@@ -15,27 +15,24 @@
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
+	size_t	len;
 
-	i = 0;
-	if (size == 0)
+	len = 0;
+	if (*src)
+		len = ft_strlen(src);
+	if (*dst && size != 0)
 	{
-		while (*src)
+		i = 0;
+		while (i < len && i < (size - 1))
+		{
+			dst[i] = src[i];
 			i++;
-		return (i);
-	}
-	while (*src && i < size - 1)
-	{
-		dst[i] = src[i];
-		i ++;
-	}
-	if (i < size)
+		}
 		dst[i] = '\0';
-	i++;
-	while (src[i] != '\0')
-		i++;
-	return (i);
+	}
+	return (len);
 }
-
+/*#include <bsd/string.h>
 int main (void)
 {
 	char c[15];
@@ -45,4 +42,4 @@ int main (void)
 	printf("%lu\n", strlcpy(c, d , 10));
 
 }
-
+*/
