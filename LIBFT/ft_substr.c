@@ -14,24 +14,30 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-    char    *newchain;
+	char	*newchain;
+	size_t	i;
 
-    if (!s)
-        return(NULL);
-    newchain = (char *)malloc (sizeof(*s) * (len + 1));
-    if (!newchain)
-        return (NULL);
-    while (s[start] != '\0' && start < len)
-    {
-        newchain[start] = s[start];
-        start++;
-    }
-    newchain[start] = '\0';
-    return (newchain);
+	if (!s)
+		return (NULL);
+	newchain = (char *)malloc (sizeof(*newchain) * (len + 1));
+	if (!newchain)
+		return (NULL);
+	i = 0;
+	while (s[start] != '\0' && i < len)
+	{
+		newchain[i] = s[start];
+		start++;
+		i++;
+	}
+	newchain[i] = '\0';
+	return (newchain);
 }
 
-int main(void)
+/*int main(void)
 {
-    char const a[] = "1234567890";
-    printf("%p\n", ft_substr(a, 5, 3));
+    char const a[] = "lorem ipsum dolor sit amet";
+    char	*dest = ft_substr(a, 7, 10);
+
+    printf("%s\n", dest);
 }
+*/
