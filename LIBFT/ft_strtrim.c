@@ -1,32 +1,23 @@
+/* Reserva memoria (con malloc(3)) y devuelve la cadena de caracteres que es 
+una copia de ’s1’, sin los caracteres indicados en el ’set’ al principio y
+al final de la cadena de caracteres.*/
+
 #include "libft.h"
 
-char    *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-    char    *newchain;
-    size_t  start;
-    size_t  end;
-    size_t  len;
-    
-    if (!s1 || !set)
-        return (NULL);
-    start = 0;
-    while (s1[start] != '\0' && ft_strchr(set, s1[start]))
-        start++;
-    end = ft_strlen(s1);
-    while (end > start && ft_strchr(set, s1[end]))
-    {
-        end--;
-    }
-    newchain = (char *)malloc(sizeof(*s1) * (end - start + 1));
-    if (!newchain)
-        return (NULL);
-    len = 0;
-    while(start < end)
-    {
-        newchain[len] = s1[start];
-        len++;
-        start++;
-    }
-    newchain[start] = '\0';
-    return (newchain);
+	char	*newchain;
+	size_t	end;
+
+	if (!s1 || !set)
+		return (NULL);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	end = ft_strlen(s1);
+	while (end && ft_strchr(set, s1[end]))
+	{
+		end--;
+	}
+	newchain = ft_substr ((char *)s1, 0, end + 1 );
+	return (newchain);
 }

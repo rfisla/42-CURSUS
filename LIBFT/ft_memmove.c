@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*Copies n bytes from memory area src to memory area dest, returns a pointer
+to dest.*/
+
 #include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
@@ -23,13 +26,12 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		return (dest);
 	if (d > s)
 	{
-		while (n > 0)
+		while (n-- > 0)
 		{
-			*d++ = *s++;
-			n--;
+			d[n] = s[n];
 		}
 	}
-	else if (s > d)
+	else if (d < s)
 		ft_memcpy(dest, src, n);
 	return (dest);
 }
