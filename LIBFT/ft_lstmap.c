@@ -8,16 +8,23 @@ hay que elminar el contenido de algún elemento.*/
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	size;
 	t_list	*newlst;
-	t_list	*tmp;
+	t_list	*newel;
 
-	if (!lst || !f || !del)
+	if (!f || !del)
 		return (NULL);
-	size = ft_lstsize(lst);
-	newlst = (t_list *)malloc(sizeof(*t_list) * size + 1);
-	if (!newlst)
-		return (NULL);
-	newlst = ft_lstiter(lst, f);
-	newlst = ft_lstdelone(lst, del);
+	newlst = NULL;
+	while (lst)
+	{
+		newel = ft_lstnew (f(lst->content));
+		if (!newel)
+		{
+			del(newlst->content);
+			free(newlst);
+			return (NULL);
+		}
+		ft_lstadd_back(&newlst, newel);
+		lst = lst->next;
+	}
+	return (newlst);
 }
