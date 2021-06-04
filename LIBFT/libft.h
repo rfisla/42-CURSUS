@@ -37,7 +37,7 @@ size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 char				*ft_strchr(const char *str, int c);
 char				*ft_strrchr(const char *str, int c);
 char				*ft_strnstr(const char *big, const char *little, \
-				size_t len);
+						size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *nptr);
 int					ft_isalpha(int c);
@@ -67,6 +67,7 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void*));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
-t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
+						void (*del)(void *));
 
 #endif

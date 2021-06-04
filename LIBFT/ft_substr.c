@@ -9,7 +9,7 @@
 /*   Updated: 2021/05/24 17:38:48 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*Returns the substring of the given string at the given start position with 
+/* Returns the substring of the given string at the given start position with 
  * the given length (or smaller if the length of the original string is less 
  * than start + length, or length is bigger than MAXSTRINGLEN).*/
 
@@ -26,11 +26,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!newchain)
 		return (NULL);
 	i = 0;
-	while (s[start] != '\0' && i < len)
+	if (start < ft_strlen(s))
 	{
-		newchain[i] = s[start];
-		start++;
-		i++;
+		while (s[start] != '\0' && i < len)
+		{
+			newchain[i] = s[start];
+			start++;
+			i++;
+		}
 	}
 	newchain[i] = '\0';
 	return (newchain);
