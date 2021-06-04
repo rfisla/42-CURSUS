@@ -9,6 +9,8 @@
 /*   Updated: 2021/05/17 17:34:55 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Erases the data in the n bytes of the memory starting at the location 
+ *pointed to by s, by writing zeros (bytes containing '\0') to that area.*/
 
 #include "libft.h"
 void	*ft_bzero (void *s, size_t n)
@@ -23,13 +25,3 @@ void	*ft_bzero (void *s, size_t n)
 	}
 	return (s);
 }
-/*int	main(void)
-{
-	char memory[]= "hoalyryrsdfr";
-
-	printf("%p\n", ft_bzero(memory,   3));
-	printf("%s\n", memory);
-	printf("%p\n", ft_bzero(memory, 3));
-
-}
-*/

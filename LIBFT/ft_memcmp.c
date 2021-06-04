@@ -9,6 +9,8 @@
 /*   Updated: 2021/05/19 18:22:29 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* The memcmp() function compares the first n bytes (each
+ * interpreted as unsigned char) of the memory areas s1 and s2.*/
 
 #include "libft.h"
 
@@ -31,14 +33,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		return (ptr1[i] - ptr2[i]);
 	return (0);
 }
-/*int main () 
-{
-   const char str[] = "1234567";
-   const char ch[] = "1234967";
-
-   printf("%d\n", memcmp(str, ch , 7));
-   printf("%d\n", ft_memcmp(str, ch , 7));
-
-   return(0);
-}
-*/

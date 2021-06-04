@@ -9,6 +9,7 @@
 /*   Updated: 2021/05/24 16:06:04 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Converts the letter c to upper case, if possible. */
 
 #include "libft.h"
 
@@ -18,12 +19,3 @@ int	ft_toupper(int c)
 		c -= 32;
 	return (c);
 }
-
-/*#include <ctype.h>
-int	main (void)
-{
-	printf("%d\n", ft_toupper('a'));
-	printf("%d\n", ft_toupper('a'));
-
-}
-*/

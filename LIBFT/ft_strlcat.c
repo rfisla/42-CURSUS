@@ -9,6 +9,8 @@
 /*   Updated: 2021/05/24 16:35:14 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Appends the NUL-terminated string src to  the end of dst. It will append at 
+ * most size - strlen(dst) - 1 bytes, NUL-terminating the result. */
 
 #include "libft.h"
 
@@ -30,33 +32,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		dst[i + j] = '\0';
 	return (i + ft_strlen(src));
 }
-/*#include <bsd/string.h>
-void	ft_print_result(int n)
-{
-	char c;
-
-	if (n >= 10)
-		ft_print_result(n / 10);
-	c = n % 10 + '0';
-	write (1, &c, 1);
-}
-int		main(void)
-{
-    char hola[11] = "a";
-	ft_print_result(ft_strlcat(hola, "lorem", 15));
-	write(1, "\n", 1);
-	write(1, hola, 15);
-    ft_print_result(strlcat(hola, "lorem", 11));
-	write(1, "\n", 1);
-	write(1, hola, 15);
-}
-int main (void)
-{
-	char c[] = "hola";
-    const char d[] = "adios";
-	printf("%zu\n", ft_strlcat(c, d, 10));
-    printf("%s\n", c);
-	printf("%lu\n", strlcat(c, d , 10));
-
-}
-*/

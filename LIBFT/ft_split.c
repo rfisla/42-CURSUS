@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rufernan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/04 18:07:15 by rufernan          #+#    #+#             */
+/*   Updated: 2021/06/04 18:07:34 by rufernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 /* Reserva memoria (con malloc(3)) y devuelve una tabla de cadena de caracteres 
-obtenida separando ’s’ con el carácter ’c’, que se utiliza como delimitador. 
-La tabla debe terminar con NULL.*/
+ * obtenida separando ’s’ con el carácter ’c’, que se utiliza como delimitador. 
+ * La tabla debe terminar con NULL. */
 
 #include "libft.h"
 

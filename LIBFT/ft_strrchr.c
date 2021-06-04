@@ -9,6 +9,7 @@
 /*   Updated: 2021/05/19 19:19:05 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Returns a pointer to the last occurrence of the char c in the string s. */
 
 #include "libft.h"
 
@@ -26,13 +27,3 @@ char	*ft_strrchr(const char *str, int c)
 	}
 	return (NULL);
 }
-/*int main (void) 
-{
-   const char str[] = "holaestamos";
-   const char ch = 'b';
-
-   printf("%s\n", strrchr(str, ch));
-   printf("%s\n", ft_strrchr(str, ch));
-   return(0);
-}
-*/

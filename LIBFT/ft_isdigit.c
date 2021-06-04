@@ -9,6 +9,7 @@
 /*   Updated: 2021/05/24 16:05:08 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* checks for a digit (0 through 9).*/
 
 #include "libft.h"
 
@@ -18,8 +19,3 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
-/*int main (void)
-{
-    printf("%d\n", ft_isdigit('5'));
-}
-*/

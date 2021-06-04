@@ -1,6 +1,15 @@
-/* #1. La dirección del puntero al primer elemento de
-la lista. #2. La dirección del puntero al elemento que hay
-que añadir a la lista.Añade el elemento ’new’ al principio de la lista. */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rufernan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/04 17:44:23 by rufernan          #+#    #+#             */
+/*   Updated: 2021/06/04 17:44:34 by rufernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+/* Añade el elemento ’new’ al principio de la lista. */
 
 #include "libft.h"
 

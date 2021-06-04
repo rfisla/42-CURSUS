@@ -9,6 +9,8 @@
 /*   Updated: 2021/05/17 18:04:35 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Copies n bytes from memory area src to memory area dest.  The memory areas 
+ * must not overlap.  Use memmove if the memory areas do overlap. */
 
 #include "libft.h"
 
@@ -28,12 +30,3 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-/*int main () {
-   const char src[50] = "http://www.tutorialspoint.com";
-   char dest[50];
-   printf("%p\n", ft_memcpy(dest, src, 7));
-   printf("%s\n", dest);
-   printf("%p\n", memcpy(dest, src, 7));
-   return(0);
-}
-*/

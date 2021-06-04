@@ -9,6 +9,9 @@
 /*   Updated: 2021/05/19 17:31:32 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Copies no more than n bytes from memory area src to memory area dest, 
+ * stopping when the character c is found. If the memory areas overlap, the
+ * results are undefined. */
 
 #include "libft.h"
 
@@ -32,13 +35,3 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 	}
 	return (NULL);
 }
-/*int main () 
-{
-   const char src[50] = "http://www.tu3torialspoint.com";
-   char dest[50];
-   printf("%p\n", ft_memccpy(dest, src, '3' ,50));
-   printf("%s\n",dest);
-   printf("%p\n", memccpy(dest, src, '3' ,50));
-   return(0);
-}
-*/

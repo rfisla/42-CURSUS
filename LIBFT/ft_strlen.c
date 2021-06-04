@@ -9,6 +9,7 @@
 /*   Updated: 2021/05/19 18:30:44 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Returns the lenght of s. */
 
 #include "libft.h"
 
@@ -21,10 +22,3 @@ size_t	ft_strlen(const char *s)
 		count++;
 	return (count);
 }
-/*int main (void)
-{
-	char c[] = "hola";
-	printf("%zu\n", ft_strlen(c));
-	printf("%zu\n", strlen(c));
-
-}*/

@@ -1,8 +1,19 @@
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rufernan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/04 18:16:06 by rufernan          #+#    #+#             */
+/*   Updated: 2021/06/04 18:16:13 by rufernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+/* Aplica cadena cadena de las la función ’f’ a cada carácter de la 
+ * de de caracteres ’s’ para crear una nueva de caracteres (con malloc (3)) 
+ * que resulte aplicaciones sucesivas de ’f’.*/
 
-/*Aplica cadena cadena de las la función ’f’ a cada carácter de la 
-de de caracteres ’s’ para crear una nueva de caracteres (con malloc (3)) 
-que resulte aplicaciones sucesivas de ’f’.*/
+#include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

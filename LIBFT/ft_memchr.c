@@ -9,6 +9,9 @@
 /*   Updated: 2021/05/19 18:02:33 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Scans the initial n bytes of the memory area pointed to by s for the first 
+ * instance of c.  Both c and the bytes of the memory area pointed to by s are 
+ * interpreted as unsigned char. */
 
 #include "libft.h"
 
@@ -27,18 +30,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-/*int main () {
-   const char str[] = "http://www.tutorialspoint.com";
-   const char ch = '.';
-   char *ret;
-
-   ret = ft_memchr(str, ch, strlen(str));
-
-   printf("String after |%c| is - |%s|\n", ch, ret);
-   printf("%p\n", ft_memchr(str, ch , strlen(str)));
-   printf("%p\n", memchr(str, ch , strlen(str)));
-
-
-   return(0);
-}
-*/

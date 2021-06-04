@@ -9,6 +9,7 @@
 /*   Updated: 2021/05/24 16:05:23 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* checks for any printable character including space.*/
 
 #include "libft.h"
 

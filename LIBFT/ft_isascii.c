@@ -9,6 +9,7 @@
 /*   Updated: 2021/05/24 16:04:55 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* checks if c is a 7-bit unsigned char value that fits into the ASCII set */
 
 #include "libft.h"
 

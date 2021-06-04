@@ -9,6 +9,9 @@
 /*   Updated: 2021/05/24 17:38:48 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*Returns the substring of the given string at the given start position with 
+ * the given length (or smaller if the length of the original string is less 
+ * than start + length, or length is bigger than MAXSTRINGLEN).*/
 
 #include "libft.h"
 
@@ -32,12 +35,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	newchain[i] = '\0';
 	return (newchain);
 }
-
-/*int main(void)
-{
-    char const a[] = "lorem ipsum dolor sit amet";
-    char	*dest = ft_substr(a, 7, 10);
-
-    printf("%s\n", dest);
-}
-*/

@@ -9,6 +9,7 @@
 /*   Updated: 2021/05/24 16:05:53 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Converts the letter c to lower case, if possible. */
 
 #include "libft.h"
 
@@ -18,11 +19,3 @@ int	ft_tolower(int c)
 		c += 32;
 	return (c);
 }
-
-/*#include <ctype.h>
-int	main (void)
-{
-	printf("%d\n", ft_tolower('B'));
-	printf("%d\n", tolower('B'));
-}
-*/

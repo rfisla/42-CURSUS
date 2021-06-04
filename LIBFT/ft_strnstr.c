@@ -9,6 +9,8 @@
 /*   Updated: 2021/05/26 21:06:34 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Locates the first occurrence	of the null-terminated string little in the 
+ * null-terminated string big.*/
 
 #include "libft.h"
 
@@ -34,11 +36,3 @@ char	*ft_strnstr(const char	*big, const char *little, size_t len)
 	}
 	return (NULL);
 }
-/*int main(void)
-{
-    const char *largestring = "Foo Bar Baz";
-    const char *smallstring = "Baz";
-    printf("%s\n", strnstr(largestring, smallstring, 15));
-    printf("%s\n", ft_strnstr(largestring, smallstring, 15));
-}
-*/

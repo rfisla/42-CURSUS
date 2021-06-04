@@ -9,6 +9,7 @@
 /*   Updated: 2021/05/19 21:16:12 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*Converts the initial portion of the string pointed to by nptr to int*/
 
 #include "libft.h"
 
@@ -38,12 +39,3 @@ int	ft_atoi(const char *nptr)
 	}
 	return (number * mult);
 }
-
-/*
-int main(void)
-{
-    const char c[] = "-48";
-    printf("%d\n", ft_atoi(c));
-    printf("%d\n", atoi(c));
-}
-*/

@@ -9,6 +9,8 @@
 /*   Updated: 2021/05/24 17:39:51 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Returns a pointer to a new string which is a duplicate of the str s. Memory
+ * for the new string is obtained with malloc, and can be freed with free.*/
 
 #include "libft.h"
 

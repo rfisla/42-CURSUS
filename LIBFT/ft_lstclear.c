@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rufernan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/04 17:45:40 by rufernan          #+#    #+#             */
+/*   Updated: 2021/06/04 17:45:50 by rufernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 /*  Suprime y libera la memoria del elemento pasado como parámetro y 
  *  de todos los elementos siguientes, con ’del’ y free (3) Por último,
  *  el puntero inicial debe pasar a NULL.*/

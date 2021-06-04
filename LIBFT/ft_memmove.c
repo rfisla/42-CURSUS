@@ -9,9 +9,8 @@
 /*   Updated: 2021/05/19 17:33:34 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*Copies n bytes from memory area src to memory area dest, returns a pointer
-to dest.*/
+/* Copies n bytes from memory area src to memory area dest, returns a pointer
+ * to dest.*/
 
 #include "libft.h"
 
@@ -35,13 +34,3 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		ft_memcpy(dest, src, n);
 	return (dest);
 }
-/*int main (void) 
-{
-   const char src[50] = "http://www.tutorialspoint.com";
-   char dest[50];
-   printf("%p\n", ft_memmove(dest, src, 50));
-   printf("%s\n", dest);
-   printf("%p\n", memmove(dest, src, 50));
-   return(0);
-}
-*/

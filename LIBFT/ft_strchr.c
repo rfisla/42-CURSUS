@@ -9,6 +9,7 @@
 /*   Updated: 2021/05/19 19:18:39 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*Returns a pointer to the first occurrence of the character c in the string s*/
 
 #include "libft.h"
 
@@ -20,12 +21,3 @@ char	*ft_strchr(const char *str, int c)
 		return ((char *) str);
 	return ((char *) NULL);
 }
-/*int main () {
-   const char str[] = "hols.gfg";
-   const char ch = 's';
-
-   printf("%s\n", strchr(str, ch));
-   printf("%s\n", ft_strchr(str, ch));
-   return(0);
-}
-*/

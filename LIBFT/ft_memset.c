@@ -9,6 +9,8 @@
 /*   Updated: 2021/05/17 17:09:44 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* The memset() function fills the first n bytes of the memory area pointed to
+ * by s with the constant byte c. */
 
 #include "libft.h"
 
@@ -23,13 +25,3 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
-/*int	main(void)
-{
-	char memory[8];
-
-	printf("%p\n", ft_memset(memory, '#' , 6));
-	printf("%s\n", memory);
-	printf("%p\n", memset(memory, '#' , 6));
-
-}
-*/

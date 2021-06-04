@@ -9,6 +9,8 @@
 /*   Updated: 2021/05/24 17:12:42 by rufernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* Copies up to size - 1 characters from the NUL-terminated string src to dst, 
+ * NUL-terminating the result.*/
 
 #include "libft.h"
 
@@ -32,14 +34,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	}
 	return (len);
 }
-/*#include <bsd/string.h>
-int main (void)
-{
-	char c[15];
-    const char d[] = "lorem";
-	printf("%zu\n", ft_strlcpy(c, d, 10));
-    printf("%s\n", c);
-	printf("%lu\n", strlcpy(c, d , 10));
-
-}
-*/
