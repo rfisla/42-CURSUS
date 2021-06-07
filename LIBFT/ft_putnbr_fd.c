@@ -16,9 +16,21 @@
 
 void	ft_putnbr_fd (int n, int fd)
 {
-	char	*number;
+	long	nb;
 
-	number = ft_itoa(n);
-	while (*number)
-		write (fd, number++, 1);
+	nb = n;
+	if (nb < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nb *= -1;
+	}
+	if (nb < 10)
+	{
+		ft_putchar_fd(nb + '0', fd);
+	}
+	else
+	{
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
+	}
 }
