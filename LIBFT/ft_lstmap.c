@@ -29,8 +29,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		newel = ft_lstnew (f(lst->content));
 		if (!newel)
 		{
-			del(newlst->content);
-			/*free(newlst);*/
+			ft_lstclear(&lst, del);
 			return (NULL);
 		}
 		ft_lstadd_back(&newlst, newel);

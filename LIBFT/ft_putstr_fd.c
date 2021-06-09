@@ -16,9 +16,11 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-		while (*s)
-		{
-			ft_putchar_fd(*s, fd);
-			s++;
-		}
+	if (!s || fd < 0)
+		return ;
+	while (*s)
+	{
+		ft_putchar_fd(*s, fd);
+		s++;
+	}
 }

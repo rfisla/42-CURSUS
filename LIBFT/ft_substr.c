@@ -22,18 +22,20 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	newchain = (char *)malloc (sizeof(*newchain) * (len + 1));
+	if (len <= 0 || (start + 1 > ft_strlen(s)))
+	{
+		newchain = (char *)malloc(1);
+		*newchain = 0;
+		return (newchain);
+	}
+	newchain = (char *)malloc (sizeof(char) * (len + 1));
 	if (!newchain)
 		return (NULL);
 	i = 0;
 	if (start < ft_strlen(s))
 	{
 		while (s[start] != '\0' && i < len)
-		{
-			newchain[i] = s[start];
-			start++;
-			i++;
-		}
+			newchain[i++] = s[start++];
 	}
 	newchain[i] = '\0';
 	return (newchain);

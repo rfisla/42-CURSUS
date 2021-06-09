@@ -21,8 +21,10 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	int		i;
 
 	i = 0;
+	if (!s || !f)
+		return (NULL);
 	newchain = (char *)malloc(sizeof(*s) * ft_strlen(s) + 1);
-	if (!newchain || !s || !f)
+	if (!newchain)
 		return (NULL);
 	while (s[i])
 	{
