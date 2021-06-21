@@ -24,10 +24,10 @@ static int	count_words (char const *s, char c)
 	i = 0;
 	if (!s)
 		return (0);
-	if (s[i] == c)
+	if (s[i] != c)
 	{
 		i++;
-		words--;
+		words++;
 	}
 	while (s[i] != '\0')
 	{
@@ -35,7 +35,6 @@ static int	count_words (char const *s, char c)
 			words++;
 		i++;
 	}
-	words++;
 	return (words);
 }
 
