@@ -11,77 +11,73 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h> 
+#include <fcntl.h>
 
-void	ft_strclr(char *s)
+static int  get_line(char **s, char **line)
 {
-	if (s)
-	{
-		while (*s)
-		{
-			*s = '\0';
-			s++;
-		}
-	}
-}
+    int     len;
+    char    *temp;
 
-char    *check_s(char *s, char **line)
-{
-    char    *p_n;
-
-    p_n = NULL;
-    if (s)
+    len = 0;
+    
+    while ((*s)[len] != '\n' && (*s)[len] != '\0')
+        len++;
+    if ((*s)[len] == '\n')
     {
-        if ((p_n = ft_strchr(s, '\n')))
+        *line = ft_substr(*s, 0, len);
+        temp = ft_strdup(&((*s)[len + 1]));
+        free(*s);
+        *s = temp;
+        if ((*s)[0] == '\0')
         {
-            *p_n = '\0';
-            *line = strdup(s);
-            strcpy(s, ++p_n);
-        }
-        else
-        {
-            *line = strdup(s);
-            ft_strclr(s);
+            free(*s);
+            *s = NULL;
         }
     }
-    else
-        *line = ft_strnew(1);
-    return (p_n);
+    else if((*s)[len] == '\0')
+    {
+        *line = ft_strdup(*s);
+        free(*s);
+        *s = NULL;
+    }
+    return (1);
 }
+
+static int  output (char **s, char **line, int read_bytes, int fd)
+{
+   if (read_bytes < 0)
+        return (-1);
+    else if (read_bytes == 0 && s[fd] == NULL)
+        return (0);
+    else 
+        return (get_line(&s[fd], line));
+}
+
 int get_next_line (int fd, char **line)
 {
-    static char *s;
-    char        buf[BUFFER_SIZE + 1];
-    char        *p_n;
+    static char *s[4096];
+    char        *temp;
+    char        buf[BUFFER_SIZE];
     int         read_bytes;
-    char        *tmp; //? sin usar esta variable mismo resultado
 
-    if (fd < 0 || BUFFER_SIZE <= 0 || !line)
+    if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
         return (-1);
-    p_n = check_s(s, line);
-    while (!p_n && (read_bytes = read(fd, buf, BUFFER_SIZE))> 0)
+    while ((read_bytes = read(fd, buf, BUFFER_SIZE)))
     {
-        if (read_bytes == -1)
-            return (-1);
         buf[read_bytes] = '\0';
-        if ((p_n = ft_strchr(buf, '\n')))
+        if (!s[fd])
+            s[fd] = ft_strdup(buf);
+        else 
         {
-            *p_n = '\0';
-            p_n++;
-            s = ft_strdup(p_n);
+            temp = ft_strjoin(s[fd], buf);
+            free(s[fd]);
+            s[fd] = temp;
         }
-        tmp = *line;
-        *line = ft_strjoin(*line, buf);
-        free(tmp);
-    }
-    if (read_bytes == 0)
-        {
-            *line = ft_strjoin(*line, buf);
-            return (0);
-
-        }
-
-    return (1);
+        if (ft_strchr(s[fd], '\n'))
+            break ;
+    }  
+    return (output (s, line, read_bytes, fd)); 
+ 
 }
 
 
@@ -93,8 +89,16 @@ int main (void)
 
 
     while (get_next_line(fd, &line))
-        printf("%s\n", line);
-    
-    return (0);
+    {
+        printf("%s\n\n", line);
+    }
+    close(fd);
+    fd = open("test.txt", O_RDONLY);
 
+    while (get_next_line(fd, &line))
+    {
+        printf("%d\n", get_next_line(fd, &line));
+    }
+
+    return (0);
 }
