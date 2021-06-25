@@ -25,16 +25,6 @@ char	*ft_strchr(const char *str, int c)
 	return ((char *) NULL);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	size_t		count;
-
-	count = 0;
-	while (*s++)
-		count++;
-	return (count);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*newchain;
@@ -100,17 +90,4 @@ char	*ft_strdup(const char *s1)
 	}
 	ptr[i] = '\0';
 	return (ptr);
-}
-
-
-char	*ft_strnew(size_t size)
-{
-	char	*str;
-
-	if (!(str = (char *)malloc(sizeof(char) * size + 1)))
-		return (NULL);
-	str[size] = '\0';
-	while (size--)
-		str[size] = '\0';
-	return (str);
 }
