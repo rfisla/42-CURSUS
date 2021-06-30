@@ -12,6 +12,18 @@
 
 #include "get_next_line.h"
 
+
+size_t	ft_strlen(const char *s)
+{
+	size_t		count;
+
+	count = 0;
+	while (s[count] != '\0')
+		count++;
+	return (count);
+}
+
+
 char	*ft_strchr(const char *str, int c)
 {
 	while (*str)
@@ -24,6 +36,7 @@ char	*ft_strchr(const char *str, int c)
 		return ((char *) str);
 	return ((char *) NULL);
 }
+
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -47,30 +60,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[size2] != '\0')
 		newchain[size1++] = s2[size2++];
 	newchain[size1] = '\0';
-	return (newchain);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*newchain;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	newchain = (char *)malloc (sizeof(*newchain) * (len + 1));
-	if (!newchain)
-		return (NULL);
-	i = 0;
-	if (start < ft_strlen(s))
-	{
-		while (s[start] != '\0' && i < len)
-		{
-			newchain[i] = s[start];
-			start++;
-			i++;
-		}
-	}
-	newchain[i] = '\0';
+	free((void *)s1); //This line avoid many leaks that i couldn´t fix
 	return (newchain);
 }
 
@@ -91,3 +81,4 @@ char	*ft_strdup(const char *s1)
 	ptr[i] = '\0';
 	return (ptr);
 }
+
