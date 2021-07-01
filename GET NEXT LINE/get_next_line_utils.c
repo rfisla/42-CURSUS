@@ -12,7 +12,6 @@
 
 #include "get_next_line.h"
 
-
 size_t	ft_strlen(const char *s)
 {
 	size_t		count;
@@ -22,7 +21,6 @@ size_t	ft_strlen(const char *s)
 		count++;
 	return (count);
 }
-
 
 char	*ft_strchr(const char *str, int c)
 {
@@ -36,7 +34,6 @@ char	*ft_strchr(const char *str, int c)
 		return ((char *) str);
 	return ((char *) NULL);
 }
-
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -60,7 +57,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[size2] != '\0')
 		newchain[size1++] = s2[size2++];
 	newchain[size1] = '\0';
-	free((void *)s1); //This line avoid many leaks that i couldn´t fix
+	free((void *)s1);
 	return (newchain);
 }
 
@@ -81,4 +78,3 @@ char	*ft_strdup(const char *s1)
 	ptr[i] = '\0';
 	return (ptr);
 }
-
