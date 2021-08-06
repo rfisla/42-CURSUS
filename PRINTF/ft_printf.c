@@ -12,10 +12,10 @@
 
 // The overall syntax of a conversion specification is:
 // %[$][flags][width][.precision][length modifier]conversion
+
 #include "ft_printf.h"
 
-
-t_printf *ft_init_tab(t_printf *tab)
+t_printf    *ft_init_tab(t_printf *tab)
 {
     tab->width = 0;
     tab->precission = 0;
@@ -26,6 +26,7 @@ t_printf *ft_init_tab(t_printf *tab)
     tab->space = 0;
     tab->plus = 0;
     tab->point = 0;
+    tab->sign = 0;
     return (tab);
 }
 int conversor_checker (t_printf *tab, const char *format, int i)
@@ -37,9 +38,9 @@ int conversor_checker (t_printf *tab, const char *format, int i)
     else if (format[i] == 'p')
         p_conversor();
     else if (format[i] == 'd')
-        d_conversor();
+        id_conversor();
     else if (format[i] == 'i')
-        i_conversor();
+        id_conversor();
     else if (format[i] == 'u')
         u_conversor();
     else if (format[i] == 'x')
@@ -51,6 +52,16 @@ int conversor_checker (t_printf *tab, const char *format, int i)
     //Hay que hacer función para resetear la tabla para los próximos % que puede haber
     return (i);
 }
+/*
+int limits_manager (t_printf *tab, int len)
+{
+    if ((tab->precission + len)>= INT_MAX || (tab->width + len) >= INT_MAX)
+    {
+        len = -1;
+        return (len);
+    }
+}
+*/
 int format_checker(t_printf *tab, const char *format, int i)
 {
     while (!ft_strchr(SPECIFIERS, format[++i])) // queremos avanzar una pos porque estmaos osbre el %
@@ -66,6 +77,8 @@ int format_checker(t_printf *tab, const char *format, int i)
             tab->zero = 1;
         else if (format[i] == '.')
             tab->point = 1;
+        else if (format[i] == '+')
+            tab->plus =1;
         else if (ft_isdigit(format[i]))
         {
             if (tab->point && !tab->precission)
@@ -73,14 +86,13 @@ int format_checker(t_printf *tab, const char *format, int i)
             else if (!tab->width)
                 tab->width = ft_atoi(&format[i]);
             while (ft_isdigit(format[i]))
-				i++;
-			i--;
+                i++;
+            i--;
         }
     }
     conversor_checker(tab, format, i);
     return (i);
     //else if (format[i] == '#')
-
 }
 
 int ft_printf (const char *format, ...)
@@ -108,21 +120,4 @@ int ft_printf (const char *format, ...)
     len += tab->lenght;
     free(tab);
     return(len);
-
 }
-/*
-int main (void)
-{
-    int len;
-    char tab[] = "holamelamo";
-    int i = 0;
-
-    while (tab[i])
-    {
-        len += write (1, &tab[i], 1);
-        i++;
-    }
-    printf("%d\n", len);
-    return (0);
-}
-*/
