@@ -12,13 +12,15 @@
 
 #include "ft_printf.h"
 
-void	c_conversor (t_printf *tab)
+void	c_conversor(t_printf *tab)
 {
 	char	*str;
 	char	c;
 
 	c = va_arg(tab->args, int);
 	str = &c;
+	if (tab->zero && tab->dash)
+		tab->zero = 0;
 	if (tab->dash)
 	{
 		tab->lenght += write(1, str, 1);
