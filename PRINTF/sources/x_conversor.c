@@ -12,6 +12,31 @@
 
 #include "../includes/ft_printf.h"
 
+char	*ft_xitoa_base(unsigned int nb, unsigned int base, int i)
+{
+	char	*ret;
+	char	*numbers;
+	int		size;
+
+	if (i == 0)
+		numbers = ft_strdup("0123456789abcdef");
+	else
+		numbers = ft_strdup("0123456789ABCDEF");
+	ret = NULL;
+	size = ft_numlen_base(nb, base);
+	ret = (char *)malloc(sizeof(char) * size + 1);
+	if (!ret)
+		return (NULL);
+	ret[size--] = '\0';
+	while (size >= 0)
+	{
+		ret[size--] = numbers[nb % base];
+		nb /= base;
+	}
+	free(numbers);
+	return (ret);
+}
+
 void	x_conversor(t_printf *tab, int choice)
 {
 	unsigned int	x;
@@ -19,14 +44,19 @@ void	x_conversor(t_printf *tab, int choice)
 
 	x = va_arg(tab->args, unsigned int);
 	str = NULL;
-	if (str == 0 && tab->point)
+	if (x == 0 && tab->point)
 		str = ft_strdup("");
 	else if (choice == 0)
-		str = ft_itoa_base(x, 16, 0);
+		str = ft_xitoa_base(x, 16, 0);
 	else if (choice == 1)
-		str = ft_itoa_base(x, 16, 1);
+		str = ft_xitoa_base(x, 16, 1);
 	if ((tab->point && tab->zero) || (tab->zero && tab->dash))
 		tab->zero = 0;
+	if (x == 0)
+	{
+		tab->hash = 0;
+		tab->ox = 0;
+	}
 	if (!tab->precission && !tab->width)
 	{
 		printing_sign(tab);

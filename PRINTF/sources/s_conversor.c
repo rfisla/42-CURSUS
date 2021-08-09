@@ -79,7 +79,7 @@ void	s_conversor(t_printf *tab)
 
 	str = va_arg(tab->args, char *);
 	if (!str)
-		write (1, "", 1);
+		str= ft_strdup("");
 	if (tab->plus)
 		tab->plus = 0;
 	if (tab->zero && tab->dash)
