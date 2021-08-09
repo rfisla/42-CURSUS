@@ -37,27 +37,25 @@ typedef struct s_printf
 
 int						ft_printf(const char *format, ...);
 t_printf				*ft_init_tab(t_printf *tab);
-int						format_checker(t_printf *tab, const char *format, \
-						 int i);
-int						conversor_checker(t_printf *tab, const char *format, \
-						 int i);
+t_printf				*ft_reset_tab(t_printf *tab);
+
 void					s_conversor(t_printf *tab);
 void					c_conversor(t_printf *tab, int choice);
+void					id_conversor(t_printf *tab);
+void					u_conversor(t_printf *tab);
+void					p_conversor(t_printf *tab);
+void					x_conversor(t_printf *tab, int choice);
 void					width_highest_value_dash(t_printf *tab, char *number);
-void					width_highest_value_notdash(t_printf *tab, char *number);
+void					width_highest_value_notdash(t_printf *tab, \
+						char *number, size_t len);
 void					precission_highest_value(t_printf *tab, char *number);
 void					len_highest_value(t_printf *tab, char *number);
-void					id_conversor(t_printf *tab);
 void					filling_width(int amount, t_printf *tab);
 void					printing_sign(t_printf *tab);
 void					exception_negatives(t_printf *tab, int number);
 void					print_space(t_printf *tab, long number);
-void					u_conversor(t_printf *tab);
 int						ft_numlen_base(unsigned long n, int base);
-char					*ft_itoa_base(unsigned int nb, unsigned int base, int i);
-void					px_width_highest_value_dash(t_printf *tab, char *number);
-void					px_width_highest_value_notdash(t_printf *tab, char *number);
-void					p_conversor(t_printf *tab);
-void					x_conversor(t_printf *tab, int choice);
+void					px_width_highest_dash(t_printf *tab, char *number);
+void					px_width_highest_notdash(t_printf *tab, char *number);
 
 #endif

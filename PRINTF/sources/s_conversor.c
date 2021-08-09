@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-void	common_exception(t_printf *tab)
+static void	common_exception(t_printf *tab)
 {
 	if (tab->width)
 		filling_width(tab->width, tab);
@@ -20,13 +20,16 @@ void	common_exception(t_printf *tab)
 		write(1, "", 1);
 }
 
-void	notdash_width_precission(t_printf *tab, char *str)
+static void	notdash_width_precission(t_printf *tab, char *str)
 {
+	int	diff;
+
+	diff = tab->precission - ft_strlen(str);
 	if (tab->point && !tab->precission)
 		common_exception(tab);
 	else if (tab->width > ft_strlen(str))
 	{
-		if (tab->precission && tab->precission <= ft_strlen(str))
+		if (tab->precission && diff <= 0)
 		{
 			filling_width(tab->width - tab->precission, tab);
 			tab->lenght += write(1, str, tab->precission);
@@ -37,15 +40,14 @@ void	notdash_width_precission(t_printf *tab, char *str)
 			tab->lenght += write(1, str, ft_strlen(str));
 		}
 	}
-	else if ((!tab->width || tab->width <= ft_strlen(str)) && \
-			tab->precission > ft_strlen(str))
+	else if ((!tab->width || tab->width <= ft_strlen(str)) && diff > 0)
 		tab->lenght += write(1, str, ft_strlen(str));
 	else if ((!tab->width || tab->width <= ft_strlen(str)) && \
-			tab->precission && tab->precission <= ft_strlen(str))
+			tab->precission && diff <= 0)
 		tab->lenght += write(1, str, tab->precission);
 }
 
-void	dash_width_precission(t_printf *tab, char *str)
+static void	dash_width_precission(t_printf *tab, char *str)
 {
 	if (tab->point && !tab->precission)
 		common_exception(tab);
@@ -69,8 +71,17 @@ void	dash_width_precission(t_printf *tab, char *str)
 			tab->precission && tab->precission <= ft_strlen(str))
 		tab->lenght += write(1, str, tab->precission);
 	else if ((!tab->width || tab->width <= ft_strlen(str)) && \
-            ((tab->point && tab->precission) || tab->precission <= ft_strlen(str)))
-        tab->lenght += write(1, str, ft_strlen(str));;
+			((tab->point && tab->precission) || tab->precission <= \
+			ft_strlen(str)))
+		tab->lenght += write(1, str, ft_strlen(str));
+}
+
+static void	updating_table(t_printf *tab)
+{
+	if (tab->plus)
+		tab->plus = 0;
+	if (tab->zero && tab->dash)
+		tab->zero = 0;
 }
 
 void	s_conversor(t_printf *tab)
@@ -79,11 +90,8 @@ void	s_conversor(t_printf *tab)
 
 	str = va_arg(tab->args, char *);
 	if (!str)
-		str= ft_strdup("");
-	if (tab->plus)
-		tab->plus = 0;
-	if (tab->zero && tab->dash)
-		tab->zero = 0;
+		str = ft_strdup("");
+	updating_table(tab);
 	if ((!tab->width && !tab->precission) && !tab->point)
 		tab->lenght += write(1, str, ft_strlen(str));
 	else if (!tab->dash)

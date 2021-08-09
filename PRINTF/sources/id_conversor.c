@@ -12,7 +12,6 @@
 
 #include "../includes/ft_printf.h"
 
-// tratar los int maximos para width y precission
 void	width_highest_value_dash(t_printf *tab, char *number)
 {
 	int	diff;
@@ -32,32 +31,32 @@ void	width_highest_value_dash(t_printf *tab, char *number)
 	}
 }
 
-void	width_highest_value_notdash(t_printf *tab, char *number)
+void	width_highest_value_notdash(t_printf *tab, char *number, size_t len)
 {
 	int	diff;
 
-	diff = tab->precission - ft_strlen(number);
+	diff = tab->precission - len;
 	if (tab->width && tab->width >= tab->precission && \
-		tab->width > ft_strlen(number) && !tab->dash)
+		tab->width > len && !tab->dash)
 	{
 		if (tab->zero)
-        {
-            printing_sign(tab);
-            filling_width(tab->width - tab->precission - ft_strlen(number), tab);
-        }
-        else if (diff > 0)
-        {
+		{
+			printing_sign(tab);
+			filling_width(tab->width - tab->precission - len, tab);
+		}
+		else if (diff > 0)
+		{
 			filling_width(tab->width - tab->precission, tab);
-            printing_sign(tab);
-        }
+			printing_sign(tab);
+		}
 		else
-        {
-			filling_width(tab->width - ft_strlen(number), tab);
-            printing_sign(tab);
-        }	
+		{
+			filling_width(tab->width - len, tab);
+			printing_sign(tab);
+		}	
 		while (diff-- > 0)
 			tab->lenght += write(1, "0", 1);
-		tab->lenght += write (1, number, ft_strlen(number));
+		tab->lenght += write (1, number, len);
 	}
 }
 
@@ -109,7 +108,7 @@ void	id_conversor(t_printf *tab)
 	}
 	precission_highest_value(tab, nstr);
 	width_highest_value_dash (tab, nstr);
-	width_highest_value_notdash(tab, nstr);
+	width_highest_value_notdash(tab, nstr, ft_strlen(nstr));
 	len_highest_value (tab, nstr);
 	free (nstr);
 }

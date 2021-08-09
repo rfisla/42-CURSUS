@@ -28,22 +28,7 @@ t_printf	*ft_init_tab(t_printf *tab)
 	return (tab);
 }
 
-t_printf *ft_reset_tab(t_printf *tab)
-{
-    tab->width = 0;
-    tab->precission = 0;
-    tab->hash = 0;
-    tab->zero = 0;
-    tab->dash = 0;
-    tab->space = 0;
-    tab->plus = 0;
-    tab->point = 0;
-	tab->sign = 0;
-	tab->ox = 0;
-    return (tab);
-
-}
-int	conversor_checker(t_printf *tab, const char *format, int i)
+static int	conversor_checker(t_printf *tab, const char *format, int i)
 {
 	if (format[i] == 'c')
 		c_conversor(tab, 0);
@@ -63,39 +48,34 @@ int	conversor_checker(t_printf *tab, const char *format, int i)
 		c_conversor(tab, 1);
 	return (i);
 }
-/*
-int limits_manager (t_printf *tab, int len)
+
+static void	format_options(t_printf *tab, const char *format, int i)
 {
-if ((tab->precission + len)>= INT_MAX || (tab->width + len) >= INT_MAX)
-{
-	len = -1;
-	return (len);
+	if (format[i] == ' ')
+		tab->space = 1;
+	else if (format[i] == '-')
+		tab->dash = 1;
+	else if (format[i] == ' ')
+		tab->space = 1;
+	else if (format[i] == '0')
+		tab->zero = 1;
+	else if (format[i] == '.')
+		tab->point = 1;
+	else if (format[i] == '+')
+		tab->plus = 1;
+	else if (format[i] == '#')
+		tab->hash = 1;
 }
-}
-*/
-int	format_checker(t_printf *tab, const char *format, int i)
+
+static int	format_checker(t_printf *tab, const char *format, int i)
 {
-	while (!ft_strchr(SPECIFIERS, format[++i])) 
+	while (!ft_strchr(SPECIFIERS, format[++i]))
 	{
-		//Checking flags
-		if (format[i] == ' ')
-			tab->space = 1;
-		else if (format[i] == '-')
-			tab->dash = 1;
-		else if (format[i] == ' ')
-			tab->space = 1;
-		else if (format[i] == '0')
-			tab->zero = 1;
-		else if (format[i] == '.')
-			tab->point = 1;
-		else if (format[i] == '+')
-			tab->plus = 1;
-		else if (format[i] == '#')
-			tab->hash = 1;
-		else if (ft_isdigit(format[i]))
+		format_options(tab, format, i);
+		if (ft_isdigit(format[i]))
 		{
 			if (tab->point && !tab->precission)
-				tab->precission = ft_atoi(&format[i]); 
+				tab->precission = ft_atoi(&format[i]);
 			else if (!tab->width)
 				tab->width = ft_atoi(&format[i]);
 			while (ft_isdigit(format[i]))
@@ -105,23 +85,22 @@ int	format_checker(t_printf *tab, const char *format, int i)
 	}
 	conversor_checker(tab, format, i);
 	return (i);
-	//else if (format[i] == '#')
 }
 
 int	ft_printf(const char *format, ...)
 {
-	t_printf     *tab;
-	int         len;
-	int         i;
+	t_printf	*tab;
+	int			len;
+	int			i;
 
-	i = 0;
+	i = -1;
 	len = 0;
 	tab = (t_printf *) malloc(sizeof(t_printf));
 	if (!tab)
 		return (-1);
 	ft_init_tab(tab);
 	va_start(tab->args, format);
-	while(format[i])
+	while (format[++i])
 	{
 		if (format[i] == '%')
 		{
@@ -130,10 +109,9 @@ int	ft_printf(const char *format, ...)
 		}
 		else
 			len += write(1, &format[i], 1);
-		i++;
 	}
 	va_end(tab->args);
 	len += tab->lenght;
 	free(tab);
-	return(len);
+	return (len);
 }

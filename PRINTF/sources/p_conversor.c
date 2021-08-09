@@ -30,53 +30,32 @@ int	ft_numlen_base(unsigned long n, int base)
 	return (i);
 }
 
-char	*ft_itoa_base(unsigned long nb, unsigned int base, int i)
+static char	*p_itoa_base(unsigned long nb, unsigned int base, int i)
 {
-	char	*ret;
-	char	*numbers;
+	char	*str;
+	char	*characters;
 	int		size;
 
 	if (i == 0)
-		numbers = ft_strdup("0123456789abcdef");
+		characters = ft_strdup("0123456789abcdef");
 	else
-		numbers = ft_strdup("0123456789ABCDEF");
-	ret = NULL;
+		characters = ft_strdup("0123456789ABCDEF");
+	str = NULL;
 	size = ft_numlen_base(nb, base);
-	ret = (char *)malloc(sizeof(char) * size + 1);
-	if (!ret)
+	str = (char *)malloc(sizeof(char) * size + 1);
+	if (!str)
 		return (NULL);
-	ret[size--] = '\0';
+	str[size--] = '\0';
 	while (size >= 0)
 	{
-		ret[size--] = numbers[nb % base];
+		str[size--] = characters[nb % base];
 		nb /= base;
 	}
-	free(numbers);
-	return (ret);
-}
-/*
-void	ft_putnbr_base(unsigned long number)
-{
-	int		len;
-
-	len = 16;
-	if (number < 0)
-	{
-		number = -number;
-		ft_putchar('-');
-	}
-	if (number > len)
-	{
-		ft_putnbr_base((number / len));
-		ft_putnbr_base((number % len));
-	}
-	else
-		ft_putchar_fd('0' + number, 1);
+	free(characters);
+	return (str);
 }
 
-*/
-
-void	px_width_highest_value_dash(t_printf *tab, char *number)
+void	px_width_highest_dash(t_printf *tab, char *number)
 {
 	int	diff;
 
@@ -95,7 +74,7 @@ void	px_width_highest_value_dash(t_printf *tab, char *number)
 	}
 }
 
-void	px_width_highest_value_notdash(t_printf *tab, char *number)
+void	px_width_highest_notdash(t_printf *tab, char *number)
 {
 	int	diff;
 
@@ -124,8 +103,7 @@ void	p_conversor(t_printf *tab)
 	if (pointer == 0 && tab->point)
 		str = ft_strdup("");
 	else
-		str = ft_itoa_base(pointer, 16, 0);
-	//str = ft_strjoin("10", str);
+		str = p_itoa_base(pointer, 16, 0);
 	if ((tab->point && tab->zero) || (tab->zero && tab->dash))
 		tab->zero = 0;
 	if (!tab->precission && !tab->width)
@@ -134,8 +112,8 @@ void	p_conversor(t_printf *tab)
 		tab->lenght += write(1, str, ft_strlen(str));
 	}
 	precission_highest_value(tab, str);
-	px_width_highest_value_dash (tab, str);
-	px_width_highest_value_notdash(tab, str);
+	px_width_highest_dash (tab, str);
+	px_width_highest_notdash(tab, str);
 	len_highest_value (tab, str);
 	free(str);
 }

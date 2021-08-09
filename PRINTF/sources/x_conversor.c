@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-char	*ft_xitoa_base(unsigned int nb, unsigned int base, int i)
+static char	*x_itoa_base(unsigned int nb, unsigned int base, int i)
 {
 	char	*ret;
 	char	*numbers;
@@ -37,6 +37,33 @@ char	*ft_xitoa_base(unsigned int nb, unsigned int base, int i)
 	return (ret);
 }
 
+static void	hash_options(t_printf *tab, char *str)
+{
+	if (tab->hash)
+	{
+		px_width_highest_dash (tab, str);
+		px_width_highest_notdash(tab, str);
+	}
+	else if (!tab->hash)
+	{
+		width_highest_value_dash (tab, str);
+		width_highest_value_notdash(tab, str, ft_strlen(str));
+	}
+}
+
+static void	updating_table(t_printf *tab)
+{
+	tab->plus = 0;
+	if ((tab->point && tab->zero) || (tab->zero && tab->dash))
+		tab->zero = 0;
+}
+
+static void	zero_value_update(t_printf *tab)
+{
+	tab->hash = 0;
+	tab->ox = 0;
+}
+
 void	x_conversor(t_printf *tab, int choice)
 {
 	unsigned int	x;
@@ -47,16 +74,12 @@ void	x_conversor(t_printf *tab, int choice)
 	if (x == 0 && tab->point)
 		str = ft_strdup("");
 	else if (choice == 0)
-		str = ft_xitoa_base(x, 16, 0);
+		str = x_itoa_base(x, 16, 0);
 	else if (choice == 1)
-		str = ft_xitoa_base(x, 16, 1);
-	if ((tab->point && tab->zero) || (tab->zero && tab->dash))
-		tab->zero = 0;
+		str = x_itoa_base(x, 16, 1);
+	updating_table(tab);
 	if (x == 0)
-	{
-		tab->hash = 0;
-		tab->ox = 0;
-	}
+		zero_value_update(tab);
 	if (!tab->precission && !tab->width)
 	{
 		printing_sign(tab);
@@ -64,15 +87,6 @@ void	x_conversor(t_printf *tab, int choice)
 	}
 	precission_highest_value(tab, str);
 	len_highest_value (tab, str);
-	if (tab->hash)
-	{
-		px_width_highest_value_dash (tab, str);
-		px_width_highest_value_notdash(tab, str);
-	}
-	else
-	{
-		width_highest_value_dash (tab, str);
-		width_highest_value_notdash(tab, str);
-	}
+	hash_options(tab, str);
 	free(str);
 }
