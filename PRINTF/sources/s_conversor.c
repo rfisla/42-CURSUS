@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-void	common_exception(t_printf *tab, char *str)
+void	common_exception(t_printf *tab)
 {
 	if (tab->width)
 		filling_width(tab->width, tab);
@@ -23,7 +23,7 @@ void	common_exception(t_printf *tab, char *str)
 void	notdash_width_precission(t_printf *tab, char *str)
 {
 	if (tab->point && !tab->precission)
-		common_exception(tab, str);
+		common_exception(tab);
 	else if (tab->width > ft_strlen(str))
 	{
 		if (tab->precission && tab->precission <= ft_strlen(str))
@@ -48,7 +48,7 @@ void	notdash_width_precission(t_printf *tab, char *str)
 void	dash_width_precission(t_printf *tab, char *str)
 {
 	if (tab->point && !tab->precission)
-		common_exception(tab, str);
+		common_exception(tab);
 	else if (tab->width > ft_strlen(str))
 	{
 		if (tab->precission && tab->precission <= ft_strlen(str))

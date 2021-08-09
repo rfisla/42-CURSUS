@@ -18,6 +18,7 @@ void	x_conversor(t_printf *tab, int choice)
 	char			*str;
 
 	x = va_arg(tab->args, unsigned int);
+	str = NULL;
 	if (str == 0 && tab->point)
 		str = ft_strdup("");
 	else if (choice == 0)

@@ -22,17 +22,17 @@
 typedef struct s_printf
 {
 	va_list	args;
-	int		width;
-	int		precission;
-	int		lenght;
-	int		hash;
-	int		zero;
-	int		dash;
-	int		space;
-	int		plus;
-	int		point;
-	int		sign;
-	int		ox;
+	size_t	width;
+	size_t	precission;
+	size_t	lenght;
+	size_t	hash;
+	size_t	zero;
+	size_t	dash;
+	size_t	space;
+	size_t	plus;
+	size_t	point;
+	size_t	sign;
+	size_t	ox;
 }		t_printf;
 
 int						ft_printf(const char *format, ...);
@@ -41,6 +41,7 @@ int						format_checker(t_printf *tab, const char *format, \
 						 int i);
 int						conversor_checker(t_printf *tab, const char *format, \
 						 int i);
+void					s_conversor(t_printf *tab);
 void					c_conversor(t_printf *tab, int choice);
 void					width_highest_value_dash(t_printf *tab, char *number);
 void					width_highest_value_notdash(t_printf *tab, char *number);
@@ -51,6 +52,7 @@ void					filling_width(int amount, t_printf *tab);
 void					printing_sign(t_printf *tab);
 void					exception_negatives(t_printf *tab, int number);
 void					print_space(t_printf *tab, long number);
+void					u_conversor(t_printf *tab);
 int						ft_numlen_base(unsigned long n, int base);
 char					*ft_itoa_base(unsigned int nb, unsigned int base, int i);
 void					px_width_highest_value_dash(t_printf *tab, char *number);
