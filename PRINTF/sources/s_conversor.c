@@ -69,8 +69,8 @@ void	dash_width_precission(t_printf *tab, char *str)
 			tab->precission && tab->precission <= ft_strlen(str))
 		tab->lenght += write(1, str, tab->precission);
 	else if ((!tab->width || tab->width <= ft_strlen(str)) && \
-			tab->point && tab->precission)
-		tab->lenght += write(1, str, ft_strlen(str));
+            ((tab->point && tab->precission) || tab->precission <= ft_strlen(str)))
+        tab->lenght += write(1, str, ft_strlen(str));;
 }
 
 void	s_conversor(t_printf *tab)

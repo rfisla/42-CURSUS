@@ -30,7 +30,7 @@ int	ft_numlen_base(unsigned long n, int base)
 	return (i);
 }
 
-char	*ft_itoa_base(unsigned int nb, unsigned int base, int i)
+char	*ft_itoa_base(unsigned long nb, unsigned int base, int i)
 {
 	char	*ret;
 	char	*numbers;
@@ -125,7 +125,7 @@ void	p_conversor(t_printf *tab)
 		str = ft_strdup("");
 	else
 		str = ft_itoa_base(pointer, 16, 0);
-	str = ft_strjoin("10", str);
+	//str = ft_strjoin("10", str);
 	if ((tab->point && tab->zero) || (tab->zero && tab->dash))
 		tab->zero = 0;
 	if (!tab->precission && !tab->width)

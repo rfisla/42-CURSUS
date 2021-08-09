@@ -48,7 +48,10 @@ void	filling_width (int amount, t_printf *tab)
 void	exception_negatives(t_printf *tab, int number)
 {
 	if (number == -2147483648)
+	{
 		tab->sign = 0;
+		tab->plus = 0;
+	}
 	else if (number < 0 && number > -2147483648)
 		tab->sign = 1;
 }

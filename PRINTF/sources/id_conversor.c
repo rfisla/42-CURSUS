@@ -40,11 +40,21 @@ void	width_highest_value_notdash(t_printf *tab, char *number)
 	if (tab->width && tab->width >= tab->precission && \
 		tab->width > ft_strlen(number) && !tab->dash)
 	{
-		if (diff > 0)
+		if (tab->zero)
+        {
+            printing_sign(tab);
+            filling_width(tab->width - tab->precission - ft_strlen(number), tab);
+        }
+        else if (diff > 0)
+        {
 			filling_width(tab->width - tab->precission, tab);
+            printing_sign(tab);
+        }
 		else
+        {
 			filling_width(tab->width - ft_strlen(number), tab);
-		printing_sign(tab);
+            printing_sign(tab);
+        }	
 		while (diff-- > 0)
 			tab->lenght += write(1, "0", 1);
 		tab->lenght += write (1, number, ft_strlen(number));

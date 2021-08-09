@@ -38,8 +38,10 @@ t_printf *ft_reset_tab(t_printf *tab)
     tab->space = 0;
     tab->plus = 0;
     tab->point = 0;
+	tab->sign = 0;
 	tab->ox = 0;
     return (tab);
+
 }
 int	conversor_checker(t_printf *tab, const char *format, int i)
 {
