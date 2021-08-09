@@ -13,7 +13,7 @@ CC = gcc
 
 NAME = libftprintf.a
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
 LIBFT = LIBFT
 
@@ -32,11 +32,13 @@ SOURCES =  auxiliar_functions.c \
 			u_conversor.c \
 			x_conversor.c 
 
-
+#Selecting the sources
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
+#Folder where the objects will be save
 OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
+#Main rule
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -49,17 +51,14 @@ $(DIR_O)/%.o: $(DIR_S)/%.c $(HEADER)/ft_printf.h
 	@mkdir -p obj
 	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
 
-test:
-	@make all misc/main.c
-
-
+#checking norme
 norme:
 	norminette ./libft/
 	@echo
 	norminette ./$(HEADER)/
 	@echo
 	norminette ./$(DIR_S)/
-
+# Rule to remove everything that has been created by the makefile.
 clean:
 	@rm -f $(OBJS)
 	@rm -rf $(DIR_O)
@@ -69,8 +68,12 @@ fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C $(LIBFT)
 
+# Rule to re-make everything.
 re: fclean all
 
+#bonus rule
 bonus: re
 
+# Makes sure that gnu make will still run even if files called
+# clean / fclean / all and re already exist in the directory
 .PHONY: fclean re norme all clean
