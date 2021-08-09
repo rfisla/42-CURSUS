@@ -18,12 +18,17 @@ void	c_conversor(t_printf *tab, int choice)
 	char	c;
 
 	if (choice == 1)
+	{
 		c = '%';
+		if (tab->zero && tab->dash)
+			tab->zero = 0;
+	}
 	else
+	{
 		c = va_arg(tab->args, int);
-	str = &c;
-	if (tab->zero && tab->dash)
 		tab->zero = 0;
+	}
+	str = &c;
 	if (tab->dash)
 	{
 		tab->lenght += write(1, str, 1);

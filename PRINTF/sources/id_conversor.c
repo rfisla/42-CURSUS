@@ -67,8 +67,8 @@ void	precission_highest_value(t_printf *tab, char *number)
 
 void	len_highest_value(t_printf *tab, char *number)
 {
-	if ((tab->precission || tab->width) && ft_strlen(number) > tab->precission \
-		&& ft_strlen(number) > tab->width)
+	if ((tab->precission || tab->width) && ft_strlen(number) >= tab->precission \
+		&& ft_strlen(number) >= tab->width)
 	{
 		printing_sign(tab);
 		tab->lenght += write(1, number, ft_strlen(number));
@@ -81,13 +81,17 @@ void	id_conversor(t_printf *tab)
 	long	n;
 
 	n = va_arg(tab->args, int);
+	print_space(tab, n);
 	if (n < 0)
+	{
 		exception_negatives(tab, n);
+		n = -n;
+	}
 	if ((tab->point && tab->zero) || (tab->zero && tab->dash))
 		tab->zero = 0;
 	nstr = ft_itoa(n);
 	if (n == 0 && tab->precission == 0 && tab->width == 0 && tab->point)
-		tab->lenght += write(1, "", 1);
+		write(1, "", 1);
 	else if (!tab->precission && !tab->width)
 	{
 		printing_sign(tab);

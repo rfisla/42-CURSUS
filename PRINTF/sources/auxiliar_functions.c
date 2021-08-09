@@ -14,10 +14,13 @@
 
 void	printing_sign (t_printf *tab)
 {
+
 	if (tab->sign)
-		tab->lenght += write (1, "-", 1);
+			tab->lenght += write (1, "-", 1);
 	else if (tab->plus)
-		tab->lenght += write(1, "+", 1);
+			tab->lenght += write(1, "+", 1);
+	if (tab->ox == 1 || tab->hash == 1)
+		tab->lenght += write(1, "0x", 2);
 }
 
 void	filling_width (int amount, t_printf *tab)
@@ -46,7 +49,13 @@ void	exception_negatives(t_printf *tab, int number)
 {
 	if (number == -2147483648)
 		tab->sign = 0;
-	else
+	else if (number < 0 && number > -2147483648)
 		tab->sign = 1;
-	number = -number;
+}
+
+void	print_space(t_printf *tab, long number)
+{
+	if (tab->space && number >= 0 && !tab->plus && \
+		tab->precission >= tab->width)
+		tab->lenght += write(1, " ", 1);
 }

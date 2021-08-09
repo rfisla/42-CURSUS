@@ -24,7 +24,22 @@ t_printf	*ft_init_tab(t_printf *tab)
 	tab->plus = 0;
 	tab->point = 0;
 	tab->sign = 0;
+	tab->ox = 0;
 	return (tab);
+}
+
+t_printf *ft_reset_tab(t_printf *tab)
+{
+    tab->width = 0;
+    tab->precission = 0;
+    tab->hash = 0;
+    tab->zero = 0;
+    tab->dash = 0;
+    tab->space = 0;
+    tab->plus = 0;
+    tab->point = 0;
+	tab->ox = 0;
+    return (tab);
 }
 int	conversor_checker(t_printf *tab, const char *format, int i)
 {
@@ -34,19 +49,16 @@ int	conversor_checker(t_printf *tab, const char *format, int i)
 		s_conversor(tab);
 	else if (format[i] == 'p')
 		p_conversor(tab);
-	else if (format[i] == 'd')
-		id_conversor(tab);
-	else if (format[i] == 'i')
+	else if (format[i] == 'd' || format[i] == 'i')
 		id_conversor(tab);
 	else if (format[i] == 'u')
-		u_conversor();
+		u_conversor(tab);
 	else if (format[i] == 'x')
-		x_conversor();
+		x_conversor(tab, 0);
 	else if (format[i] == 'X')
-		x_conversor();
+		x_conversor(tab, 1);
 	else if (format[i] == '%')
 		c_conversor(tab, 1);
-	//Hay que hacer función para resetear la tabla para los próximos % que puede haber
 	return (i);
 }
 /*
@@ -61,7 +73,7 @@ if ((tab->precission + len)>= INT_MAX || (tab->width + len) >= INT_MAX)
 */
 int	format_checker(t_printf *tab, const char *format, int i)
 {
-	while (!ft_strchr(SPECIFIERS, format[++i])) // queremos avanzar una pos porque estmaos osbre el %
+	while (!ft_strchr(SPECIFIERS, format[++i])) 
 	{
 		//Checking flags
 		if (format[i] == ' ')
@@ -76,6 +88,8 @@ int	format_checker(t_printf *tab, const char *format, int i)
 			tab->point = 1;
 		else if (format[i] == '+')
 			tab->plus = 1;
+		else if (format[i] == '#')
+			tab->hash = 1;
 		else if (ft_isdigit(format[i]))
 		{
 			if (tab->point && !tab->precission)
@@ -108,7 +122,10 @@ int	ft_printf(const char *format, ...)
 	while(format[i])
 	{
 		if (format[i] == '%')
+		{
 			i = format_checker(tab, format, i);
+			ft_reset_tab(tab);
+		}
 		else
 			len += write(1, &format[i], 1);
 		i++;
