@@ -9,63 +9,68 @@
 #    Updated: 2021/08/09 02:39:53 by rufernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-NAME	=	libftprintf.a
-
-SRCS	=	auxiliar_functions.c \
-			c_conversor.c \
-			ft_printf.c \
-			id_conversor.c \
-			p_conversor.c \
-			s_conversor.c \
-			u_conversor.c \
-			x_conversor.c 
-
-OBJS =  ${SRCS:.c=.o}
-
-SRCS_DIR = sources
-OBJS_DIR = objs
-
-SRCS = $(addprefix $(SRCS_DIR)/, $(SOURCES))
-OBJS = $(addprefix $(OBJS_DIR)/, $(OBJECTS))
-
-
-BONUS	=	auxiliar_functions.c \
-			c_conversor.c \
-			ft_printf.c \
-			id_conversor.c \
-			p_conversor.c \
-			s_conversor.c \
-			u_conversor.c \
-			x_conversor.c 
-
-BONUS_OBJS =  ${BONUS:.c=.o}
-
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g
+NAME = libftprintf.a
 
-RM = rm -f
+FLAGS = -Wall -Wextra -Werror -g
 
-all: ${NAME}
+LIBFT = LIBFT
 
-${NAME}:	
-		${CC} -c ${CFLAGS} ${SRCS} 
-		ar crs ${NAME} ${OBJS}
-# Rule to remove all the object files and directory.		
+DIR_S = sources
+
+DIR_O = obj
+
+HEADER = includes
+
+SOURCES =  auxiliar_functions.c \
+			c_conversor.c \
+			ft_printf.c \
+			id_conversor.c \
+			p_conversor.c \
+			s_conversor.c \
+			u_conversor.c \
+			x_conversor.c 
+
+
+SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
+
+OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@make -C $(LIBFT)
+	@cp LIBFT/libft.a ./$(NAME)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
+
+$(DIR_O)/%.o: $(DIR_S)/%.c $(HEADER)/ft_printf.h
+	@mkdir -p obj
+	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
+
+test:
+	@make all misc/main.c
+
+
+norme:
+	norminette ./libft/
+	@echo
+	norminette ./$(HEADER)/
+	@echo
+	norminette ./$(DIR_S)/
+
 clean:
-			${RM} ${OBJS} ${BONUS_OBJS}
-# Rule to remove everything that has been created by the makefile.
-fclean:		clean
-				${RM} ${NAME}
-# Rule to re-make everything.
-re:			fclean all
+	@rm -f $(OBJS)
+	@rm -rf $(DIR_O)
+	@make clean -C $(LIBFT)
 
-bonus:		${OBJS} ${BONUS_OBJS}
-			ar crs ${NAME} ${OBJS} ${BONUS_OBJS}
+fclean: clean
+	@rm -f $(NAME)
+	@make fclean -C $(LIBFT)
 
-# Makes sure that gnu make will still run even if files called
-# clean / fclean / all and re already exist in the directory
-.PHONY: all, clean, fclean, re
+re: fclean all
 
+bonus: re
 
+.PHONY: fclean re norme all clean
