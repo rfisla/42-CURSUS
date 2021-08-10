@@ -27,7 +27,7 @@ t_printf	*ft_reset_tab(t_printf *tab)
 	return (tab);
 }
 
-void	printing_sign (t_printf *tab)
+void	printing_sign(t_printf *tab)
 {
 	if (tab->sign)
 		tab->lenght += write (1, "-", 1);
@@ -39,7 +39,7 @@ void	printing_sign (t_printf *tab)
 		tab->lenght += write(1, "0x", 2);
 }
 
-void	filling_width (int amount, t_printf *tab)
+void	filling_width(int amount, t_printf *tab)
 {
 	if (tab->zero)
 	{
