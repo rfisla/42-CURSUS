@@ -4,7 +4,8 @@ This directory contains the GET NEXT LINE PROJECT, which consist on creating a f
 
 A (-1) is returned if an error occurred. A (0) is returned if the file is finished reading. And a (1) is returned if a line is read.
 
-Result: [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/get_next_line)](https://github.com/JaeSeoKim/badge42)
+## Result: 
+[![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/get_next_line)](https://github.com/JaeSeoKim/badge42)
 
 ## Testers
 
