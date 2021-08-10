@@ -55,8 +55,6 @@ static void	format_options(t_printf *tab, const char *format, int i)
 		tab->space = 1;
 	else if (format[i] == '-')
 		tab->dash = 1;
-	else if (format[i] == ' ')
-		tab->space = 1;
 	else if (format[i] == '0')
 		tab->zero = 1;
 	else if (format[i] == '.')
