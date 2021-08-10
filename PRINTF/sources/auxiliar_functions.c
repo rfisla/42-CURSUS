@@ -33,7 +33,9 @@ void	printing_sign (t_printf *tab)
 		tab->lenght += write (1, "-", 1);
 	else if (tab->plus)
 		tab->lenght += write(1, "+", 1);
-	if (tab->ox == 1 || tab->hash == 1)
+	if (tab->ox == 2)
+		tab->lenght += write(1, "0X", 2);
+	else if (tab->ox == 1 || tab->hash == 1)
 		tab->lenght += write(1, "0x", 2);
 }
 

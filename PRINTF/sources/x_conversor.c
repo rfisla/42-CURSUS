@@ -51,11 +51,16 @@ static void	hash_options(t_printf *tab, char *str)
 	}
 }
 
-static void	updating_table(t_printf *tab)
+static void	updating_table(t_printf *tab, int choice)
 {
+	int	i;
+
+	i = choice;
 	tab->plus = 0;
 	if ((tab->point && tab->zero) || (tab->zero && tab->dash))
 		tab->zero = 0;
+	if (i == 1 && tab-> hash)
+		tab->ox = 2;
 }
 
 static void	zero_value_update(t_printf *tab)
@@ -77,7 +82,7 @@ void	x_conversor(t_printf *tab, int choice)
 		str = x_itoa_base(x, 16, 0);
 	else if (choice == 1)
 		str = x_itoa_base(x, 16, 1);
-	updating_table(tab);
+	updating_table(tab, choice);
 	if (x == 0)
 		zero_value_update(tab);
 	if (!tab->precission && !tab->width)
