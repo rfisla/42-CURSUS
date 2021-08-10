@@ -53,7 +53,7 @@ $(DIR_O)/%.o: $(DIR_S)/%.c $(HEADER)/ft_printf.h
 
 #checking norme
 norme:
-	norminette ./libft/
+	norminette ./LIBFT/
 	@echo
 	norminette ./$(HEADER)/
 	@echo
