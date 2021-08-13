@@ -8,8 +8,7 @@ This project is pretty straight forward. You will recode printf. The versatility
 - It will anage any combination of the following flags: ’-0.' '#+’ and minimum field width with all conversions
 
 ## Result 
-[![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/ft_printf)](https://github.com/JaeSeoKim/badge42)
-
+In proccess
 
 ## Compilation
 
