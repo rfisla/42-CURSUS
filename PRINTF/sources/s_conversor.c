@@ -87,13 +87,13 @@ void	s_conversor(t_printf *tab)
 	char	*str;
 
 	str = va_arg(tab->args, char *);
+	updating_table(tab);
 	if (!str || (!tab->precission && !tab->width && tab->point))
 	{
 		str = ft_strdup("");
 		free(str);
 	}
-	updating_table(tab);
-	if ((!tab->width && !tab->precission) && !tab->point)
+	else if ((!tab->width && !tab->precission) && !tab->point)
 		tab->lenght += write(1, str, ft_strlen(str));
 	else if (!tab->dash)
 		notdash_width_precission(tab, str);
