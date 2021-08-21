@@ -16,8 +16,6 @@ static void	common_exception(t_printf *tab)
 {
 	if (tab->width)
 		filling_width(tab->width, tab);
-	else
-		write(1, "", 1);
 }
 
 static void	notdash_width_precission(t_printf *tab, char *str)
@@ -89,8 +87,11 @@ void	s_conversor(t_printf *tab)
 	char	*str;
 
 	str = va_arg(tab->args, char *);
-	if (!str)
+	if (!str || (!tab->precission && !tab->width && tab->point))
+	{
 		str = ft_strdup("");
+		free(str);
+	}
 	updating_table(tab);
 	if ((!tab->width && !tab->precission) && !tab->point)
 		tab->lenght += write(1, str, ft_strlen(str));
