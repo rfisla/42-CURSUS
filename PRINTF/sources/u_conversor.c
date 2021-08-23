@@ -64,7 +64,10 @@ void	u_conversor(t_printf *tab)
 	updating_table(tab);
 	str = u_itoa(u);
 	if (u == 0 && tab->precission == 0 && tab->width == 0 && tab->point)
+	{
+		free(str);
 		str = ft_strdup("");
+	}
 	else if (!tab->precission && !tab->width)
 		tab->lenght += write(1, str, ft_strlen(str));
 	precission_highest_value(tab, str);
