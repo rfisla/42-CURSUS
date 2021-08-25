@@ -76,35 +76,23 @@ static void	updating_table(t_printf *tab)
 		tab->zero = 0;
 }
 
-static char	*copy_aux(char *str)
-{
-	char	*aux;
-
-	if (str == NULL)
-		aux = ft_strdup("(null)\0");
-	else
-		aux = ft_strdup(str);
-	return (aux);
-}
-
 void	s_conversor(t_printf *tab)
 {
 	char	*str;
-	char	*aux;
 
-	aux = va_arg(tab->args, char *);
-	str = copy_aux(aux);
+	str = va_arg(tab->args, char *);
+	if (!str)
+		str = "(null)";
 	updating_table(tab);
-	if (!str || (!tab->precission && !tab->width && tab->point))
-		str = ft_strdup("");
-	else
+	if (!tab->precission && !tab->width && tab->point)
 	{
-		if ((!tab->width && !tab->precission) && !tab->point)
-			tab->lenght += write(1, str, ft_strlen(str));
-		else if (!tab->dash)
-			notdash_width_precission(tab, str);
-		else
-			dash_width_precission(tab, str);
+		str = ft_strdup("");
+		free(str);
 	}
-	free (str);
+	else if ((!tab->width && !tab->precission) && !tab->point)
+		tab->lenght += write(1, str, ft_strlen(str));
+	else if (!tab->dash)
+		notdash_width_precission(tab, str);
+	else
+		dash_width_precission(tab, str);
 }
