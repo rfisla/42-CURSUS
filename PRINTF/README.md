@@ -1,11 +1,11 @@
 ## FT_PRINTF  PROJECT (42CURSUS)
 
-This project is pretty straight forward. You will recode printf. The versatility of the printf function in C represents a great exercise in programming.
+This project is pretty straight forward. I have to recode printf. The versatility of the printf function in C represents a great exercise in programming and a good introduction to Variadic Functions.
 
 #### The prototype of ft_printf will be:
 ```int ft_printf(const char *, ...);```
 - It will manage the following conversions: cspdiuxX% and it will be compared with the real printf
-- It will anage any combination of the following flags: ’-0.' '#+’ and minimum field width with all conversions
+- It will manage any combination of the following flags: ’-0.' '#+’ and minimum field width with all conversions
 
 ## Result 
 [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/ft_printf)](https://github.com/JaeSeoKim/badge42)
