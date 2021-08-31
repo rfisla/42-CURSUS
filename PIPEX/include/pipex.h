@@ -26,5 +26,7 @@ void				pipex(char **argv, char **envp);
 char				**split_cmd(char *argv);
 void				parsing_path(char *cmd, char **envp, char **path);
 int					check_args(int argc);
+void                free_arr(char **arr);
+
 
 #endif

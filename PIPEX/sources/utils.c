@@ -21,3 +21,19 @@ int	check_args(int argc)
 	}
 	return (0);
 }
+
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while ((*arr)[i])
+	{
+		free(*arr + i);
+		i++;
+	}
+	//free(*arr);
+	//*arr = NULL;
+}

@@ -41,17 +41,18 @@ void	parsing_path(char *cmd, char **envp, char **path)
 		path_no_cmd = ft_strjoin(splitted_path[i], "/");
 		path_cmd = ft_strjoin(path_no_cmd, cmd);
 		fd = open(path_cmd, O_RDONLY);
-		if (fd > 0)
+		if (fd >= 0)
 		{
 			*path = path_cmd;
+			free_arr(splitted_path);
 			close (fd);
+			return ;
 		}
-		free(path_no_cmd);
+		//free(path_no_cmd);
 		free (path_cmd);
-		free (splitted_path);
 		i++;
 	}
-	free (splitted_path);
+	free_arr(splitted_path);
 }
 
 char	**split_cmd(char *argv)
