@@ -20,6 +20,8 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 # include "../LIBFT/libft.h"
 
 void				pipex(char **argv, char **envp);
