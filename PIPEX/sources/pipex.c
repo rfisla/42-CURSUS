@@ -12,6 +12,16 @@
 
 #include "../include/pipex.h"
 
+static void fd_checker(char **argv, int fd)
+{
+	if (fd == -1)
+	{
+		ft_putstr_fd("No such file or directory: ", 2);
+		ft_putendl_fd(argv[1], 2);
+		exit (0);
+	}
+}
+
 static void	child_process(int *end, char **argv, char **envp)
 {
 	int		fd;
@@ -22,12 +32,7 @@ static void	child_process(int *end, char **argv, char **envp)
 	dup2(end[1], STDOUT_FILENO);
 	close(end[1]);
 	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		ft_putstr_fd("No such file or directory: ", 2);
-		ft_putendl_fd(argv[1], 2);
-		exit (0);
-	}
+	fd_checker(argv, fd);
 	dup2(fd, STDIN_FILENO);
 	//close(fd);
 	cmd = split_cmd(argv[2]);
@@ -57,7 +62,7 @@ static void	parent_process(int *end, char **argv, char **envp)
 	//close(fd);
 	cmd = split_cmd(argv[3]);
 	parsing_path(cmd[0], envp, &path);
-	path_exists(path);
+	//path_exists(path);
 	if (execve(path, cmd, envp) == -1)
 	{
 		//ft_putstr_fd("Command not found", 2);
@@ -102,6 +107,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	check_args(argc);
 	pipex (argv, envp);
-	//system("leaks a.out");
+	//system("leaks pipex");
 	return (0);
 }

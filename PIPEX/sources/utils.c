@@ -34,13 +34,15 @@ void	free_arr(char **arr)
 		free(*arr + i);
 		i++;
 	}
-	//free(*arr);
+	free(*arr);
 	//*arr = NULL;
 }
 
+
+//EL problema de los leaks está en esta función
 int	path_exists(char *path)
 {
-	if (access(path, W_OK) == -1)
+	if (access(path, F_OK) == -1)
 	{
 		ft_putstr_fd("Command not found\n", 2);
 		//ft_putendl_fd(*cmd, 2);

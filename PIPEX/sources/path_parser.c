@@ -23,7 +23,7 @@ static char	*find_path_word(char **envp)
 			return (envp[i]);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
 void	parsing_path(char *cmd, char **envp, char **path)
@@ -40,6 +40,7 @@ void	parsing_path(char *cmd, char **envp, char **path)
 	{
 		path_no_cmd = ft_strjoin(splitted_path[i], "/");
 		path_cmd = ft_strjoin(path_no_cmd, cmd);
+		free(path_no_cmd);
 		fd = open(path_cmd, O_RDONLY);
 		if (fd >= 0)
 		{
