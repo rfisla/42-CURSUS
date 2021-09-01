@@ -24,7 +24,7 @@ DIR_O = obj
 
 HEADER = include
 
-SOURCES =  pipex.c \
+SOURCES =   pipex.c \
 			path_parser.c \
 			utils.c \
 

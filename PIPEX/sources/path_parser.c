@@ -48,7 +48,6 @@ void	parsing_path(char *cmd, char **envp, char **path)
 			close (fd);
 			return ;
 		}
-		//free(path_no_cmd);
 		free (path_cmd);
 		i++;
 	}

@@ -19,18 +19,23 @@ static void	child_process(int *end, char **argv, char **envp)
 	char	*path;
 
 	close(end[0]);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		exit (0);
-	dup2(fd, STDIN_FILENO);
-	close(fd);
 	dup2(end[1], STDOUT_FILENO);
 	close(end[1]);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("No such file or directory: ", 2);
+		ft_putendl_fd(argv[1], 2);
+		exit (0);
+	}
+	dup2(fd, STDIN_FILENO);
+	//close(fd);
 	cmd = split_cmd(argv[2]);
 	parsing_path(cmd[0], envp, &path);
+	//path_exists(path);
 	if (execve(path, cmd, envp) == -1)
 	{
-		ft_putstr_fd("Command not found", 2);
+		//ft_putstr_fd("Command not found", 2);
 		free_arr(cmd);
 		free(path);
 		exit (0);
@@ -40,23 +45,22 @@ static void	child_process(int *end, char **argv, char **envp)
 static void	parent_process(int *end, char **argv, char **envp)
 {
 	int		fd;
-	//int		child_status;
 	char	**cmd;
 	char	*path;
 
 	close(end[1]);
-	fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC | O_APPEND | S_IRWXU);
-	if (fd < 0)
-		exit(0);
 	dup2(end[0], STDIN_FILENO);
 	close(end[0]);
+	fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
+
 	dup2(fd, STDOUT_FILENO);
 	//close(fd);
 	cmd = split_cmd(argv[3]);
 	parsing_path(cmd[0], envp, &path);
-	if (execve(path, cmd, envp) == 1)
+	path_exists(path);
+	if (execve(path, cmd, envp) == -1)
 	{
-		ft_putstr_fd("Command not found", 2);
+		//ft_putstr_fd("Command not found", 2);
 		free_arr(cmd);
 		free(path);
 		exit (0);
@@ -98,5 +102,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	check_args(argc);
 	pipex (argv, envp);
+	//system("leaks a.out");
 	return (0);
 }
