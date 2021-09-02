@@ -20,15 +20,15 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include "../LIBFT/libft.h"
 
 void				pipex(char **argv, char **envp);
 char				**split_cmd(char *argv);
 void				parsing_path(char *cmd, char **envp, char **path);
 int					check_args(int argc);
-void                free_arr(char **arr);
-int                 path_exists(char *path, char **cmd);
+void				free_arr(char **arr);
+int					command_exists(char *path, char **cmd);
 
 #endif

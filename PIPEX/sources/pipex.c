@@ -12,7 +12,7 @@
 
 #include "../include/pipex.h"
 
-static void fd_checker(char **argv, int fd)
+static void	fd_checker(char **argv, int fd)
 {
 	if (fd == -1)
 	{
@@ -34,13 +34,11 @@ static void	child_process(int *end, char **argv, char **envp)
 	fd = open(argv[1], O_RDONLY);
 	fd_checker(argv, fd);
 	dup2(fd, STDIN_FILENO);
-	//close(fd);
 	cmd = split_cmd(argv[2]);
 	parsing_path(cmd[0], envp, &path);
-	path_exists(path, cmd);
+	command_exists(path, cmd);
 	if (execve(path, cmd, envp) == -1)
 	{
-		//ft_putstr_fd("Command not found", 2);
 		free_arr(cmd);
 		free(path);
 		exit (0);
@@ -57,24 +55,17 @@ static void	parent_process(int *end, char **argv, char **envp)
 	dup2(end[0], STDIN_FILENO);
 	close(end[0]);
 	fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
-
 	dup2(fd, STDOUT_FILENO);
-	//close(fd);
 	cmd = split_cmd(argv[3]);
 	parsing_path(cmd[0], envp, &path);
-	path_exists(path, cmd);
+	command_exists(path, cmd);
 	if (execve(path, cmd, envp) == -1)
 	{
-		//ft_putstr_fd("Command not found", 2);
 		free_arr(cmd);
 		free(path);
 		exit (0);
 	}
 }
-
-/*one end will write and the other will read.From now on we will say that end[1]
-is the child process, and end[0] the parent process, and that the child writes,
-while theparent reads. so cmd1 will be executed by the child,and cmd2 by the parent*/
 
 void	pipex(char **argv, char **envp)
 {
@@ -107,6 +98,5 @@ int	main(int argc, char **argv, char **envp)
 {
 	check_args(argc);
 	pipex (argv, envp);
-	//system("leaks pipex");
 	return (0);
 }

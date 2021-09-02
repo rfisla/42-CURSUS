@@ -36,12 +36,9 @@ void	free_arr(char **arr)
 		i++;
 	}
 	free(arr);
-	//*arr = NULL;
 }
 
-
-//EL problema de los leaks está en esta función
-int	path_exists(char *path, char **cmd)
+int	command_exists(char *path, char **cmd)
 {
 	if (access(path, F_OK) == -1)
 	{
@@ -49,11 +46,5 @@ int	path_exists(char *path, char **cmd)
 		ft_putendl_fd(*cmd, 2);
 		exit(0);
 	}
-	/*else if (access(path, R_OK) == -1)
-		ft_putstr_fd("open: read permission denied\n", 2);
-	else if (access(path, W_OK) == -1)
-		ft_putstr_fd("open: write permission denied\n", 2);
-	else
-		return (1);*/
-	return (0);	
+	return (0);
 }

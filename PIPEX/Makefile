@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rufernan <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/09/02 16:33:40 by rufernan          #+#    #+#              #
+#    Updated: 2021/09/02 16:33:44 by rufernan         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = pipex.a
 
 SRCS =      sources/pipex.c \
@@ -6,7 +18,7 @@ SRCS =      sources/pipex.c \
 
 OBJS = ${SRCS:.c=.o}
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=leak
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -fno-omit-frame-pointer
 RM = rm -rf
 
 all: ${NAME}
