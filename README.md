@@ -12,9 +12,11 @@ I'll post every project I'll made during my cursus. For the moment all the proje
 
 ---
 
-|  ##  |			Name_Proyect				| Result |
+|  Nº  |			Name_Proyect				| Result |
 |:----:|:----------------:|:------:|
 |  00  |Libft			  | ![rufernan's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/Libft)        |  
 |  01  |Get_next_line     | ![rufernan's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/get_next_line)|
-|  02  |born2beroot	      | ![rufernan's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/Born2beroot)  |
-|  03  |ft_printf	      | [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/ft_printf)](https://github.com/JaeSeoKim/badge42)|
+|  02  |Born2beroot	      | ![rufernan's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/Born2beroot)  |
+|  03  |Ft_printf	      | [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/ft_printf)](https://github.com/JaeSeoKim/badge42)|
+|  04  |Pipex	      | [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/pipex)](https://github.com/JaeSeoKim/badge42)|
+
