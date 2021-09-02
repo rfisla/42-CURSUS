@@ -6,7 +6,7 @@ SRCS =      sources/pipex.c \
 
 OBJS = ${SRCS:.c=.o}
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=leak
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=leak
 RM = rm -rf
 
 all: ${NAME}

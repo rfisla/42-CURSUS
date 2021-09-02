@@ -37,7 +37,7 @@ static void	child_process(int *end, char **argv, char **envp)
 	//close(fd);
 	cmd = split_cmd(argv[2]);
 	parsing_path(cmd[0], envp, &path);
-	//path_exists(path);
+	path_exists(path, cmd);
 	if (execve(path, cmd, envp) == -1)
 	{
 		//ft_putstr_fd("Command not found", 2);
@@ -62,7 +62,7 @@ static void	parent_process(int *end, char **argv, char **envp)
 	//close(fd);
 	cmd = split_cmd(argv[3]);
 	parsing_path(cmd[0], envp, &path);
-	//path_exists(path);
+	path_exists(path, cmd);
 	if (execve(path, cmd, envp) == -1)
 	{
 		//ft_putstr_fd("Command not found", 2);
