@@ -8,7 +8,7 @@ It has to be executed in this way:
 
 The execution of the Pipex program should do the the same as the next Shell command:
 
-```$> < archivo1 comando1 | comando2 > archivo2```
+```$> < file1 cmd1 | cmd2 > file2```
 
 ---
 For example: ```$> ./pipex infile "ls -l" "wc -l" outfile``` should be  the same as ```<infile ls -l | wc -l >outfile”```
