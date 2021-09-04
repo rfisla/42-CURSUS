@@ -30,5 +30,7 @@ void				parsing_path(char *cmd, char **envp, char **path);
 int					check_args(int argc);
 void				free_arr(char **arr);
 int					command_exists(char *path, char **cmd);
+void				file1_checker(char **argv, int fd);
+void				file2_checker(char **argv, int fd);
 
 #endif

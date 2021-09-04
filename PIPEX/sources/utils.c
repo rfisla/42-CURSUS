@@ -48,3 +48,23 @@ int	command_exists(char *path, char **cmd)
 	}
 	return (0);
 }
+
+void	file1_checker(char **argv, int fd)
+{
+	if (fd == -1)
+	{
+		ft_putstr_fd("No such file or access denied: ", 2);
+		ft_putendl_fd(argv[1], 2);
+		exit (0);
+	}
+}
+
+void	file2_checker(char **argv, int fd)
+{
+	if (fd == -1)
+	{
+		ft_putstr_fd("No such file or access denied: ", 2);
+		ft_putendl_fd(argv[4], 2);
+		exit (0);
+	}
+}

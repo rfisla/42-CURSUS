@@ -12,16 +12,6 @@
 
 #include "../include/pipex.h"
 
-static void	fd_checker(char **argv, int fd)
-{
-	if (fd == -1)
-	{
-		ft_putstr_fd("No such file or directory: ", 2);
-		ft_putendl_fd(argv[1], 2);
-		exit (0);
-	}
-}
-
 static void	child_process(int *end, char **argv, char **envp)
 {
 	int		fd;
@@ -32,7 +22,7 @@ static void	child_process(int *end, char **argv, char **envp)
 	dup2(end[1], STDOUT_FILENO);
 	close(end[1]);
 	fd = open(argv[1], O_RDONLY);
-	fd_checker(argv, fd);
+	file1_checker(argv, fd);
 	dup2(fd, STDIN_FILENO);
 	cmd = split_cmd(argv[2]);
 	parsing_path(cmd[0], envp, &path);
@@ -55,6 +45,7 @@ static void	parent_process(int *end, char **argv, char **envp)
 	dup2(end[0], STDIN_FILENO);
 	close(end[0]);
 	fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
+	file2_checker(argv, fd);
 	dup2(fd, STDOUT_FILENO);
 	cmd = split_cmd(argv[3]);
 	parsing_path(cmd[0], envp, &path);
