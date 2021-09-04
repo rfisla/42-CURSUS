@@ -12,7 +12,7 @@
 
 #include "../include/pipex.h"
 
-static void	child_process(int *end, char **argv, char **envp)
+static void	first_process(int *end, char **argv, char **envp)
 {
 	int		fd;
 	char	**cmd;
@@ -35,7 +35,7 @@ static void	child_process(int *end, char **argv, char **envp)
 	}
 }
 
-static void	parent_process(int *end, char **argv, char **envp)
+static void	second_process(int *end, char **argv, char **envp)
 {
 	int		fd;
 	char	**cmd;
@@ -68,14 +68,14 @@ void	pipex(char **argv, char **envp)
 	if (subprocess < 0)
 		perror("Fork: ");
 	if (!subprocess)
-		child_process(end, argv, envp);
+		first_process(end, argv, envp);
 	else
 	{
 		subprocess = fork();
 		if (subprocess < 0)
 			perror("Fork: ");
 		if (!subprocess)
-			parent_process(end, argv, envp);
+			second_process(end, argv, envp);
 		else
 		{
 			close(end[0]);
