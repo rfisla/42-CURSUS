@@ -33,6 +33,7 @@ void	push_a(t_stack **stack_a, t_stack **stack_b)
 		tmp->next = to_a;
 		*stack_a = tmp;
 	}
+	ft_putendl_fd("pa", 0);
 
 }	
 void	push_b(t_stack **stack_a, t_stack **stack_b)
@@ -60,5 +61,6 @@ void	push_b(t_stack **stack_a, t_stack **stack_b)
 		tmp->next = to;
 		*stack_b = tmp;
 	}
+	ft_putendl_fd("pb", 0);
 }
 

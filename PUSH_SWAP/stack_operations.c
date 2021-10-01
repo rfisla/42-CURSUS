@@ -7,7 +7,7 @@ t_stack	*create_new_node(void)
 	first = (t_stack*)malloc(sizeof(t_stack));
 	first->number = 0;
 	first->next = NULL;
-	first->size = 1;
+	first->size += 1;
 	return (first);
 }
 
@@ -42,9 +42,9 @@ static int	duplicates_checker(int n, t_stack **stack)
 }
 
 
-t_stack	*get_stack(int size, char **args)
+void get_stack(int size, char **args, t_stack **stack_a)
 {
-	t_stack	*stack;
+	//t_stack	*stack;
 	t_stack *tmp;
 	int		i;
 	int		status;
@@ -55,29 +55,29 @@ t_stack	*get_stack(int size, char **args)
 		exit (0);
 	i = 1;
 	status = 0;
-	stack = create_new_node();
-	tmp = stack;
+	*stack_a = create_new_node();
+	tmp = *stack_a;
 	while (i < size && !status)
 	{
 		
 		n = ft_atoi(args[i]);
-		if (!(int_checker(args[i])) || !(duplicates_checker(n, &stack))\
+		if (!(int_checker(args[i])) || !(duplicates_checker(n, stack_a))\
 			|| n > INT_MAX || n < INT_MIN)	
 			status = 1;
 		tmp->number = ft_atoi(args[i]);
 		if (i < size - 1)
 		{
-			tmp->size +=1;
+			tmp->size = size - 1;
 			tmp->next = create_new_node();
-			tmp = stack->next;
+			tmp = tmp->next;
 		}
 		i++;
 	}
 	if (status)
 	{
-		free_stack(&stack);
+		free_stack(stack_a);
 		ft_putendl_fd("error", 2);
 		exit (0);
 	}
-	return (stack);
+	//return (stack_a);
 }

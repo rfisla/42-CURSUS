@@ -13,10 +13,10 @@ void	swap_a(t_stack **stack_a)
 	t_stack	*tmp;
 
 	tmp = *stack_a;
-	if (tmp && tmp->next)
-	{
+	if (!(tmp && tmp->next))
+		return ;
+	else
 		ft_swap(&tmp->number, &tmp->next->number);
-	}
 	ft_putendl_fd("sa", 0);
 }
 
@@ -25,10 +25,10 @@ void	swap_b(t_stack **stack_b)
 	t_stack	*tmp;
 
 	tmp = *stack_b;
-	if (tmp && tmp->next)
-	{
+	if (!(tmp && tmp->next))
+		return ;
+	else
 		ft_swap(&tmp->number, &tmp->next->number);
-	}
 	ft_putendl_fd("sb", 0);
 }
 
