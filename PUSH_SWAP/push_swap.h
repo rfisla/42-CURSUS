@@ -32,13 +32,26 @@ t_stack	*create_new_node(void);
 t_stack	*init_stack_a(int size);
 void    free_array(char **items);
 void    free_stack(t_stack **stack);
-t_stack	*get_stack(int size, char **args);
+int	already_sorted(t_stack **stack_a);
+
+int min_finder(t_stack **stack, int size);
+
+void get_stack(int size, char **args, t_stack **stack_a);
+
 void	swap_a(t_stack **stack_a);
 void	swap_b(t_stack **stack_b);
 void	swap_a_b(t_stack **stack_a, t_stack **stack_b);
 
 void push_b(t_stack **stack_a, t_stack **stack_b);
 void push_a(t_stack **stack_a, t_stack **stack_b);
+
+void	rotate_a(t_stack **stack_a);
+void	rotate_b(t_stack **stack_b);
+void	reverse_rotate_a(t_stack **stack_a, char stack);
+
+
+
+void	short_list_sorter(t_stack **stack_a, t_stack **stack_b, int size);
 
 
 
