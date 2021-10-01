@@ -1,25 +1,9 @@
 #include "push_swap.h"
 
-int	already_sorted(t_stack **stack_a)
+static void	sort_two(t_stack **stack)
 {
-	t_stack	*stack;
-
-	stack = *stack_a;
-	while (stack->next)
-	{
-		if (!(stack->number < stack->next->number))
-			return (0);
-		else
-			stack = stack->next;
-	}
-	ft_putendl_fd("Stack already sorted", 0);
-	return (1);
-}
-
-static void	sort_two(t_stack **stack_a)
-{
-	if ((*stack_a)->number > (*stack_a)->next->number)
-		swap_a(stack_a);
+	if ((*stack)->number > (*stack)->next->number)
+		swap_a(stack);
 }
 
 static void	sort_three(t_stack **stack_a)
@@ -51,7 +35,60 @@ static void	sort_three(t_stack **stack_a)
 		reverse_rotate_a(stack_a, 'a');
 }
 
-void	short_sort(t_stack **stack_a, int size)
+static void	sort_four(t_stack **stack_a, t_stack **stack_b)
+{
+
+	//t_stack	*tmp;
+
+	//tmp = *stack_a;
+	push_b(stack_a, stack_b);
+	sort_three(stack_a);
+	push_a(stack_a,stack_b);
+	sort_three(stack_a);
+}
+
+static void	sort_five(t_stack **stack_a, t_stack **stack_b)
+{
+	push_b(stack_a, stack_b);
+	sort_four(stack_a, stack_b);
+	if ((*stack_a)->number > (*stack_b)->number)
+		push_a(stack_a, stack_b);
+	else if ((*stack_a)->number < (*stack_b)->number)
+	{
+		push_a(stack_a, stack_b);
+		swap_a(stack_a);
+		push_b(stack_a, stack_b);
+		sort_four(stack_a, stack_b);
+		push_a(stack_a, stack_b);
+	}
+
+}
+/*
+static void	sort_five(t_stack **stack_a, t_stack **stack_b)
+{
+	push_b(stack_a, stack_b);
+	push_b(stack_a, stack_b);
+	sort_three(stack_a);
+	push_a(stack_a,stack_b);
+	if ((*stack_a)->number > (*stack_a)->next->next->next->number)
+		rotate_a(stack_a);
+	else
+		sort_three(stack_a);
+
+	push_a(stack_a, stack_b); //	PPROBLEMA CON ESTE PUSH?????
+	//if ((*stack_a)->number > (*stack_a)->next->next->next->next->number)
+		//rotate_a(stack_a);
+	if ((*stack_a)->number > (*stack_a)->next->next->next->number)
+		rotate_a(stack_a);
+	else if ((*stack_a)->number > (*stack_a)->next->number)
+	{
+		swap_a(stack_a);
+		sort_three(stack_a);
+	}
+	//printf("\n\n%d\n\n", last->number);
+}
+*/
+void	short_sort(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	if (already_sorted(stack_a))
 		return ;
@@ -59,4 +96,10 @@ void	short_sort(t_stack **stack_a, int size)
 		sort_two(stack_a);
 	else if (size == 3)
 		sort_three(stack_a);
+	else if (size == 4)
+		sort_four(stack_a, stack_b);
+	else if (size == 5)
+		sort_five(stack_a, stack_b);
 }
+
+
