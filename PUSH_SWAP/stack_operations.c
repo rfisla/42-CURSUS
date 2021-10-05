@@ -4,10 +4,10 @@ t_stack	*create_new_node(void)
 {
 	t_stack	*first;
 
-	first = (t_stack*)malloc(sizeof(t_stack));
+	first = (t_stack *)malloc(sizeof(t_stack));
 	first->number = 0;
 	first->next = NULL;
-	first->size += 1;
+	first->index = 1;
 	return (first);
 }
 
@@ -18,7 +18,7 @@ static int	int_checker(char *item)
 	i = 0;
 	if (item[i] == '-')
 		i++;
-	while(item[i])
+	while (item[i])
 	{
 		if ((!ft_isdigit(item[i])))
 			return (0);
@@ -41,15 +41,12 @@ static int	duplicates_checker(int n, t_stack **stack)
 	return (1);
 }
 
-
-void get_stack(int size, char **args, t_stack **stack_a)
+void	get_stack(int size, char **args, t_stack **stack_a)
 {
-	//t_stack	*stack;
-	t_stack *tmp;
+	t_stack	*tmp;
 	int		i;
 	int		status;
 	int		n;
-	//char	**items;
 
 	if (size < 1)
 		exit (0);
@@ -59,15 +56,13 @@ void get_stack(int size, char **args, t_stack **stack_a)
 	tmp = *stack_a;
 	while (i < size && !status)
 	{
-		
 		n = ft_atoi(args[i]);
-		if (!(int_checker(args[i])) || !(duplicates_checker(n, stack_a))\
-			|| n > INT_MAX || n < INT_MIN)	
+		if (!(int_checker(args[i])) || !(duplicates_checker(n, stack_a)) \
+		|| n > INT_MAX || n < INT_MIN)
 			status = 1;
 		tmp->number = ft_atoi(args[i]);
 		if (i < size - 1)
 		{
-			tmp->size = size - 1;
 			tmp->next = create_new_node();
 			tmp = tmp->next;
 		}
@@ -79,5 +74,4 @@ void get_stack(int size, char **args, t_stack **stack_a)
 		ft_putendl_fd("error", 2);
 		exit (0);
 	}
-	//return (stack_a);
 }

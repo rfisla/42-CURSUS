@@ -88,9 +88,7 @@ static void	sort_five(t_stack **stack_a, t_stack **stack_b, int size)
 
 void	short_list_sorter(t_stack **stack_a, t_stack **stack_b, int size)
 {
-	if (already_sorted(stack_a))
-		return ;
-	else if (size == 2)
+	if (size == 2)
 		sort_two(stack_a);
 	else if (size == 3)
 		sort_three(stack_a);

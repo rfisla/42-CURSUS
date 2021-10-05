@@ -22,7 +22,7 @@
 
 typedef	struct s_stack
 {
-    int		size;
+    int		index;
 	int		number;
 	struct	s_stack *next;
 }	t_stack;
@@ -52,6 +52,18 @@ void	reverse_rotate_a(t_stack **stack_a, char stack);
 
 
 void	short_list_sorter(t_stack **stack_a, t_stack **stack_b, int size);
+
+void    assign_index(t_stack **stack);
+int		stack_size(t_stack **stack);
+void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b);
+
+t_stack	*hold_first(t_stack **stack);
+t_stack	*hold_second(t_stack **stack, t_stack *hold_first);
+
+
+
+
+
 
 
 

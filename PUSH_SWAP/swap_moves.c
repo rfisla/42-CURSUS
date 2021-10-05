@@ -8,6 +8,7 @@ static void	ft_swap(int *a, int *b)
 	*a = *b;
 	*b = tmp;
 }
+
 void	swap_a(t_stack **stack_a)
 {
 	t_stack	*tmp;
@@ -17,7 +18,7 @@ void	swap_a(t_stack **stack_a)
 		return ;
 	else
 		ft_swap(&tmp->number, &tmp->next->number);
-	ft_putendl_fd("sa", 0);
+	ft_putendl_fd("sa", 1);
 }
 
 void	swap_b(t_stack **stack_b)
@@ -29,7 +30,7 @@ void	swap_b(t_stack **stack_b)
 		return ;
 	else
 		ft_swap(&tmp->number, &tmp->next->number);
-	ft_putendl_fd("sb", 0);
+	ft_putendl_fd("sb", 1);
 }
 
 void	swap_a_b(t_stack **stack_a, t_stack **stack_b)
@@ -47,6 +48,5 @@ void	swap_a_b(t_stack **stack_a, t_stack **stack_b)
 	{
 		ft_swap(&tmp_b->number, &tmp_b->next->number);
 	}
-	ft_putendl_fd("ss", 0);
+	ft_putendl_fd("ss", 1);
 }
-
