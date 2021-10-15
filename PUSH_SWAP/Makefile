@@ -19,7 +19,9 @@ SRCS =      push_movements.c \
 			big_lists_sorter.c \
 			stack_operations.c \
 			swap_moves.c \
-			utils.c
+			500_list_sorter.c \
+			utils.c \
+			find_quartiles.c
 
 OBJS = ${SRCS:.c=.o}
 CC = gcc
