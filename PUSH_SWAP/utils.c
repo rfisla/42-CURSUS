@@ -1,33 +1,5 @@
 #include "push_swap.h"
 
-void	free_array(char **items)
-{
-	int	i;
-
-	i = 0;
-	while (items[i])
-	{
-		free(items[i]);
-		i++;
-	}
-	free(items);
-}
-
-void	free_stack(t_stack **stack)
-{
-	t_stack	*tmp;
-	t_stack	*delete;
-
-	tmp = *stack;
-	while (tmp)
-	{
-		delete = tmp;
-		tmp = tmp->next;
-		free(delete);
-	}
-	*stack = NULL;
-}
-
 int	already_sorted(t_stack **stack_a)
 {
 	t_stack	*stack;
@@ -42,6 +14,74 @@ int	already_sorted(t_stack **stack_a)
 	}
 	return (1);
 }
+
+static int	searching_min(t_stack **stack, int size)
+{
+	t_stack	*tmp;
+	int		*array;
+	int		i;
+
+	tmp = *stack;
+	i = 0;
+	array = malloc(sizeof(int) * (size + 1));
+	if (!(array))
+		return (0);
+	while (tmp)
+	{
+		array[i++] = tmp->number;
+		tmp = tmp->next;
+	}
+	i = 1;
+	while (array[i])
+	{
+		if (array[0] > array[i])
+		{
+			free(array);
+			return (0);
+		}
+		i++;
+	}
+	free(array);
+	return (1);
+}
+
+int	min_finder(t_stack **stack, int size)
+{
+	if (searching_min(stack, size) == 1)
+		return (1);
+	return (0);
+}
+
+void	assign_index(t_stack **stack)
+{
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *stack;
+	i = 0;
+	while (tmp)
+	{
+		tmp->index = i;
+		tmp = tmp->next;
+		i++;
+	}
+}
+
+int	stack_size(t_stack **stack)
+{
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *stack;
+	i = 0;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
 
 t_stack	*hold_first(t_stack **stack)
 {
@@ -90,71 +130,4 @@ t_stack	*hold_second(t_stack **stack, t_stack *hold_first)
 		tmp = tmp->next;
 	}
 	return (hold_second);
-}
-
-static int	array_int(t_stack **stack, int size)
-{
-	t_stack	*tmp;
-	int		*array;
-	int		i;
-
-	tmp = *stack;
-	i = 0;
-	array = malloc(sizeof(int) * (size + 1));
-	if (!(array))
-		return (0);
-	while (tmp)
-	{
-		array[i++] = tmp->number;
-		tmp = tmp->next;
-	}
-	i = 1;
-	while (array[i])
-	{
-		if (array[0] > array[i])
-		{
-			free(array);
-			return (0);
-		}
-		i++;
-	}
-	free(array);
-	return (1);
-}
-
-int	min_finder(t_stack **stack, int size)
-{
-	if (array_int(stack, size) == 1)
-		return (1);
-	return (0);
-}
-
-void	assign_index(t_stack **stack)
-{
-	t_stack	*tmp;
-	int		i;
-
-	tmp = *stack;
-	i = 0;
-	while (tmp)
-	{
-		tmp->index = i;
-		tmp = tmp->next;
-		i++;
-	}
-}
-
-int	stack_size(t_stack **stack)
-{
-	t_stack	*tmp;
-	int		i;
-
-	tmp = *stack;
-	i = 0;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	return(i);
 }

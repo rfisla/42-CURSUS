@@ -28,12 +28,10 @@ typedef	struct s_stack
 }	t_stack;
 
 t_stack	*create_new_node(void);
-
 t_stack	*init_stack_a(int size);
 void    free_array(char **items);
 void    free_stack(t_stack **stack);
 int	already_sorted(t_stack **stack_a);
-
 int min_finder(t_stack **stack, int size);
 
 void get_stack(int size, char **args, t_stack **stack_a);
@@ -49,16 +47,26 @@ void	rotate_a(t_stack **stack_a);
 void	rotate_b(t_stack **stack_b);
 void	reverse_rotate_a(t_stack **stack_a, char stack);
 
-
-
 void	short_list_sorter(t_stack **stack_a, t_stack **stack_b, int size);
 
 void    assign_index(t_stack **stack);
 int		stack_size(t_stack **stack);
 void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b);
+void	check_head_b(t_stack **stack);
 
 t_stack	*hold_first(t_stack **stack);
 t_stack	*hold_second(t_stack **stack, t_stack *hold_first);
+
+
+void	move_to_first(t_stack **stack_b, int index);
+void	bigger_list_sorter(t_stack **stack_a, t_stack **stack_b);
+
+int	quartile_finder(t_stack **stack, int size, int quartile);
+int	quartile_size(t_stack **stack, int size, int quartile);
+
+
+
+
 
 
 

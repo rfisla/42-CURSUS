@@ -1,12 +1,12 @@
 #include "push_swap.h"
 
-static int	*get_array(t_stack **stack, int size)
+static int	*get_array(t_stack *stack, int size)
 {
 	t_stack	*tmp;
 	int		*array;
 	int		i;
 
-	tmp = *stack;
+	tmp = stack;
 	i = 0;
 	array = malloc(sizeof(int) * (size + 1));
 	if (!(array))
@@ -21,11 +21,13 @@ static int	*get_array(t_stack **stack, int size)
 
 int	*sort_array(t_stack **stack, int size)
 {
+	t_stack	*tmp;
 	int		*array;
 	int		temp;
 	int		i;
 
-	array = get_array(stack, size);
+	tmp = *stack;
+	array = get_array(tmp, size);
 	i = 0;
 	while (size > 1)
 	{
@@ -45,32 +47,105 @@ int	*sort_array(t_stack **stack, int size)
 	return (array);
 }
 
-int	first_quartile(t_stack **stack, int size)
+int	quartile_finder(t_stack **stack, int size, int quartile)
 {
 	int	*array;
-	int	first_quartile;
+	int	position;
 
 	array = sort_array(stack, size);
-	first_quartile = array[size / 4 - 1];
-	return (first_quartile);
+	if (quartile == 1)
+		position = array[size / 4 - 1];
+	else if (quartile == 2)
+		position = array[size / 2 - 1];
+	else if (quartile == 3)
+		position = array[(size / 4)*3 - 1];
+	return (position);
 }
 
-int	median(t_stack **stack, int size)
+
+/*
+int	quartile_size(t_stack **stack, int init, int finish, char quartile)
 {
-	int	*array;
+	int	q_size;
+	t_stack *tmp;
+
+	tmp = *stack;
+	q_size = 0;
+	if (quartile != 4)
+	{
+		while (tmp)
+		{
+			if (tmp->number > init && tmp->number <= finish)
+				q_size++;
+			tmp = tmp->next;
+		}
+	}
+	if (quartile == 4)
+	{
+		while (tmp)
+		{
+			if (tmp->number > init)
+				q_size++;
+			tmp = tmp->next;
+		}
+	}
+	free_stack(&tmp);
+	return (q_size);
+}
+
+ESTO FUNCIONA
+*/
+int	quartile_size(t_stack **stack, int size, int quartile)
+{
+	int	q_size;
+	t_stack *tmp;
+	int	quartile_first;
 	int	median;
+	int	quartile_third;
 
-	array = sort_array(stack, size);
-	median = array[size / 2 - 1];
-	return (median);
+	quartile_first = quartile_finder(stack, size, 1);
+	median = quartile_finder(stack, size, 2);
+	quartile_third = quartile_finder(stack, size, 3);
+
+	tmp = *stack;
+	q_size = 0;
+	if (quartile == 1)
+	{
+		while (tmp)
+		{
+			if (tmp->number <= quartile_first)
+				q_size++;
+			tmp = tmp->next;
+		}
+	}
+	if (quartile == 2)
+	{
+		while (tmp)
+		{
+			if (tmp->number > quartile_first && tmp->number <= median)
+				q_size++;
+			tmp = tmp->next;
+		}
+	}
+	if (quartile == 3)
+	{
+		while (tmp)
+		{
+			if (tmp->number > median && tmp->number <= quartile_third)
+				q_size++;
+			tmp = tmp->next;
+		}
+	}
+	if (quartile == 4)
+	{
+		while (tmp)
+		{
+			if (tmp->number > quartile_third)
+				q_size++;
+			tmp = tmp->next;
+		}
+	}
+	free_stack(&tmp);
+	return (q_size);
 }
 
-int	third_quartile(t_stack **stack, int size)
-{
-	int	*array;
-	int	third_quartile;
-
-	array = sort_array(stack, size);
-	third_quartile = array[(size / 4)*3 - 1];
-	return (third_quartile);
-}

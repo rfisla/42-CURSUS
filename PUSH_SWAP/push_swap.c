@@ -25,17 +25,44 @@ int	main(int argc, char **argv)
 		return (0);
 	else if (size <= 5)
 		short_list_sorter(&stack_a, &stack_b, size);
-	else
+	//ESTO ES PRUEBA
+	//else if (size == 20)
+		//array = sort_array(&stack_a, size);
+	else if(size > 5)
 		big_lists_sorter(&stack_a, &stack_b);
+	//else if (size > 100)
+		//bigger_list_sorter(&stack_a, &stack_b);
+	
 	/*
+	int i = 0;
+	int * array;
+
+	while (array[i])
+	{
+		printf("%d\n", array[i]);
+		i++;
+	}
+	printf("\n%d\n", first_quartile(&stack_a, size));
+	printf("\n%d\n", median(&stack_a, size));
+	printf("\n%d\n", third_quartile(&stack_a, size));
+
+*/
+
+
+	
 	t_stack	*list;
 	list = stack_a;
+	
+	
 	while (list)
 	{
 		printf("%d\n", list->number);
 		list = list->next;
 	}
-	*/
+	
+	
 	//system("leaks push_swap"); 
+
 	return (0); 
+
 }
