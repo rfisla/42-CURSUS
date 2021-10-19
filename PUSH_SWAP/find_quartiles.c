@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static int	*get_array(t_stack *stack, int size)
+int	*get_array(t_stack *stack, int size)
 {
 	t_stack	*tmp;
 	int		*array;
@@ -62,12 +62,10 @@ int	quartile_finder(t_stack **stack, int size, int quartile)
 	return (position);
 }
 
-
-/*
 int	quartile_size(t_stack **stack, int init, int finish, char quartile)
 {
-	int	q_size;
-	t_stack *tmp;
+	int		q_size;
+	t_stack	*tmp;
 
 	tmp = *stack;
 	q_size = 0;
@@ -92,60 +90,3 @@ int	quartile_size(t_stack **stack, int init, int finish, char quartile)
 	free_stack(&tmp);
 	return (q_size);
 }
-
-ESTO FUNCIONA
-*/
-int	quartile_size(t_stack **stack, int size, int quartile)
-{
-	int	q_size;
-	t_stack *tmp;
-	int	quartile_first;
-	int	median;
-	int	quartile_third;
-
-	quartile_first = quartile_finder(stack, size, 1);
-	median = quartile_finder(stack, size, 2);
-	quartile_third = quartile_finder(stack, size, 3);
-
-	tmp = *stack;
-	q_size = 0;
-	if (quartile == 1)
-	{
-		while (tmp)
-		{
-			if (tmp->number <= quartile_first)
-				q_size++;
-			tmp = tmp->next;
-		}
-	}
-	if (quartile == 2)
-	{
-		while (tmp)
-		{
-			if (tmp->number > quartile_first && tmp->number <= median)
-				q_size++;
-			tmp = tmp->next;
-		}
-	}
-	if (quartile == 3)
-	{
-		while (tmp)
-		{
-			if (tmp->number > median && tmp->number <= quartile_third)
-				q_size++;
-			tmp = tmp->next;
-		}
-	}
-	if (quartile == 4)
-	{
-		while (tmp)
-		{
-			if (tmp->number > quartile_third)
-				q_size++;
-			tmp = tmp->next;
-		}
-	}
-	free_stack(&tmp);
-	return (q_size);
-}
-

@@ -35,6 +35,9 @@ int	already_sorted(t_stack **stack_a);
 int min_finder(t_stack **stack, int size);
 
 void get_stack(int size, char **args, t_stack **stack_a);
+void	error_message(t_stack **stack_a);
+int	*get_array(t_stack *stack, int size);
+
 
 void	swap_a(t_stack **stack_a);
 void	swap_b(t_stack **stack_b);
@@ -56,13 +59,16 @@ void	check_head_b(t_stack **stack);
 
 t_stack	*hold_first(t_stack **stack);
 t_stack	*hold_second(t_stack **stack, t_stack *hold_first);
+int	second_min_best_located(t_stack **stack);
 
 
-void	move_to_first(t_stack **stack_b, int index);
+
+//void	move_to_first(t_stack **stack, int index);
 void	bigger_list_sorter(t_stack **stack_a, t_stack **stack_b);
 
+
 int	quartile_finder(t_stack **stack, int size, int quartile);
-int	quartile_size(t_stack **stack, int size, int quartile);
+int	quartile_size(t_stack **stack, int init, int finish, char quartile);
 
 
 

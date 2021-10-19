@@ -19,6 +19,8 @@ int	main(int argc, char **argv)
 	int		size;
 
 	size = argc - 1;
+	if (size < 1)
+		exit (0);
 	get_stack(argc, argv, &stack_a);
 	stack_b = NULL;
 	if (already_sorted(&stack_a))

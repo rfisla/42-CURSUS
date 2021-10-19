@@ -48,8 +48,6 @@ void	get_stack(int size, char **args, t_stack **stack_a)
 	int		status;
 	int		n;
 
-	if (size < 1)
-		exit (0);
 	i = 1;
 	status = 0;
 	*stack_a = create_new_node();
@@ -69,9 +67,5 @@ void	get_stack(int size, char **args, t_stack **stack_a)
 		i++;
 	}
 	if (status)
-	{
-		free_stack(stack_a);
-		ft_putendl_fd("error", 2);
-		exit (0);
-	}
+		error_message(stack_a);
 }

@@ -21,7 +21,9 @@ SRCS =      push_movements.c \
 			swap_moves.c \
 			utils.c \
 			find_quartiles.c \
-			free_functions.c
+			free_functions.c \
+			mins_finder.c 
+
 
 OBJS = ${SRCS:.c=.o}
 CC = gcc

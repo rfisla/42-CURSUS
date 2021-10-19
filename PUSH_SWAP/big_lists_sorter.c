@@ -9,37 +9,21 @@ void	check_head_b(t_stack **stack)
 	}
 }
 
-static int	second_min_best_located(t_stack **stack_a)
+static void	move_to_first(t_stack **stack, int index)
 {
-	t_stack	*first;
-	t_stack	*second;
-	int		quarter;
-
-	quarter = stack_size(stack_a) / 4;
-	assign_index(stack_a);
-	first = hold_first(stack_a);
-	second = hold_second(stack_a, first);
-	if ((second->index < quarter || second->index > (quarter * 3)) \
-		&& (first->index >= quarter && first->index <= (quarter * 3)))
-		return (1);
-	return (0);
-}
-
-void	move_to_first(t_stack **stack_b, int index)
-{
-	if (index <= (stack_size(stack_b) / 2))
+	if (index <= (stack_size(stack) / 2))
 	{
 		while (index > 0)
 		{
-			rotate_a(stack_b);
+			rotate_a(stack);
 			index--;
 		}
 	}
-	else if (index > (stack_size(stack_b) / 2))
+	else if (index > (stack_size(stack) / 2))
 	{
-		while (index < stack_size(stack_b))
+		while (index < stack_size(stack))
 		{
-			reverse_rotate_a(stack_b, 'b');
+			reverse_rotate_a(stack, 'b');
 			index++;
 		}
 	}
@@ -82,10 +66,10 @@ void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b)
 	quartile_first = quartile_finder(stack_a, size, 1);
 	median = quartile_finder(stack_a, size, 2);
 	quartile_third = quartile_finder(stack_a, size, 3);
-	size1 = quartile_size(stack_a, size, 1);
-	size2 = quartile_size(stack_a, size, 2);
-	size3 = quartile_size(stack_a, size, 3);
-	size4 = quartile_size(stack_a, size, 4);
+	size1 = size / 4;
+	size2 = quartile_size(stack_a, quartile_first, median, 2);
+	size3 = quartile_size(stack_a, median, quartile_third, 3);
+	size4 = quartile_size(stack_a, quartile_third, 0, 4);
 	while (stack_size(stack_b) < size3)
 	{
 		if ((*stack_a)->number > median && \
@@ -120,8 +104,4 @@ void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b)
 			rotate_a(stack_a);
 	}
 	sort_quarter(stack_a, stack_b);
-	//printf("\n%d 1QUARTILE:", size / 4);
-	//printf("\n%d 2NDQUARTILE:", quartile_size(stack_a, quartile_first, median, 2));
-	//printf("\n%d 3NDQUARTILE:", quartile_size(stack_a, median, quartile_third, 3));
-	//printf("\n%d 4NDQUARTILE:", quartile_size(stack_a, quartile_third, size, 4));
 }
