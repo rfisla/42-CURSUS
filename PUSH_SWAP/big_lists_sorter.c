@@ -51,54 +51,55 @@ static void	sort_quarter(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
-void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b)
+static t_quartiles	*quartile_values(t_stack **stack_a, t_quartiles *q, int size)
 {
-	int	size;
-	int	quartile_first;
-	int	median;
-	int	quartile_third;
-	int size1;
-	int size2;
-	int size3;
-	int size4;
 
-	size = stack_size(stack_a);
-	quartile_first = quartile_finder(stack_a, size, 1);
-	median = quartile_finder(stack_a, size, 2);
-	quartile_third = quartile_finder(stack_a, size, 3);
-	size1 = size / 4;
-	size2 = quartile_size(stack_a, quartile_first, median, 2);
-	size3 = quartile_size(stack_a, median, quartile_third, 3);
-	size4 = quartile_size(stack_a, quartile_third, 0, 4);
-	while (stack_size(stack_b) < size3)
+	q->q1n = quartile_finder(stack_a, size, 1);
+	q->q2n = quartile_finder(stack_a, size, 2);
+	q->q3n = quartile_finder(stack_a, size, 3);
+	q->q1size = size / 4;
+	q->q2size = quartile_size(stack_a, q->q1n , q->q2n, 2);
+	q->q3size = quartile_size(stack_a, q->q2n , q->q3n, 3);
+	q->q4size = quartile_size(stack_a, q->q3n , 0, 4);
+	return (q);
+}
+
+
+void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size)
+{
+	t_quartiles *quartiles;
+
+	quartiles = (t_quartiles *) malloc(sizeof(t_quartiles));
+	quartile_values(stack_a, quartiles, size);
+	while (stack_size(stack_b) < quartiles->q3size)
 	{
-		if ((*stack_a)->number > median && \
-			(*stack_a)->number <= quartile_third)
+		if ((*stack_a)->number > quartiles->q2n && \
+			(*stack_a)->number <= quartiles->q3n)
 			push_b(stack_a, stack_b);
 		else
 			rotate_a(stack_a);
 	}
 	sort_quarter(stack_a, stack_b);
-	while (stack_size(stack_b) < size2)
+	while (stack_size(stack_b) < quartiles->q2size)
 	{
-		if ((*stack_a)->number > quartile_first && \
-			(*stack_a)->number <= median)
+		if ((*stack_a)->number > quartiles->q1n && \
+			(*stack_a)->number <= quartiles->q2n)
 			push_b(stack_a, stack_b);
 		else
 			rotate_a(stack_a);
 	}
 	sort_quarter(stack_a, stack_b);
-	while (stack_size(stack_b) < size1)
+	while (stack_size(stack_b) < quartiles->q1size)
 	{
-		if ((*stack_a)->number <= quartile_first)
+		if ((*stack_a)->number <= quartiles->q1n)
 			push_b(stack_a, stack_b);
 		else
 			rotate_a(stack_a);
 	}
 	sort_quarter(stack_a, stack_b);
-	while (stack_size(stack_b) < size4)
+	while (stack_size(stack_b) < quartiles->q4size)
 	{
-		if ((*stack_a)->number > quartile_third)
+		if ((*stack_a)->number > quartiles->q3n)
 			push_b(stack_a, stack_b);
 		else
 			rotate_a(stack_a);

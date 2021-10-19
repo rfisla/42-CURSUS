@@ -27,6 +27,19 @@ typedef	struct s_stack
 	struct	s_stack *next;
 }	t_stack;
 
+typedef	struct s_quartiles
+{
+	int		q1size;
+	int		q1n;
+	int		q2size;
+	int		q2n;
+	int		q3size;
+	int		q3n;
+	int		q4size;
+}	t_quartiles;
+
+
+
 t_stack	*create_new_node(void);
 t_stack	*init_stack_a(int size);
 void    free_array(char **items);
@@ -54,7 +67,7 @@ void	short_list_sorter(t_stack **stack_a, t_stack **stack_b, int size);
 
 void    assign_index(t_stack **stack);
 int		stack_size(t_stack **stack);
-void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b);
+void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size);
 void	check_head_b(t_stack **stack);
 
 t_stack	*hold_first(t_stack **stack);
