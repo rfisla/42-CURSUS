@@ -51,3 +51,12 @@ void	error_message(t_stack **stack_a)
 	ft_putendl_fd("error", 2);
 	exit (0);
 }
+
+void	check_head_b(t_stack **stack)
+{
+	if ((*stack)->next)
+	{
+		if ((*stack)->number > (*stack)->next->number)
+			swap_b(stack);
+	}
+}
