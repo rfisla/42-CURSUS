@@ -26,38 +26,54 @@ static int	int_checker(char *item)
 	}
 	return (1);
 }
-
-static int	duplicates_checker(int n, t_stack **stack)
+//PROBLEMA DEL 0 ESTA AQUI. GET ARRAY?
+static int	duplicates_checker(int n, t_stack **stack, int size)
 {
-	t_stack	*copy;
+	t_stack	*tmp;
+	int		*array;
+	int		i;
 
-	copy = *stack;
-	while (copy)
+	tmp = *stack;
+	array = get_array(tmp, size);
+	i = 0;
+	while (array[i])
 	{
-		if (copy->number == n)
-			return (0);
-		copy = copy->next;
+		if (array[i] == n)
+			return (1);
+		i++;
 	}
-	return (1);
+	return (0);
 }
 
+static int		check_int_overflow(char *str)
+{
+	if (str[0] == '-')
+	{
+		if (ft_atoi(str) > 0)
+			return (1);
+	}
+	if (str[0] != '-')
+	{
+		if (ft_atoi(str) < 0)
+			return (1);
+	}
+	return (0);
+}
 void	get_stack(int size, char **args, t_stack **stack_a)
 {
 	t_stack	*tmp;
 	int		i;
-	int		status;
 	int		n;
 
 	i = 1;
-	status = 0;
 	*stack_a = create_new_node();
 	tmp = *stack_a;
-	while (i < size && !status)
+	while (i < size)
 	{
 		n = ft_atoi(args[i]);
-		if (!(int_checker(args[i])) || !(duplicates_checker(n, stack_a)) \
-		|| n > INT_MAX || n < INT_MIN)
-			status = 1;
+		if (!(int_checker(args[i])) || (duplicates_checker(n, stack_a, size)) \
+		|| check_int_overflow(args[i]))
+			error_message(stack_a);
 		tmp->number = ft_atoi(args[i]);
 		if (i < size - 1)
 		{
@@ -66,6 +82,24 @@ void	get_stack(int size, char **args, t_stack **stack_a)
 		}
 		i++;
 	}
-	if (status)
-		error_message(stack_a);
 }
+/*
+static int	duplicates_checker(int n, t_stack **stack, int size)
+{
+	t_stack	*tmp;
+	int		*array;
+	int		i;
+
+	tmp = *stack;
+	array = get_array(tmp, size);
+	i = 0;
+	zero = 0;
+	while (array[i])
+	{
+		if (array[i] == n)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+*/
