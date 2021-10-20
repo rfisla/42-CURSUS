@@ -65,5 +65,6 @@ int			second_min_best_located(t_stack **stack);
 int			quartile_finder(t_stack **stack, int size, int quartile);
 int			quartile_size(t_stack **stack, int init, int finish, char quartile);
 void		big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size);
+void		under100_lists_sorter(t_stack **stack_a, t_stack **stack_b);
 
 #endif

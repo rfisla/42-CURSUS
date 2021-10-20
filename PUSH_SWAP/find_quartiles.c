@@ -52,6 +52,7 @@ int	quartile_finder(t_stack **stack, int size, int quartile)
 	int	*array;
 	int	position;
 
+	position = 0;
 	array = sort_array(stack, size);
 	if (quartile == 1)
 		position = array[size / 4 - 1];
