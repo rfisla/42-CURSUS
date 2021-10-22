@@ -45,48 +45,59 @@ static int	duplicates_checker(int n, t_stack **stack, int size)
 	return (0);
 }
 
-static int		check_int_overflow(char *str)
+static int		check_int_overflow(char *item)
 {
-	if (str[0] == '-')
+	if (item[0] == '-')
 	{
-		if (ft_atoi(str) > 0)
+		if (ft_atoi(item) > 0)
 			return (1);
 	}
-	if (str[0] != '-')
+	if (item[0] != '-')
 	{
-		if (ft_atoi(str) < 0)
+		if (ft_atoi(item) < 0)
 			return (1);
 	}
 	return (0);
 }
+
+static int		check_len(char *item)
+{
+	int		i;
+	int		len;
+
+
+	i = 0;
+	while (item[i])
+	{
+		len++;
+		i++;
+	}
+	if (len > 11)
+		return (1);
+
+	return (0);
+}
+
 void	get_stack(int size, char **args, t_stack **stack_a)
 {
 	t_stack	*tmp;
 	int		i;
 	int		n;
-	int		j;
-	char	**array;
 
 	i = 1;
 	*stack_a = create_new_node();
 	tmp = *stack_a;
 	while (i < size)// O mejor args[i]
 	{
-		array = ft_split(args[i], ' ');
-		j = 0;
-		while(array[j])
+		n = ft_atoi(args[i]);
+		if (check_len(args[i]) || (duplicates_checker(n, stack_a, size)) \
+		|| !int_checker(args[i]) || check_int_overflow(args[i]))
+			error_message(stack_a);
+		tmp->number = ft_atoi(args[i]);
+		if (i < size - 1)
 		{
-			n = ft_atoi(array[j]);
-			if (!(int_checker(array[j])) || (duplicates_checker(n, stack_a, size)) \
-			|| check_int_overflow(args[i]))
-				error_message(stack_a);
-			tmp->number = ft_atoi(array[j]);
-			if (i < size - 1)
-			{
-				tmp->next = create_new_node();
-				tmp = tmp->next;
-			}
-			j++;
+			tmp->next = create_new_node();
+			tmp = tmp->next;
 		}
 		i++;
 	}
