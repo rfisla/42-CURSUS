@@ -64,6 +64,41 @@ void	get_stack(int size, char **args, t_stack **stack_a)
 	t_stack	*tmp;
 	int		i;
 	int		n;
+	int		j;
+	char	**array;
+
+	i = 1;
+	*stack_a = create_new_node();
+	tmp = *stack_a;
+	while (i < size)// O mejor args[i]
+	{
+		array = ft_split(args[i], ' ');
+		j = 0;
+		while(array[j])
+		{
+			n = ft_atoi(array[j]);
+			if (!(int_checker(array[j])) || (duplicates_checker(n, stack_a, size)) \
+			|| check_int_overflow(args[i]))
+				error_message(stack_a);
+			tmp->number = ft_atoi(array[j]);
+			if (i < size - 1)
+			{
+				tmp->next = create_new_node();
+				tmp = tmp->next;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+//Trucos para comprobar en 42: el size con $ARG es 2?
+//The other option, check both
+/*
+void	get_stack(int size, char **args, t_stack **stack_a)
+{
+	t_stack	*tmp;
+	int		i;
+	int		n;
 
 	i = 1;
 	*stack_a = create_new_node();
@@ -83,6 +118,8 @@ void	get_stack(int size, char **args, t_stack **stack_a)
 		i++;
 	}
 }
+*/
+//https://github.com/AdrianWR/push_swap/blob/main/src/get_stack.c
 /*
 static int	duplicates_checker(int n, t_stack **stack, int size)
 {
