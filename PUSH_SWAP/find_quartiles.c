@@ -55,11 +55,15 @@ int	quartile_finder(t_stack **stack, int size, int quartile)
 	position = 0;
 	array = sort_array(stack, size);
 	if (quartile == 1)
-		position = array[size / 4 - 1];
+		position = array[size / 6 - 1];
 	else if (quartile == 2)
-		position = array[size / 2 - 1];
+		position = array[((size / 6) * 2) - 1];
 	else if (quartile == 3)
-		position = array[(size / 4)*3 - 1];
+		position = array[(size / 2) - 1];
+	else if (quartile == 4)
+		position = array[((size / 6) * 4) - 1];
+	else if (quartile == 5)
+		position = array[((size / 6) * 5) - 1];
 	return (position);
 }
 
@@ -70,7 +74,7 @@ int	quartile_size(t_stack **stack, int init, int finish, char quartile)
 
 	tmp = *stack;
 	q_size = 0;
-	if (quartile != 4)
+	if (quartile != 6)
 	{
 		while (tmp)
 		{
@@ -79,7 +83,7 @@ int	quartile_size(t_stack **stack, int init, int finish, char quartile)
 			tmp = tmp->next;
 		}
 	}
-	if (quartile == 4)
+	if (quartile == 6)
 	{
 		while (tmp)
 		{
@@ -88,6 +92,5 @@ int	quartile_size(t_stack **stack, int init, int finish, char quartile)
 			tmp = tmp->next;
 		}
 	}
-	free_stack(&tmp);
 	return (q_size);
 }

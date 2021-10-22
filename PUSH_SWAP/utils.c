@@ -48,7 +48,7 @@ int	stack_size(t_stack **stack)
 void	error_message(t_stack **stack_a)
 {
 	free_stack(stack_a);
-	ft_putendl_fd("error", 2);
+	ft_putendl_fd("Error", 2);
 	exit (0);
 }
 

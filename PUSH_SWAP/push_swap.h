@@ -34,8 +34,12 @@ typedef struct s_quartiles
 	int		q2size;
 	int		q2n;
 	int		q3size;
-	int		q3n;
+	int		q3n;	
 	int		q4size;
+	int		q4n;
+	int		q5size;
+	int		q5n;
+	int		q6size;
 }	t_quartiles;
 
 t_stack		*create_new_node(void);
@@ -54,7 +58,8 @@ void		push_b(t_stack **stack_a, t_stack **stack_b);
 void		push_a(t_stack **stack_a, t_stack **stack_b);
 void		rotate_a(t_stack **stack_a);
 void		rotate_b(t_stack **stack_b);
-void		reverse_rotate_a(t_stack **stack_a, char stack);
+void		reverse_rotate(t_stack **stack, char letter);
+void		reverse_rotate_both(t_stack **stack_a, t_stack **stack_b);
 void		short_list_sorter(t_stack **stack_a, t_stack **stack_b, int size);
 void		assign_index(t_stack **stack);
 int			stack_size(t_stack **stack);

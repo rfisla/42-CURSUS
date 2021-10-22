@@ -85,12 +85,12 @@ int	second_min_best_located(t_stack **stack)
 	t_stack	*second;
 	int		quarter;
 
-	quarter = stack_size(stack) / 4;
+	quarter = stack_size(stack) / 6;
 	assign_index(stack);
 	first = hold_first(stack);
 	second = hold_second(stack, first);
-	if ((second->index < quarter || second->index > (quarter * 3)) \
-		&& (first->index >= quarter && first->index <= (quarter * 3)))
+	if ((second->index < quarter || second->index > (quarter * 5)) \
+		&& (first->index >= quarter && first->index <= (quarter * 5)))
 		return (1);
 	return (0);
 }

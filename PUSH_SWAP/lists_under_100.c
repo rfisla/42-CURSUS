@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+//OPCIÓN 1
 static void	check_head(t_stack **stack)
 {
 	if ((*stack)->next)
@@ -21,60 +22,65 @@ static void	check_head(t_stack **stack)
 	}
 }
 
-static int	second_min_best_position(t_stack **stack_a)
+static int	second_min_best_position(t_stack *f, t_stack *s, t_quartiles *q)
 {
-	t_stack	*first;
-	t_stack	*second;
-	int		quarter;
-
-	if (stack_size(stack_a) >= 20)
-	{
-		quarter = stack_size(stack_a) / 4;
-		assign_index(stack_a);
-		first = hold_first(stack_a);
-		second = hold_second(stack_a, first);
-		if ((second->index < quarter || second->index > (quarter * 3)) \
-			&& (first->index >= quarter && first->index <= (quarter * 3)))
-			return (1);
-	}
+	if ((s->index < q->q1size || s->index > q->q3size) \
+		&& (f->index >= q->q1size && f->index <= q->q3size))
+		return (1);
 	return (0);
 }
 
-static void	move_to_top(t_stack **stack_a, t_stack **stack_b, int index)
+static void	to_top(t_stack **stack_a, t_stack **stack_b, int i, t_quartiles *q)
 {
-	if (index <= (stack_size(stack_a) / 2))
+	if (i <= q->q2size)
 	{
-		while (index > 0)
+		while (i > 0)
 		{
 			rotate_a(stack_a);
-			index--;
+			i--;
 		}
 	}
-	else if (index > (stack_size(stack_a) / 2))
+	else if (i > q->q2size)
 	{
-		while (index < stack_size(stack_a))
+		while (i < stack_size(stack_a))
 		{
-			reverse_rotate_a(stack_a, 'a');
-			index++;
+			reverse_rotate(stack_a, 'a');
+			i++;
 		}
 	}
 	push_b(stack_a, stack_b);
 }
 
-void    under100_lists_sorter(t_stack **stack_a, t_stack **stack_b)
+static t_quartiles	*median_values(t_stack **stack_a, t_quartiles *q, int size)
 {
-	t_stack	*first;
-	t_stack	*second;
+	q->q1n = quartile_finder(stack_a, size, 1);
+	q->q2n = quartile_finder(stack_a, size, 2);
+	q->q3n = quartile_finder(stack_a, size, 3);
+	q->q1size = size / 4;
+	q->q2size = quartile_size(stack_a, q->q1n, q->q2n, 2);
+	q->q3size = quartile_size(stack_a, q->q2n, q->q3n, 3);
+	q->q4size = quartile_size(stack_a, q->q3n, 0, 4);
+	return (q);
+}
+
+void	under100_lists_sorter(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack		*first;
+	t_stack		*second;
+	t_quartiles	*quartiles;
 
 	while (stack_size(stack_a))
 	{
+		quartiles = (t_quartiles *) malloc(sizeof(t_quartiles));
+		median_values(stack_a, quartiles, stack_size(stack_a));
 		assign_index(stack_a);
 		first = hold_first(stack_a);
 		second = hold_second(stack_a, first);
-		if (second_min_best_position(stack_a))
-			move_to_top(stack_a, stack_b, second->index);
+		if (second_min_best_position(first, second, quartiles) \
+		&& stack_size(stack_a) >= 20)
+			to_top(stack_a, stack_b, second->index, quartiles);
 		else
-			move_to_top(stack_a, stack_b, first->index);
+			to_top(stack_a, stack_b, first->index, quartiles);
 		check_head(stack_b);
 	}
 	while (*stack_b)
@@ -85,3 +91,85 @@ void    under100_lists_sorter(t_stack **stack_a, t_stack **stack_b)
 	}	
 }
 
+//OPCION 2
+/*
+
+static void	check_head(t_stack **stack)
+{
+	if ((*stack)->next)
+	{
+		if ((*stack)->number < (*stack)->next->number)
+			swap_b(stack);
+	}
+}
+
+static int	second_min_best_position(t_stack *f, t_stack *s, t_quartiles *q)
+{
+	if ((s->index < q->q1size || s->index > q->q3size) \
+		&& (f->index >= q->q1size && f->index <= q->q3size))
+		return (1);
+	return (0);
+}
+
+static void	to_top(t_stack **stack_a, t_stack **stack_b, int i, t_quartiles *q)
+{
+	if (i <= q->q2size)
+	{
+		while (i > 0)
+		{
+			rotate_a(stack_a);
+			i--;
+		}
+	}
+	else if (i > q->q2size)
+	{
+		while (i < stack_size(stack_a))
+		{
+			reverse_rotate_a(stack_a, 'a');
+			i++;
+		}
+	}
+	push_b(stack_a, stack_b);
+}
+
+static t_quartiles	*median_values(t_stack **stack_a, t_quartiles *q, int size)
+{
+	q->q1n = quartile_finder(stack_a, size, 1);
+	q->q2n = quartile_finder(stack_a, size, 2);
+	q->q3n = quartile_finder(stack_a, size, 3);
+	q->q1size = size / 4;
+	q->q2size = quartile_size(stack_a, q->q1n, q->q2n, 2);
+	q->q3size = quartile_size(stack_a, q->q2n, q->q3n, 3);
+	q->q4size = quartile_size(stack_a, q->q3n, 0, 4);
+	return (q);
+}
+
+void	under100_lists_sorter(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack		*first;
+	t_stack		*second;
+	t_quartiles	*quartiles;
+
+	while (stack_size(stack_a))
+	{
+		quartiles = (t_quartiles *) malloc(sizeof(t_quartiles));
+		median_values(stack_a, quartiles, stack_size(stack_a));
+		assign_index(stack_a);
+		first = hold_first(stack_a);
+		second = hold_second(stack_a, first);
+		if (second_min_best_position(first, second, quartiles) \
+		&& stack_size(stack_a) >= 20)
+			to_top(stack_a, stack_b, second->index, quartiles);
+		else
+			to_top(stack_a, stack_b, first->index, quartiles);
+		check_head(stack_b);
+	}
+	while (*stack_b)
+	{
+		if (stack_size(stack_b) == 2)
+			check_head(stack_b);
+		push_a(stack_a, stack_b);
+	}	
+}
+
+*/

@@ -6,7 +6,7 @@ static void	move_to_first(t_stack **stack, int index)
 	{
 		while (index > 0)
 		{
-			rotate_a(stack);
+			rotate_b(stack);
 			index--;
 		}
 	}
@@ -14,7 +14,7 @@ static void	move_to_first(t_stack **stack, int index)
 	{
 		while (index < stack_size(stack))
 		{
-			reverse_rotate_a(stack, 'b');
+			reverse_rotate(stack, 'b');
 			index++;
 		}
 	}
@@ -47,10 +47,14 @@ static t_quartiles	*q_values(t_stack **stack_a, t_quartiles *q, int size)
 	q->q1n = quartile_finder(stack_a, size, 1);
 	q->q2n = quartile_finder(stack_a, size, 2);
 	q->q3n = quartile_finder(stack_a, size, 3);
-	q->q1size = size / 4;
+	q->q4n = quartile_finder(stack_a, size, 4);
+	q->q5n = quartile_finder(stack_a, size, 5);
+	q->q1size = size / 6;
 	q->q2size = quartile_size(stack_a, q->q1n, q->q2n, 2);
 	q->q3size = quartile_size(stack_a, q->q2n, q->q3n, 3);
-	q->q4size = quartile_size(stack_a, q->q3n, 0, 4);
+	q->q4size = quartile_size(stack_a, q->q3n, q->q4n, 4);
+	q->q5size = quartile_size(stack_a, q->q4n, q->q5n, 5);
+	q->q6size = quartile_size(stack_a, q->q5n, 0, 6);
 	return (q);
 }
 
@@ -64,7 +68,13 @@ static void	push_q(t_stack **stack_a, t_stack **stack_b, t_quartiles *qr, int q)
 	else if (q == 3 && ((*stack_a)->number > qr->q2n && \
 			(*stack_a)->number <= qr->q3n))
 		push_b(stack_a, stack_b);
-	else if (q == 4 && ((*stack_a)->number > qr->q3n))
+	else if (q == 4 && ((*stack_a)->number > qr->q3n && \
+			(*stack_a)->number <= qr->q4n))
+		push_b(stack_a, stack_b);
+	else if (q == 5 && ((*stack_a)->number > qr->q4n && \
+			(*stack_a)->number <= qr->q5n))
+		push_b(stack_a, stack_b);
+	else if (q == 6 && ((*stack_a)->number > qr->q5n))
 		push_b(stack_a, stack_b);
 	else
 		rotate_a(stack_a);
@@ -76,6 +86,12 @@ void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size)
 
 	quartiles = (t_quartiles *) malloc(sizeof(t_quartiles));
 	q_values(stack_a, quartiles, size);
+	while (stack_size(stack_b) < quartiles->q5size)
+		push_q(stack_a, stack_b, quartiles, 5);
+	sort_quarter(stack_a, stack_b);
+	while (stack_size(stack_b) < quartiles->q4size)
+		push_q(stack_a, stack_b, quartiles, 4);
+	sort_quarter(stack_a, stack_b);
 	while (stack_size(stack_b) < quartiles->q3size)
 		push_q(stack_a, stack_b, quartiles, 3);
 	sort_quarter(stack_a, stack_b);
@@ -85,7 +101,7 @@ void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size)
 	while (stack_size(stack_b) < quartiles->q1size)
 		push_q(stack_a, stack_b, quartiles, 1);
 	sort_quarter(stack_a, stack_b);
-	while (stack_size(stack_b) < quartiles->q4size)
-		push_q(stack_a, stack_b, quartiles, 4);
+	while (stack_size(stack_b) < quartiles->q6size)
+		push_q(stack_a, stack_b, quartiles, 6);
 	sort_quarter(stack_a, stack_b);
 }
