@@ -27,20 +27,20 @@ typedef struct s_stack
 	struct s_stack	*next;
 }					t_stack;
 
-typedef struct s_quartiles
+typedef struct s_sixtiles
 {
-	int		q1size;
-	int		q1n;
-	int		q2size;
-	int		q2n;
-	int		q3size;
-	int		q3n;	
-	int		q4size;
-	int		q4n;
-	int		q5size;
-	int		q5n;
-	int		q6size;
-}	t_quartiles;
+	int		s1size;
+	int		s1n;
+	int		s2size;
+	int		s2n;
+	int		s3size;
+	int		s3n;	
+	int		s4size;
+	int		s4n;
+	int		s5size;
+	int		s5n;
+	int		s6size;
+}	t_sixtiles;
 
 t_stack		*create_new_node(void);
 t_stack		*init_stack_a(int size);
@@ -73,8 +73,8 @@ void		check_head_b(t_stack **stack);
 t_stack		*hold_first(t_stack **stack);
 t_stack		*hold_second(t_stack **stack, t_stack *hold_first);
 int			second_min_best_located(t_stack **stack);
-int			quartile_finder(t_stack **stack, int size, int quartile);
-int			quartile_size(t_stack **stack, int init, int finish, char quartile);
+int			sixtile_finder(t_stack **stack, int size, int sixtile);
+int			sixtile_size(t_stack **stack, int init, int finish, char sixtile);
 void		big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size);
 void		under100_lists_sorter(t_stack **stack_a, t_stack **stack_b);
 

@@ -42,39 +42,39 @@ static void	sort_quarter(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
-static t_quartiles	*q_values(t_stack **stack_a, t_quartiles *q, int size)
+static t_sixtiles	*q_values(t_stack **stack_a, t_sixtiles *s, int size)
 {
-	q->q1n = quartile_finder(stack_a, size, 1);
-	q->q2n = quartile_finder(stack_a, size, 2);
-	q->q3n = quartile_finder(stack_a, size, 3);
-	q->q4n = quartile_finder(stack_a, size, 4);
-	q->q5n = quartile_finder(stack_a, size, 5);
-	q->q1size = size / 6;
-	q->q2size = quartile_size(stack_a, q->q1n, q->q2n, 2);
-	q->q3size = quartile_size(stack_a, q->q2n, q->q3n, 3);
-	q->q4size = quartile_size(stack_a, q->q3n, q->q4n, 4);
-	q->q5size = quartile_size(stack_a, q->q4n, q->q5n, 5);
-	q->q6size = quartile_size(stack_a, q->q5n, 0, 6);
-	return (q);
+	s->s1n = sixtile_finder(stack_a, size, 1);
+	s->s2n = sixtile_finder(stack_a, size, 2);
+	s->s3n = sixtile_finder(stack_a, size, 3);
+	s->s4n = sixtile_finder(stack_a, size, 4);
+	s->s5n = sixtile_finder(stack_a, size, 5);
+	s->s1size = size / 6;
+	s->s2size = sixtile_size(stack_a, s->s1n, s->s2n, 2);
+	s->s3size = sixtile_size(stack_a, s->s2n, s->s3n, 3);
+	s->s4size = sixtile_size(stack_a, s->s3n, s->s4n, 4);
+	s->s5size = sixtile_size(stack_a, s->s4n, s->s5n, 5);
+	s->s6size = sixtile_size(stack_a, s->s5n, 0, 6);
+	return (s);
 }
 
-static void	push_q(t_stack **stack_a, t_stack **stack_b, t_quartiles *qr, int q)
+static void	push(t_stack **stack_a, t_stack **stack_b, t_sixtiles *s, int sixt)
 {
-	if (q == 1 && ((*stack_a)->number <= qr->q1n))
+	if (sixt == 1 && ((*stack_a)->number <= s->s1n))
 		push_b(stack_a, stack_b);
-	else if (q == 2 && ((*stack_a)->number > qr->q1n && \
-			(*stack_a)->number <= qr->q2n))
+	else if (sixt == 2 && ((*stack_a)->number > s->s1n && \
+			(*stack_a)->number <= s->s2n))
 		push_b(stack_a, stack_b);
-	else if (q == 3 && ((*stack_a)->number > qr->q2n && \
-			(*stack_a)->number <= qr->q3n))
+	else if (sixt == 3 && ((*stack_a)->number > s->s2n && \
+			(*stack_a)->number <= s->s3n))
 		push_b(stack_a, stack_b);
-	else if (q == 4 && ((*stack_a)->number > qr->q3n && \
-			(*stack_a)->number <= qr->q4n))
+	else if (sixt == 4 && ((*stack_a)->number > s->s3n && \
+			(*stack_a)->number <= s->s4n))
 		push_b(stack_a, stack_b);
-	else if (q == 5 && ((*stack_a)->number > qr->q4n && \
-			(*stack_a)->number <= qr->q5n))
+	else if (sixt == 5 && ((*stack_a)->number > s->s4n && \
+			(*stack_a)->number <= s->s5n))
 		push_b(stack_a, stack_b);
-	else if (q == 6 && ((*stack_a)->number > qr->q5n))
+	else if (sixt == 6 && ((*stack_a)->number > s->s5n))
 		push_b(stack_a, stack_b);
 	else
 		rotate_a(stack_a);
@@ -82,27 +82,27 @@ static void	push_q(t_stack **stack_a, t_stack **stack_b, t_quartiles *qr, int q)
 
 void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size)
 {
-	t_quartiles	*quartiles;
+	t_sixtiles	*sixtiles;
 
-	quartiles = (t_quartiles *) malloc(sizeof(t_quartiles));
-	q_values(stack_a, quartiles, size);
-	while (stack_size(stack_b) < quartiles->q5size)
-		push_q(stack_a, stack_b, quartiles, 5);
+	sixtiles = (t_sixtiles *) malloc(sizeof(t_sixtiles));
+	q_values(stack_a, sixtiles, size);
+	while (stack_size(stack_b) < sixtiles->s5size)
+		push(stack_a, stack_b, sixtiles, 5);
 	sort_quarter(stack_a, stack_b);
-	while (stack_size(stack_b) < quartiles->q4size)
-		push_q(stack_a, stack_b, quartiles, 4);
+	while (stack_size(stack_b) < sixtiles->s4size)
+		push(stack_a, stack_b, sixtiles, 4);
 	sort_quarter(stack_a, stack_b);
-	while (stack_size(stack_b) < quartiles->q3size)
-		push_q(stack_a, stack_b, quartiles, 3);
+	while (stack_size(stack_b) < sixtiles->s3size)
+		push(stack_a, stack_b, sixtiles, 3);
 	sort_quarter(stack_a, stack_b);
-	while (stack_size(stack_b) < quartiles->q2size)
-		push_q(stack_a, stack_b, quartiles, 2);
+	while (stack_size(stack_b) < sixtiles->s2size)
+		push(stack_a, stack_b, sixtiles, 2);
 	sort_quarter(stack_a, stack_b);
-	while (stack_size(stack_b) < quartiles->q1size)
-		push_q(stack_a, stack_b, quartiles, 1);
+	while (stack_size(stack_b) < sixtiles->s1size)
+		push(stack_a, stack_b, sixtiles, 1);
 	sort_quarter(stack_a, stack_b);
-	while (stack_size(stack_b) < quartiles->q6size)
-		push_q(stack_a, stack_b, quartiles, 6);
+	while (stack_size(stack_b) < sixtiles->s6size)
+		push(stack_a, stack_b, sixtiles, 6);
 	sort_quarter(stack_a, stack_b);
-	free(quartiles);
+	free(sixtiles);
 }

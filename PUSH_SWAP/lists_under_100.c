@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-//OPCIÓN 1
 static void	check_head(t_stack **stack)
 {
 	if ((*stack)->next)
@@ -22,17 +21,17 @@ static void	check_head(t_stack **stack)
 	}
 }
 
-static int	second_min_best_position(t_stack *f, t_stack *s, t_quartiles *q)
+static int	second_min_best_position(t_stack *f, t_stack *s, t_sixtiles *sixt)
 {
-	if ((s->index < q->q1size || s->index > q->q3size) \
-		&& (f->index >= q->q1size && f->index <= q->q3size))
+	if ((s->index < sixt->s1size || s->index > sixt->s3size) \
+		&& (f->index >= sixt->s1size && f->index <= sixt->s3size))
 		return (1);
 	return (0);
 }
 
-static void	to_top(t_stack **stack_a, t_stack **stack_b, int i, t_quartiles *q)
+static void	to_top(t_stack **stack_a, t_stack **stack_b, int i, t_sixtiles *s)
 {
-	if (i <= q->q2size)
+	if (i <= s->s2size)
 	{
 		while (i > 0)
 		{
@@ -40,7 +39,7 @@ static void	to_top(t_stack **stack_a, t_stack **stack_b, int i, t_quartiles *q)
 			i--;
 		}
 	}
-	else if (i > q->q2size)
+	else if (i > s->s2size)
 	{
 		while (i < stack_size(stack_a))
 		{
@@ -51,15 +50,15 @@ static void	to_top(t_stack **stack_a, t_stack **stack_b, int i, t_quartiles *q)
 	push_b(stack_a, stack_b);
 }
 
-static t_quartiles	*median_values(t_stack **stack_a, t_quartiles *q, int size)
+static t_sixtiles	*median_values(t_stack **stack_a, t_sixtiles *q, int size)
 {
-	q->q1n = quartile_finder(stack_a, size, 1);
-	q->q2n = quartile_finder(stack_a, size, 2);
-	q->q3n = quartile_finder(stack_a, size, 3);
-	q->q1size = size / 4;
-	q->q2size = quartile_size(stack_a, q->q1n, q->q2n, 2);
-	q->q3size = quartile_size(stack_a, q->q2n, q->q3n, 3);
-	q->q4size = quartile_size(stack_a, q->q3n, 0, 4);
+	q->s1n = sixtile_finder(stack_a, size, 1);
+	q->s2n = sixtile_finder(stack_a, size, 2);
+	q->s3n = sixtile_finder(stack_a, size, 3);
+	q->s1size = size / 4;
+	q->s2size = sixtile_size(stack_a, q->s1n, q->s2n, 2);
+	q->s3size = sixtile_size(stack_a, q->s2n, q->s3n, 3);
+	q->s4size = sixtile_size(stack_a, q->s3n, 0, 4);
 	return (q);
 }
 
@@ -67,24 +66,23 @@ void	under100_lists_sorter(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack		*first;
 	t_stack		*second;
-	t_quartiles	*quartiles;
+	t_sixtiles	*sixtiles;
 
-	quartiles = (t_quartiles *) malloc(sizeof(t_quartiles));
+	sixtiles = (t_sixtiles *) malloc(sizeof(t_sixtiles));
 	while (stack_size(stack_a))
 	{
-		median_values(stack_a, quartiles, stack_size(stack_a));
+		median_values(stack_a, sixtiles, stack_size(stack_a));
 		assign_index(stack_a);
 		first = hold_first(stack_a);
 		second = hold_second(stack_a, first);
-		if (second_min_best_position(first, second, quartiles) \
+		if (second_min_best_position(first, second, sixtiles) \
 		&& stack_size(stack_a) >= 20)
-			to_top(stack_a, stack_b, second->index, quartiles);
+			to_top(stack_a, stack_b, second->index, sixtiles);
 		else
-			to_top(stack_a, stack_b, first->index, quartiles);
+			to_top(stack_a, stack_b, first->index, sixtiles);
 		check_head(stack_b);
-		
 	}
-	free (quartiles);
+	free (sixtiles);
 	while (*stack_b)
 	{
 		if (stack_size(stack_b) == 2)

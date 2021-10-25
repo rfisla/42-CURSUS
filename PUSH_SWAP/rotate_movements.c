@@ -14,7 +14,6 @@ void	rotate_a(t_stack **stack_a)
 	iterator = *stack_a;
 	while (iterator->next)
 		iterator = iterator->next;
-	//iterator->next = create_new_node();
 	iterator->next = last_item;
 	iterator->next->next = NULL;
 	ft_putendl_fd("ra", 1);
@@ -34,7 +33,6 @@ void	rotate_b(t_stack **stack_b)
 	iterator = *stack_b;
 	while (iterator->next)
 		iterator = iterator->next;
-	//iterator->next = create_new_node();
 	iterator->next = last_item;
 	iterator->next->next = NULL;
 	ft_putendl_fd("rb", 1);

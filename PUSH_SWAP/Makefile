@@ -20,7 +20,7 @@ SRCS =      push_movements.c \
 			stack_operations.c \
 			swap_moves.c \
 			utils.c \
-			find_quartiles.c \
+			find_sixtiles.c \
 			free_functions.c \
 			mins_finder.c \
 			lists_under_100.c \
@@ -29,7 +29,7 @@ SRCS =      push_movements.c \
 
 OBJS = ${SRCS:.c=.o}
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -fno-omit-frame-pointer
+CFLAGS = -g -Wall -Wextra -Werror #-fsanitize=address -fno-omit-frame-pointer
 RM = rm -rf
 
 all: ${NAME}

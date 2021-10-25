@@ -54,14 +54,14 @@ int	second_min_best_located(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*second;
-	int		quarter;
+	int		sixtile;
 
-	quarter = stack_size(stack) / 6;
+	sixtile = stack_size(stack) / 6;
 	assign_index(stack);
 	first = hold_first(stack);
 	second = hold_second(stack, first);
-	if ((second->index < quarter || second->index > (quarter * 5)) \
-		&& (first->index >= quarter && first->index <= (quarter * 5)))
+	if ((second->index < sixtile || second->index > (sixtile * 5)) \
+		&& (first->index >= sixtile && first->index <= (sixtile * 5)))
 		return (1);
 	return (0);
 }
