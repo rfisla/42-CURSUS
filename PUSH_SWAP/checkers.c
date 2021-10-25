@@ -54,15 +54,11 @@ int	check_int_overflow(char *item)
 int	check_len(char *item)
 {
 	int		i;
-	int		len;
 
 	i = 0;
 	while (item[i])
-	{
-		len++;
 		i++;
-	}
-	if (len > 11)
+	if (i > 11)
 		return (1);
 	return (0);
 }
