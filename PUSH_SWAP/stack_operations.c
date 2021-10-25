@@ -24,6 +24,8 @@ static int	int_checker(char *item)
 			return (0);
 		i++;
 	}
+	if ((i > 1 && !ft_isdigit(item[1])) || (i == 1 && !ft_isdigit(item[0])))
+		return(0);
 	return (1);
 }
 //PROBLEMA DEL 0 ESTA AQUI. GET ARRAY?
@@ -45,7 +47,7 @@ static int	duplicates_checker(int n, t_stack **stack, int size)
 	return (0);
 }
 
-static int		check_int_overflow(char *item)
+static int	check_int_overflow(char *item)
 {
 	if (item[0] == '-')
 	{
@@ -60,7 +62,7 @@ static int		check_int_overflow(char *item)
 	return (0);
 }
 
-static int		check_len(char *item)
+static int	check_len(char *item)
 {
 	int		i;
 	int		len;
@@ -75,6 +77,25 @@ static int		check_len(char *item)
 	if (len > 11)
 		return (1);
 
+	return (0);
+}
+
+static int		check_zeros(t_stack **stack)
+{
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *stack;
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->number == 0)
+			i++;
+		tmp = tmp->next;
+	}
+	if (i > 1)
+		return(1);
+	
 	return (0);
 }
 
@@ -101,6 +122,9 @@ void	get_stack(int size, char **args, t_stack **stack_a)
 		}
 		i++;
 	}
+	if (check_zeros(stack_a))
+		error_message(stack_a);
+	//problema cuando hay un cero y los últimos dos numeros de la lista se repiten????
 }
 //Trucos para comprobar en 42: el size con $ARG es 2?
 //The other option, check both
