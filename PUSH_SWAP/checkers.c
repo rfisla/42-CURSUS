@@ -33,6 +33,7 @@ int	duplicates_checker(int n, t_stack **stack, int size)
 			return (1);
 		i++;
 	}
+	free(array);
 	return (0);
 }
 
