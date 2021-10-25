@@ -88,7 +88,8 @@ void	under100_lists_sorter(t_stack **stack_a, t_stack **stack_b)
 		if (stack_size(stack_b) == 2)
 			check_head(stack_b);
 		push_a(stack_a, stack_b);
-	}	
+	}
+	free (quartiles);
 }
 
 //OPCION 2

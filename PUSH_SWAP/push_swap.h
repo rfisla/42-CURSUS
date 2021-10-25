@@ -44,6 +44,11 @@ typedef struct s_quartiles
 
 t_stack		*create_new_node(void);
 t_stack		*init_stack_a(int size);
+int			int_checker(char *item);
+int			duplicates_checker(int n, t_stack **stack, int size);
+int			check_int_overflow(char *item);
+int			check_len(char *item);
+int			check_zeros(t_stack **stack);
 void		get_stack(int size, char **args, t_stack **stack_a);
 void		error_message(t_stack **stack_a);
 void		free_array(char **items);
@@ -51,6 +56,7 @@ void		free_stack(t_stack **stack);
 int			already_sorted(t_stack **stack_a);
 int			min_finder(t_stack **stack, int size);
 int			*get_array(t_stack *stack, int size);
+int			*sort_array(t_stack **stack, int size);
 void		swap_a(t_stack **stack_a);
 void		swap_b(t_stack **stack_b);
 void		swap_a_b(t_stack **stack_a, t_stack **stack_b);

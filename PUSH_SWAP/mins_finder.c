@@ -1,34 +1,5 @@
 #include "push_swap.h"
 
-static int	searching_min(t_stack **stack, int size)
-{
-	t_stack	*tmp;
-	int		*array;
-	int		i;
-
-	tmp = *stack;
-	array = get_array(tmp, size);
-	i = 1;
-	while (array[i])
-	{
-		if (array[0] > array[i])
-		{
-			free(array);
-			return (0);
-		}
-		i++;
-	}
-	free(array);
-	return (1);
-}
-
-int	min_finder(t_stack **stack, int size)
-{
-	if (searching_min(stack, size) == 1)
-		return (1);
-	return (0);
-}
-
 t_stack	*hold_first(t_stack **stack)
 {
 	t_stack	*hold_first;

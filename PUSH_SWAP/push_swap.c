@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	t_stack	*list;
 	int		size;
 
 	size = argc - 1;
@@ -28,14 +27,19 @@ int	main(int argc, char **argv)
 		return (0);
 	else if (size <= 5)
 		short_list_sorter(&stack_a, &stack_b, size);
-	else if (size > 5)
+	else if (size > 5 && size < 100)
+		under100_lists_sorter(&stack_a, &stack_b);
+	else if (size >= 100)
 		big_lists_sorter(&stack_a, &stack_b, size);
-	list = stack_a;
-	while (list)
+	t_stack *tmp = stack_a;
+	while(tmp)
 	{
-		printf("%d\n", list->number);
-		list = list->next;
+		printf("%d\n", tmp->number);
+		tmp = tmp->next;
 	}
+	if (already_sorted(&stack_a))
+		printf("SORTED\n");
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 	return (0);
 }
-//system("leaks push_swap"); 

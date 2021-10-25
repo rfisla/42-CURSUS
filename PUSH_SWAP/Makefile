@@ -23,7 +23,8 @@ SRCS =      push_movements.c \
 			find_quartiles.c \
 			free_functions.c \
 			mins_finder.c \
-			lists_under_100.c
+			lists_under_100.c \
+			checkers.c
 
 
 OBJS = ${SRCS:.c=.o}

@@ -15,9 +15,9 @@
 
 int	ft_atoi(const char *nptr)
 {
-	long	i;
-	long	mult;
-	long	number;
+	long		i;
+	long		mult;
+	long int	number;
 
 	i = 0;
 	mult = 1;

@@ -64,6 +64,7 @@ int	quartile_finder(t_stack **stack, int size, int quartile)
 		position = array[((size / 6) * 4) - 1];
 	else if (quartile == 5)
 		position = array[((size / 6) * 5) - 1];
+	free(array);
 	return (position);
 }
 

@@ -104,4 +104,5 @@ void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size)
 	while (stack_size(stack_b) < quartiles->q6size)
 		push_q(stack_a, stack_b, quartiles, 6);
 	sort_quarter(stack_a, stack_b);
+	free(quartiles);
 }
