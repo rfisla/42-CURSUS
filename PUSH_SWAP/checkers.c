@@ -76,21 +76,3 @@ int	check_len(char *item)
 		return (1);
 	return (0);
 }
-
-int	check_zeros(t_stack **stack)
-{
-	t_stack	*tmp;
-	int		i;
-
-	tmp = *stack;
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->number == 0)
-			i++;
-		tmp = tmp->next;
-	}
-	if (i > 1)
-		return (1);
-	return (0);
-}

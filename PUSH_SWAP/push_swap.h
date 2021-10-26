@@ -12,7 +12,6 @@
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# define SIZE
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -48,7 +47,6 @@ int			int_checker(char *item);
 int			duplicates_checker(t_stack **stack, int size);
 int			check_int_overflow(char *item);
 int			check_len(char *item);
-int			check_zeros(t_stack **stack);
 int			get_stack(char **args, t_stack **stack_a, int argc);
 void		error_message(t_stack **stack_a);
 void		free_array(char **items);

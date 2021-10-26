@@ -84,8 +84,6 @@ int	get_stack(char **args, t_stack **stack_a, int argc)
 		size = check_argv_case1(stack_a, array);
 	else if (!array[1])
 		size = check_argv_case2(stack_a, args, argc);
-	if (check_zeros(stack_a))
-		error_message(stack_a);
 	free_array(array);
 	return (size);
 }
