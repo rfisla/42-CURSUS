@@ -37,7 +37,7 @@ int	duplicates_checker(t_stack **stack, int size)
 
 	array = sort_array(stack, size);
 	i = 0;
-	while (array[i])
+	while (i < size)
 	{
 		if (array[i] == array[i + 1])
 		{
