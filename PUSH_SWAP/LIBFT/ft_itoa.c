@@ -33,7 +33,7 @@ static int	len(long nb)
 	return (l);
 }
 
-char	*ft_itoa (int n)
+char	*ft_itoa(int n)
 {
 	long	nb;
 	char	*string;

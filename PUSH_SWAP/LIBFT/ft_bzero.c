@@ -13,7 +13,7 @@
  *pointed to by s, by writing zeros (bytes containing '\0') to that area.*/
 
 #include "libft.h"
-void	*ft_bzero (void *s, size_t n)
+void	*ft_bzero(void *s, size_t n)
 {
 	unsigned char	*ptr;
 
