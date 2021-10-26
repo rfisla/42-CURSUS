@@ -18,10 +18,11 @@ int	main(int argc, char **argv)
 	t_stack	*stack_b;
 	int		size;
 
-	size = argc - 1;
-	if (size < 1)
+	if ((argc - 1) < 1)
 		exit (0);
-	get_stack(argc, argv, &stack_a);
+	size = get_stack(argv, &stack_a, argc);
+	if (duplicates_checker(&stack_a, size))
+		error_message(&stack_a);
 	stack_b = NULL;
 	if (already_sorted(&stack_a))
 		return (0);
@@ -31,6 +32,7 @@ int	main(int argc, char **argv)
 		under100_lists_sorter(&stack_a, &stack_b);
 	else if (size >= 100)
 		big_lists_sorter(&stack_a, &stack_b, size);
+	/*
 	t_stack *tmp = stack_a;
 	while(tmp)
 	{
@@ -39,7 +41,9 @@ int	main(int argc, char **argv)
 	}
 	if (already_sorted(&stack_a))
 		printf("SORTED\n");
+	*/
 	free_stack(&stack_a);
 	free_stack(&stack_b);
+	//system("leaks push_swap");
 	return (0);
 }

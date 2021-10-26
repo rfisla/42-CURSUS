@@ -30,19 +30,20 @@ int	int_checker(char *item)
 	return (1);
 }
 
-int	duplicates_checker(int n, t_stack **stack, int size)
+int	duplicates_checker(t_stack **stack, int size)
 {
-	t_stack	*tmp;
 	int		*array;
 	int		i;
 
-	tmp = *stack;
-	array = get_array(tmp, size);
+	array = sort_array(stack, size);
 	i = 0;
 	while (array[i])
 	{
-		if (array[i] == n)
+		if (array[i] == array[i + 1])
+		{
+			free(array);
 			return (1);
+		}
 		i++;
 	}
 	free(array);
