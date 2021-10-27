@@ -72,8 +72,8 @@ int	second_min_best_located(t_stack **stack)
 	assign_index(stack);
 	first = hold_first(stack);
 	second = hold_second(stack, first);
-	if ((second->index < sixtile || second->index > (sixtile * 5)) \
-		&& (first->index >= sixtile && first->index <= (sixtile * 5)))
+	if ((second->index < (sixtile * 2) || second->index > (sixtile * 4)) \
+		&& (first->index >= (sixtile * 2) && first->index <= (sixtile * 4)))
 		return (1);
 	return (0);
 }

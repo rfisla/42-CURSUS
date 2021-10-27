@@ -32,18 +32,7 @@ int	main(int argc, char **argv)
 		under100_lists_sorter(&stack_a, &stack_b);
 	else if (size >= 100)
 		big_lists_sorter(&stack_a, &stack_b, size);
-	/*
-	t_stack *tmp = stack_a;
-	while(tmp)
-	{
-		printf("%d\n", tmp->number);
-		tmp = tmp->next;
-	}
-	if (already_sorted(&stack_a))
-		printf("SORTED\n");
-	*/
 	free_stack(&stack_a);
 	free_stack(&stack_b);
-	//system("leaks push_swap");
 	return (0);
 }

@@ -17,7 +17,7 @@ int	int_checker(char *item)
 	int	i;
 
 	i = 0;
-	if (item[i] == '-')
+	if (item[i] == '-' && item[i] == '+')
 		i++;
 	while (item[i])
 	{
