@@ -12,23 +12,41 @@
 
 #include "push_swap.h"
 
-static void	move_to_first(t_stack **stack, int index)
+static void	move_to_first(t_stack **stack_a, t_stack **stack_b, int index)
 {
-	if (index <= (stack_size(stack) / 2))
+	if (index <= (stack_size(stack_b) / 2))
 	{
 		while (index > 0)
 		{
-			rotate_b(stack);
+			rotate_b(stack_b);
 			index--;
 		}
 	}
-	else if (index > (stack_size(stack) / 2))
+	else if (index > (stack_size(stack_b) / 2))
 	{
-		while (index < stack_size(stack))
+		while (index < stack_size(stack_b))
 		{
-			reverse_rotate(stack, 'b');
+			reverse_rotate(stack_b, 'b');
 			index++;
 		}
+	}
+	push_a(stack_a, stack_b);
+}
+
+static void	check_last(t_stack **stack_a)
+{
+	t_stack *tmp;
+
+	tmp = *stack_a;
+	while (tmp->next->next)
+		tmp = tmp->next;
+	if (tmp->number > tmp->next->number)
+	{
+		reverse_rotate(stack_a, 'a');
+		reverse_rotate(stack_a, 'a');
+		swap_a(stack_a);
+		rotate_a(stack_a);
+		rotate_a(stack_a);
 	}
 }
 
@@ -42,15 +60,26 @@ static void	sort_quarter(t_stack **stack_a, t_stack **stack_b)
 		assign_index(stack_b);
 		first = hold_first(stack_b);
 		second = hold_second(stack_b, first);
-		if (second_min_best_located(stack_b))
+		if (second_min_best_located(stack_b) && stack_size(stack_b) >= 40)
 		{
-			move_to_first(stack_b, second->index);
 			assign_index(stack_b);
+			move_to_first(stack_a, stack_b, second->index);
+			//check_head_b(stack_b);
 		}
-		move_to_first(stack_b, first->index);
-		check_head_b(stack_b);
-		push_a(stack_a, stack_b);
-		rotate_a(stack_a);
+		else
+			move_to_first(stack_a, stack_b, first->index);
+	}
+}
+
+static void	sort_last_quarter(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack	*first;
+
+	while (stack_size(stack_b))
+	{
+		assign_index(stack_b);
+		first = hold_first(stack_b);
+		move_to_first(stack_a, stack_b, first->index);
 	}
 }
 
@@ -98,6 +127,9 @@ void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size)
 
 	sixtiles = (t_sixtiles *) malloc(sizeof(t_sixtiles));
 	q_values(stack_a, sixtiles, size);
+	while (stack_size(stack_b) < sixtiles->s6size)
+		push(stack_a, stack_b, sixtiles, 6);
+	sort_quarter(stack_a, stack_b);
 	while (stack_size(stack_b) < sixtiles->s5size)
 		push(stack_a, stack_b, sixtiles, 5);
 	sort_quarter(stack_a, stack_b);
@@ -111,10 +143,10 @@ void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size)
 		push(stack_a, stack_b, sixtiles, 2);
 	sort_quarter(stack_a, stack_b);
 	while (stack_size(stack_b) < sixtiles->s1size)
+	{
 		push(stack_a, stack_b, sixtiles, 1);
-	sort_quarter(stack_a, stack_b);
-	while (stack_size(stack_b) < sixtiles->s6size)
-		push(stack_a, stack_b, sixtiles, 6);
-	sort_quarter(stack_a, stack_b);
+		check_last(stack_a);
+	}
+	sort_last_quarter(stack_a, stack_b);
 	free(sixtiles);
 }

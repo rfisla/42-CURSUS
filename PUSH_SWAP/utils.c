@@ -68,7 +68,7 @@ void	check_head_b(t_stack **stack)
 {
 	if ((*stack)->next)
 	{
-		if ((*stack)->number > (*stack)->next->number)
+		if ((*stack)->number < (*stack)->next->number)
 			swap_b(stack);
 	}
 }
