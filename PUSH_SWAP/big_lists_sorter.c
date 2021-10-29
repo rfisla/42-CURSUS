@@ -12,77 +12,6 @@
 
 #include "push_swap.h"
 
-static void	move_to_first(t_stack **stack_a, t_stack **stack_b, int index)
-{
-	if (index <= (stack_size(stack_b) / 2))
-	{
-		while (index > 0)
-		{
-			rotate_b(stack_b);
-			index--;
-		}
-	}
-	else if (index > (stack_size(stack_b) / 2))
-	{
-		while (index < stack_size(stack_b))
-		{
-			reverse_rotate(stack_b, 'b');
-			index++;
-		}
-	}
-	push_a(stack_a, stack_b);
-}
-
-static void	check_last(t_stack **stack_a)
-{
-	t_stack *tmp;
-
-	tmp = *stack_a;
-	while (tmp->next->next)
-		tmp = tmp->next;
-	if (tmp->number > tmp->next->number)
-	{
-		reverse_rotate(stack_a, 'a');
-		reverse_rotate(stack_a, 'a');
-		swap_a(stack_a);
-		rotate_a(stack_a);
-		rotate_a(stack_a);
-	}
-}
-
-static void	sort_quarter(t_stack **stack_a, t_stack **stack_b)
-{
-	t_stack	*first;
-	t_stack	*second;
-
-	while (stack_size(stack_b))
-	{
-		assign_index(stack_b);
-		first = hold_first(stack_b);
-		second = hold_second(stack_b, first);
-		if (second_min_best_located(stack_b) && stack_size(stack_b) >= 40)
-		{
-			assign_index(stack_b);
-			move_to_first(stack_a, stack_b, second->index);
-			//check_head_b(stack_b);
-		}
-		else
-			move_to_first(stack_a, stack_b, first->index);
-	}
-}
-
-static void	sort_last_quarter(t_stack **stack_a, t_stack **stack_b)
-{
-	t_stack	*first;
-
-	while (stack_size(stack_b))
-	{
-		assign_index(stack_b);
-		first = hold_first(stack_b);
-		move_to_first(stack_a, stack_b, first->index);
-	}
-}
-
 static t_sixtiles	*q_values(t_stack **stack_a, t_sixtiles *s, int size)
 {
 	s->s1n = sixtile_finder(stack_a, size, 1);
@@ -121,6 +50,12 @@ static void	push(t_stack **stack_a, t_stack **stack_b, t_sixtiles *s, int sixt)
 		rotate_a(stack_a);
 }
 
+static void	push_last(t_stack **s_a, t_stack **s_b, t_sixtiles *sx, int s)
+{
+	push(s_a, s_b, sx, s);
+	check_last(s_a);
+}
+
 void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	t_sixtiles	*sixtiles;
@@ -143,10 +78,7 @@ void	big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size)
 		push(stack_a, stack_b, sixtiles, 2);
 	sort_quarter(stack_a, stack_b);
 	while (stack_size(stack_b) < sixtiles->s1size)
-	{
-		push(stack_a, stack_b, sixtiles, 1);
-		check_last(stack_a);
-	}
+		push_last(stack_a, stack_b, sixtiles, 1);
 	sort_last_quarter(stack_a, stack_b);
 	free(sixtiles);
 }

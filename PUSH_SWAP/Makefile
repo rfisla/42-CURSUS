@@ -16,6 +16,7 @@ SRCS =      push_movements.c \
 			push_swap.c \
 			rotate_movements.c \
 			short_lists_sorter.c \
+			big_lists_utils.c \
 			big_lists_sorter.c \
 			stack_operations.c \
 			swap_moves.c \

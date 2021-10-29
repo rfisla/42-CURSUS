@@ -73,6 +73,10 @@ t_stack		*hold_second(t_stack **stack, t_stack *hold_first);
 int			second_min_best_located(t_stack **stack);
 int			sixtile_finder(t_stack **stack, int size, int sixtile);
 int			sixtile_size(t_stack **stack, int init, int finish, char sixtile);
+void		move_to_first(t_stack **stack_a, t_stack **stack_b, int index);
+void		check_last(t_stack **stack_a);
+void		sort_quarter(t_stack **stack_a, t_stack **stack_b);
+void		sort_last_quarter(t_stack **stack_a, t_stack **stack_b);
 void		big_lists_sorter(t_stack **stack_a, t_stack **stack_b, int size);
 void		under100_lists_sorter(t_stack **stack_a, t_stack **stack_b);
 

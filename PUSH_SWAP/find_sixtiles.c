@@ -66,16 +66,7 @@ int	sixtile_finder(t_stack **stack, int size, int sixtile)
 
 	position = 0;
 	array = sort_array(stack, size);
-	if (sixtile == 1)
-		position = array[size / 6 - 1];
-	else if (sixtile == 2)
-		position = array[((size / 6) * 2) - 1];
-	else if (sixtile == 3)
-		position = array[(size / 2) - 1];
-	else if (sixtile == 4)
-		position = array[((size / 6) * 4) - 1];
-	else if (sixtile == 5)
-		position = array[((size / 6) * 5) - 1];
+	position = array[((size / 6) * sixtile) - 1];
 	free(array);
 	return (position);
 }
