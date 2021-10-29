@@ -23,8 +23,7 @@ SRCS =      push_movements.c \
 			utils.c \
 			find_sixtiles.c \
 			free_functions.c \
-			mins_finder.c \
-			lists_under_100.c \
+			maxs_finder.c \
 			checkers.c
 
 

@@ -46,7 +46,7 @@ void	sort_quarter(t_stack **stack_a, t_stack **stack_b)
 		assign_index(stack_b);
 		first = hold_first(stack_b);
 		second = hold_second(stack_b, first);
-		if (second_min_best_located(stack_b) && stack_size(stack_b) >= 40)
+		if (second_max_best_located(stack_b) && stack_size(stack_b) >= 40)
 		{
 			assign_index(stack_b);
 			move_to_first(stack_a, stack_b, second->index);

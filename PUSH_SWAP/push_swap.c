@@ -28,9 +28,7 @@ int	main(int argc, char **argv)
 		return (0);
 	else if (size <= 5)
 		short_list_sorter(&stack_a, &stack_b, size);
-	else if (size > 5 && size < 100)
-		under100_lists_sorter(&stack_a, &stack_b);
-	else if (size >= 100)
+	else if (size > 5)
 		big_lists_sorter(&stack_a, &stack_b, size);
 	
 	t_stack *tmp = stack_a;
