@@ -56,7 +56,8 @@ int main (int argc, char **argv)
 	}
 	game = (t_game *)malloc(sizeof(t_game));
 	init(game);
-	map_parser(argv[1], game);
+	game_init(argv[1], game);
+	/*
 	int y = 0;
 	int x;
 	while (y < game->heigh)
@@ -69,5 +70,6 @@ int main (int argc, char **argv)
         }
         y++;
     }
+	*/
 	return(0);
 }

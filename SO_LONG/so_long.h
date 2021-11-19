@@ -4,7 +4,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-#include <fcntl.h>
+# include <fcntl.h>
+# include "./minilibx/mlx.h"
+# include "./minilibx/mlx_int.h"
 # include "LIBFT/libft.h"
 
 
@@ -36,10 +38,26 @@ typedef struct s_game
 	//t_coords	*col;
 }  t_game;
 
+typedef struct s_images
+{
+
+	void			*mlx;
+	void			*mlx_win;
+	t_img			*mlx_img;
+	//t_game			*game;
+	t_img			*player;
+	t_img			*exit;
+	t_img			*coll;
+	t_img			*wall;
+	t_img			*ground;
+}				t_images;
+
 void			map_parser(char *map, t_game *game);
 void			valid_map(char *file, t_game *game);
 void			free_game(t_game *game, char *file);
 t_game			*init(t_game *game);
+t_images		*game_init(char *file, t_game *game);
+
 
 
 #endif

@@ -1,6 +1,6 @@
 NAME		=	so_long
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer
 MLX			=	minilibx/Makefile.gen
 INC			=	-I ./minilibx 
 LIB			=	-L ./minilibx -lmlx -lXext -lX11 -lm -lbsd
@@ -8,7 +8,8 @@ OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
 SRC			=	so_long.c \
 				sources/map_checks.c \
 				sources/map_parsing.c \
-				sources/frees.c
+				sources/frees.c \
+				sources/init_game.c
 
 all:		$(MLX) obj $(NAME)
 
