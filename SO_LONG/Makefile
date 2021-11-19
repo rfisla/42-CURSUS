@@ -1,26 +1,40 @@
-C = gcc
+NAME		=	so_long
+CC			=	gcc
+FLAGS		=	-Wall -Wextra -Werror
+MLX			=	minilibx/Makefile.gen
+INC			=	-I ./minilibx 
+LIB			=	-L ./minilibx -lmlx -lXext -lX11 -lm -lbsd
+OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
+SRC			=	so_long.c \
+				sources/map_checks.c \
+				sources/map_parsing.c \
+				sources/frees.c
 
-NAME = so_long.a
+all:		$(MLX) obj $(NAME)
 
-CFLAGS = -Werror -Wall -Wextra
+$(NAME):	$(OBJ)
+			$(CC) $(FLAGS) -o $@ $^ $(LIB) ./LIBFT/libft.a 
 
-MINILIBX = ./minilibx/libmlx.a  -lmlx -framework OpenGL -framework AppKit 
+$(MLX):
+			@echo " [ .. ] | Compiling minilibx.."
+			@make -s -C mlx
+			@echo " [ OK ] | Minilibx ready!"
 
-OBJS := $(*.o)
 
-SRC = so_long.c
+obj:
+			@mkdir -p obj
 
-
-all: $(NAME)
-
-${NAME}: fclean
-	${CC} ${CFLAGS} ${MINILIBX} ${SRC}  -o ${NAME}
+obj/%.o:	src/%.c
+			$(CC) $(FLAGS) $(INC) -o $@ -c $<
 
 clean:
-	rm -rf *.o
+			@rm -rf $(OBJ) obj
+			@echo "object files removed."
 
+fclean:		clean
+			@rm -rf $(NAME)
+			@echo "binary file removed."
 
-fclean: clean
-	rm -f  ${OBJS} $(NAME)
+re:			fclean all
 
-re: fclean ${NAME}
+.PHONY:		all clean fclean re
