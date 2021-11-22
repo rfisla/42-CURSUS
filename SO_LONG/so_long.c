@@ -57,19 +57,7 @@ int main (int argc, char **argv)
 	game = (t_game *)malloc(sizeof(t_game));
 	init(game);
 	game_init(argv[1], game);
-	/*
-	int y = 0;
-	int x;
-	while (y < game->heigh)
-    {
-		x = 0;
-        while (x < game->width)
-        {
-            printf("%c",game->map[y][x]);
-            x++;
-        }
-        y++;
-    }
-	*/
+	
+
 	return(0);
 }

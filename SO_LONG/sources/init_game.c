@@ -35,6 +35,10 @@ static void	renderer_init(t_images *display, t_game *game)
 			game->heigh * 40);
 	//if (display->mlx_img == 0)
 		//root_destroy(root, "mlx_new_image(): can't create an image", 0);
+	//mlx_loop(display->mlx);
+	//mlx_put_image_to_window(display->mlx, display->mlx_win, display->player, 10, 10);
+	
+	
 }
 
 t_images    *game_init(char *file, t_game *game)
@@ -54,5 +58,6 @@ t_images    *game_init(char *file, t_game *game)
 	display->ground = 0;
 	renderer_init(display, game);
 	display_init(display);
+	draw_map(game, display);
 	return (display);
 }

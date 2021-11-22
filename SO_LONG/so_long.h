@@ -57,6 +57,8 @@ void			valid_map(char *file, t_game *game);
 void			free_game(t_game *game, char *file);
 t_game			*init(t_game *game);
 t_images		*game_init(char *file, t_game *game);
+void	draw_map(t_game *game, t_images *display);
+
 
 
 

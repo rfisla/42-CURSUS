@@ -67,7 +67,6 @@ static int	rows_same_length(char *file, t_game *game)
 		length++;
 	}
 	return(1);
-
 }
 
 

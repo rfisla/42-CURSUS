@@ -36,6 +36,7 @@ static void map_read(char *map, char **file, t_game *game)
 			}
 		}
 	}
+	close(fd);
 }
 
 void    map_parser(char *argv, t_game *game)
