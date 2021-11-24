@@ -48,11 +48,11 @@ typedef struct s_game
 	void			*mlx;
 	void			*mlx_win;
 	void			*mlx_img;
-	t_images		*player;
-	t_images		*exit;
-	t_images		*coll;
-	t_images		*wall;
-	t_images		*ground;
+	void			*player;
+	void			*exit;
+	void			*coll;
+	void			*wall;
+	void			*ground;
 }  t_game;
 
 
