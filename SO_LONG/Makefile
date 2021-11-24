@@ -1,10 +1,15 @@
-NAME		=	so_long
-CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror 
-MLX			=	minilibx/Makefile.gen
-INC			=	-I ./minilibx 
-LIB			=	-L ./minilibx -lmlx -lXext -lX11 -lm -lbsd
+CC = gcc
+
+NAME = so_long
+
+LIBFTNAME = libft.a
+
+CFLAGS = -Werror -Wall -Wextra
+
+MINILIBX = -I /usr/X11/include -g  -l mlx -framework OpenGL -framework AppKit
+
 OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
+
 SRC			=	so_long.c \
 				sources/map_checks.c \
 				sources/map_parsing.c \
@@ -12,16 +17,14 @@ SRC			=	so_long.c \
 				sources/init_game.c \
 				sources/draw_map.c
 
-all:		$(MLX) obj $(NAME)
+LIBFTPATH = ./LIBFT/
 
-$(NAME):	$(OBJ)
-			$(CC) $(FLAGS) -o $@ $^ $(LIB) ./LIBFT/libft.a 
+all:		$(NAME)
 
-$(MLX):
-			@echo " [ .. ] | Compiling minilibx.."
-			@make -s -C mlx
-			@echo " [ OK ] | Minilibx ready!"
-
+${NAME}: fclean
+	make -C ${LIBFTPATH}
+	mv $(LIBFTPATH)${LIBFTNAME} ${LIBFTNAME}
+	${CC} ${CFLAGS} ${SRC} ${LIBFTNAME} ${MINILIBX} -o ${NAME}
 
 obj:
 			@mkdir -p obj
@@ -31,12 +34,10 @@ obj/%.o:	src/%.c
 
 clean:
 			@rm -rf $(OBJ) obj
-			@echo "object files removed."
 
-fclean:		clean
-			@rm -rf $(NAME)
-			@echo "binary file removed."
+fclean: clean
+	rm -f $(LIBFTNAME) ${OBJS} $(NAME)
 
-re:			fclean all
+re: fclean ${NAME}
 
 .PHONY:		all clean fclean re

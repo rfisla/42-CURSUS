@@ -36,13 +36,16 @@ t_game *init(t_game *game)
 	game->player_char = 0;
 	game->exit_char = 0;
 	game->col_char = 0;
+	game->mlx = 0;
+	game->mlx_win = 0;
+	game->mlx_img = 0;
 	return (game);
 }
 
 int main (int argc, char **argv)
 {
 	t_game *game;
-	char *file;
+	//char *file;
 
 	if (argc != 2)
 	{
@@ -55,7 +58,6 @@ int main (int argc, char **argv)
 		exit(0);
 	}
 	game = (t_game *)malloc(sizeof(t_game));
-	init(game);
 	game_init(argv[1], game);
 	
 

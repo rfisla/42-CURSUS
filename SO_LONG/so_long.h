@@ -5,8 +5,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include "./minilibx/mlx.h"
-# include "./minilibx/mlx_int.h"
+# include "mlx/mlx.h"
 # include "LIBFT/libft.h"
 
 
@@ -14,6 +13,16 @@ typedef struct s_coords{
     int	x;
 	int	y;
 } t_coords;
+
+typedef struct s_images
+{
+	//void 			*img;
+	char 			*addr;
+	int				bits_per_pixel;
+	int				size_line;
+	int 			endian;
+
+}				t_images;
 
 typedef struct s_game
 {
@@ -36,28 +45,25 @@ typedef struct s_game
 	//t_coords	player;
 	//t_coords	exit;
 	//t_coords	*col;
-}  t_game;
-
-typedef struct s_images
-{
-
 	void			*mlx;
 	void			*mlx_win;
-	t_img			*mlx_img;
-	//t_game			*game;
-	t_img			*player;
-	t_img			*exit;
-	t_img			*coll;
-	t_img			*wall;
-	t_img			*ground;
-}				t_images;
+	void			*mlx_img;
+	t_images		*player;
+	t_images		*exit;
+	t_images		*coll;
+	t_images		*wall;
+	t_images		*ground;
+}  t_game;
+
+
+
 
 void			map_parser(char *map, t_game *game);
 void			valid_map(char *file, t_game *game);
 void			free_game(t_game *game, char *file);
 t_game			*init(t_game *game);
-t_images		*game_init(char *file, t_game *game);
-void	draw_map(t_game *game, t_images *display);
+void		game_init(char *file, t_game *game);
+void		draw_map(t_game *game);
 
 
 
