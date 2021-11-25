@@ -31,18 +31,18 @@ ___
 Clone the repo in your terminal and compile with ```make``` to obtain the ```push_swap``` program
 
 Some tests:
-- ./push_swap 1 3 2
-- ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
-- ARG=$(seq -1000 1000 | sort -R | tail -n 100 | tr '\n' ' ') ; ./push_swap $ARG | wc -l
-- ARG=$(seq -1000 1000 | sort -R | tail -n 500 | tr '\n' ' ') ; ./push_swap $ARG | ./checker $ARG
+- ```./push_swap 1 3 2```
+- ```ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l```
+- ```ARG=$(seq -1000 1000 | sort -R | tail -n 100 | tr '\n' ' ') ; ./push_swap $ARG | wc -l```
+- ```ARG=$(seq -1000 1000 | sort -R | tail -n 500 | tr '\n' ' ') ; ./push_swap $ARG | ./checker $ARG```
 
 ### Number of sorting movements depending on the size of the stack
 
-- 2 : 2 Movimientos
-- 3 : Between 2 and 3 movements
-- 5 : between 7 and 12 movements
-- 100 : Between 880 and 920 movements
-- 500 : Between 8900 and 9100 movements
+- 2 numbers : 2 movements
+- 3 numbers : Between 2 and 3 movements
+- 5 numbers : Between 7 and 12 movements
+- 100 numbers : Between 880 and 920 movements
+- 500 numbers : Between 8900 and 9100 movements
 
 ## Result 
 [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/push_swap)](https://github.com/JaeSeoKim/badge42)
