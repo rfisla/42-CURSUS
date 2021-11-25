@@ -30,30 +30,6 @@ int	main(int argc, char **argv)
 		short_list_sorter(&stack_a, &stack_b, size);
 	else if (size > 5)
 		big_lists_sorter(&stack_a, &stack_b, size);
-	
-	t_stack *tmp = stack_a;
-	while(tmp)
-	{
-		printf("%d\n", tmp->number);
-		tmp = tmp->next;
-	}
-	if (already_sorted(&stack_a))
-		printf("SORTED\n");
-	printf("\n\n");
-	t_stack *other = stack_a;
-	int i =0;
-	while(other->next)
-	{
-		if (other->number > other->next->number)
-		{
-			i++;
-			printf("\n%d\n", other->number);
-		}
-		other = other->next;
-	}
-	printf("\nNUMEROS DESCOLOCADOS:%d\n", i);
-	
-	//system("leaks push_swap");
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);
