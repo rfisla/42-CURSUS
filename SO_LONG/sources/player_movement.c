@@ -58,14 +58,14 @@ static void	right_movement(t_game *game)
 		if (game->map[pos_y][pos_x] == 'C')
 			game->col_char--;
 		game->map[pos_y][pos_x] = 'P';
-		game->map[pos_y][pos_x + 1] = '0';
+		game->map[pos_y][pos_x - 1] = '0';
 		draw_map(game);
 		game->count_moves++;
 	}
 	else if (game->map[pos_y][pos_x] == 'E' && game->col_char == 0)
 	{
 		mlx_clear_window(game->mlx, game->mlx_win);
-		game->map[pos_y][pos_x + 1] = '0';
+		game->map[pos_y][pos_x - 1] = '0';
 		draw_map(game);
 		game->count_moves++;
 		game->exit_char--;
@@ -159,4 +159,3 @@ void	make_movement (t_game *game, int keycode)
 		right_movement(game);
 	}
 }
-
