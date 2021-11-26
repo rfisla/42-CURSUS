@@ -12,7 +12,7 @@
 
 #include "../so_long.h"
 
-static void map_read(char *map, char **file, t_game *game)
+static void map_read(char *map, char **file)
 {
 	int		fd;
 	int		ret;
@@ -23,18 +23,12 @@ static void map_read(char *map, char **file, t_game *game)
 	*file = ft_calloc(1,1);
 	ret = 1;
 	if (fd < 0 || *file == 0)
-	{
-		close(fd);
-		free_invalid_map(game, *file);
-	}
+		invalid_file(file, fd);
 	while (ret != 0)
 	{
 		ret = read(fd, buf, 1024);
 		if (ret == -1)
-		{
-			close(fd);
-			free_invalid_map(game, *file);
-		}
+			invalid_file(file, fd);
 		else
 		{
 			buf[ret] = 0;
@@ -42,10 +36,7 @@ static void map_read(char *map, char **file, t_game *game)
 			free(*file);//Lo hce directamente el strjoin
 			*file = tmp;
 			if (*file == 0)
-			{
-				close(fd);
-				free_invalid_map(game, *file);
-			}
+				invalid_file(file, fd);
 		}
 	}
 	close(fd);
@@ -53,16 +44,16 @@ static void map_read(char *map, char **file, t_game *game)
 
 void    map_parser(char *argv, t_game *game)
 {
-    int		x;
-    int		y;
-    int		i;
-    //int		n_col;
+    //int		x;
+    //int		y;
+    //int		i;
 	char	*file;
-    y = 0;
-    i = 0;
-    //n_col = 0;
-	map_read(argv, &file, game);
+    //y = 0;
+    //i = 0;
+	map_read(argv, &file);
     valid_map(file, game);
+	game->map = ft_split(file, '\n');
+	/*
 	game->map = (char **)malloc(sizeof(char *) * game->heigh);
 	if (!game->map)
         free_invalid_map(game, file);
@@ -80,5 +71,6 @@ void    map_parser(char *argv, t_game *game)
 		i++;
         y++;
     }
+	*/
 	free(file);
 }

@@ -12,7 +12,24 @@
 
 #include "../so_long.h"
 
-static  void    free_map(char **map)
+void	invalid_file(char **file, int fd)
+{
+		free(*file);
+		close(fd);
+		ft_putendl_fd("Error:\nInvalid file", 2);
+		exit(0);
+}
+
+void	invalid_map(t_game *game, char *file)
+{
+		free(file);
+		if (game)
+			free(game);
+		ft_putendl_fd("Error:\nInvalid map", 2);
+		exit(0);
+}
+
+void    free_map(char **map)
 {
 	int	i;
 
@@ -23,6 +40,7 @@ static  void    free_map(char **map)
 		i++;
 	}
 	free(map);
+	map = 0;
 }
 
 void    free_invalid_map(t_game *game, char *file)
@@ -39,10 +57,8 @@ void    free_invalid_map(t_game *game, char *file)
 
 }
 
-
 int	exit_and_free(t_game *game)
 {
-	free_map(game->map);
 	mlx_destroy_image(game->mlx, game->player);
 	mlx_destroy_image(game->mlx, game->coll);
 	mlx_destroy_image(game->mlx, game->wall);
@@ -50,7 +66,9 @@ int	exit_and_free(t_game *game)
 	mlx_destroy_image(game->mlx, game->ground);
 	mlx_destroy_window(game->mlx, game->mlx_win);
 	//mlx_destroy_display(game->mlx);
-	free(game->mlx);
+	free_map(game->map);
+	//free(game->mlx);
+	ft_putendl_fd("GOOD JOB!", 0);
 	exit(0);
 	return (0);
 }

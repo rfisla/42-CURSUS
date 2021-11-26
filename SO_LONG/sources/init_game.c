@@ -13,14 +13,20 @@
 
 #include "../so_long.h"
 
-static void	loading_image(t_game *display, void **element,  char *path)
+static void	loading_image(t_game *game, void **element,  char *path)
 {
 	int				width;
 	int				height;
 
-	*element= mlx_xpm_file_to_image(display->mlx, path, &width, &height);
-	//if (*img == 0)
-		//root_destroy(0, "texture_init(): can't load texture", 0);
+	*element= mlx_xpm_file_to_image(game->mlx, path, &width, &height);
+	if (*element == 0)
+	{
+		free_map(game->map);
+		//mlx_destroy_window(game->mlx, game->mlx_win);
+		//free(game->mlx);
+		ft_putendl_fd("Error:\nProblem with the images", 2);
+		exit(0);
+	}
 }
 
 static void	display_init(t_game *display)
@@ -47,17 +53,13 @@ static void	renderer_init(t_game *game)
 		//root_destroy(root, "mlx_new_image(): can't create an image", 0);	
 }
 
-
-
-void    game_init(char *file, t_game *game)
+void    game_init(t_game *game)
 {
-	init(game);
-	map_parser(file, game);
 	renderer_init(game);
 	display_init(game);
 	draw_map(game);
 	mlx_hook(game->mlx_win, 2, 1L << 0, keypress, game);
-	mlx_hook(game->mlx_win, 17, 1L << 17, exit_game, game);
+	//mlx_hook(game->mlx_win, 17, 1L << 17, exit_game, game);
 	mlx_hook(game->mlx_win, 9, 1L << 21, draw_map, game);
 	mlx_loop(game->mlx);
 }

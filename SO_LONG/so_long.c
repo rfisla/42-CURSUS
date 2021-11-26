@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
-
+#include "so_long.h"
 
 static int	check_file(char *argv)
 {
@@ -25,7 +24,7 @@ static int	check_file(char *argv)
 	return (1);
 }
 
-t_game *init(t_game *game)
+t_game	*init(t_game *game)
 {
 	game->width = 0;
 	game->heigh = 0;
@@ -45,21 +44,26 @@ t_game *init(t_game *game)
 	return (game);
 }
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_game *game;
+	t_game	*game;
 
 	if (argc != 2)
 	{
 		ft_putendl_fd("Invalid number of arguments", 2);
 		exit(0);
 	}
-	if (!check_file(argv[1]))
+	else if (!check_file(argv[1]))
 	{
 		ft_putendl_fd("File is not .ber", 2);
 		exit(0);
 	}
 	game = (t_game *)malloc(sizeof(t_game));
-	game_init(argv[1], game);
-	return(0);
+	init(game);
+	map_parser(argv[1], game);
+	game_init(game);
+	return (0);
 }
+
+//PDTES: Controlar archivos vacíos, última línea vacía, cerrar ventana pinchando en el botón de cerrar
+//Comprobar ultima línea de muros

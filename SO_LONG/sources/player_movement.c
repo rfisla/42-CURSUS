@@ -158,4 +158,5 @@ void	make_movement (t_game *game, int keycode)
 		game->playerpos_x += 1;
 		right_movement(game);
 	}
+	//if (!game->exit_char)
 }
