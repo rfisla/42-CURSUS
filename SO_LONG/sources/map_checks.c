@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_checks.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rufernan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/26 14:37:20 by rufernan          #+#    #+#             */
+/*   Updated: 2021/11/26 14:37:22 by rufernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 static void	map_width(t_game *game, char *file)
@@ -11,7 +23,7 @@ static void	map_width(t_game *game, char *file)
 		i++;
 	}
 	if (game->width == 0)
-		free_game(game, file);
+		free_invalid_map(game, file);
 }
 
 static void	map_heigh(t_game *game, char *file)
@@ -27,7 +39,7 @@ static void	map_heigh(t_game *game, char *file)
 	}
 	game->heigh++;
 	if (game->heigh == 0)
-		free_game(game, file);
+		free_invalid_map(game, file);
 }
 
 static int	border_checker(char *file, t_game *game)
@@ -81,7 +93,7 @@ static void	valid_char_checker(t_game *game, char *file, int i)
 	else if (file[i] == '1' || file[i] == '0')
 		return ;
 	else
-		free_game(game, file);
+		free_invalid_map(game, file);
 }
 
 void	valid_map(char *file, t_game *game)
@@ -93,7 +105,7 @@ void	valid_map(char *file, t_game *game)
 	map_heigh(game, file);
 	if (!border_checker(file, game) || game->heigh > game->width || \
 		rows_same_length(file, game))
-		free_game(game, file);
+		free_invalid_map(game, file);
 	while (file[i] != '\0')
 	{
 		if (file[i] == '\n')
@@ -105,5 +117,5 @@ void	valid_map(char *file, t_game *game)
 		}	
 	}
 	if (game->player_char != 1 || game->exit_char != 1 || game->col_char < 1)
-		free_game(game, file);
+		free_invalid_map(game, file);
 }

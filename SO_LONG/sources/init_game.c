@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rufernan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/26 14:37:08 by rufernan          #+#    #+#             */
+/*   Updated: 2021/11/26 14:37:10 by rufernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "../so_long.h"
 
@@ -13,11 +25,11 @@ static void	loading_image(t_game *display, void **element,  char *path)
 
 static void	display_init(t_game *display)
 {
-	loading_image(display, &display->player, "./images/worker.xpm");
-	loading_image(display, &display->exit, "./images/house.xpm");
-	loading_image(display, &display->coll, "./images/collectible.xpm");
+	loading_image(display, &display->player, "./images2/worker.xpm");
+	loading_image(display, &display->exit, "./images2/house.xpm");
+	loading_image(display, &display->coll, "./images2/collectible.xpm");
 	loading_image(display, &display->wall, "./images/wall.xpm");
-	loading_image(display, &display->ground, "./images/ground.xpm");
+	loading_image(display, &display->ground, "./images2/ground.xpm");
 }
 
 static void	renderer_init(t_game *game)
@@ -36,6 +48,7 @@ static void	renderer_init(t_game *game)
 }
 
 
+
 void    game_init(char *file, t_game *game)
 {
 	init(game);
@@ -43,5 +56,8 @@ void    game_init(char *file, t_game *game)
 	renderer_init(game);
 	display_init(game);
 	draw_map(game);
-	//return (display);
+	mlx_hook(game->mlx_win, 2, 1L << 0, keypress, game);
+	mlx_hook(game->mlx_win, 17, 1L << 17, exit_game, game);
+	mlx_hook(game->mlx_win, 9, 1L << 21, draw_map, game);
+	mlx_loop(game->mlx);
 }

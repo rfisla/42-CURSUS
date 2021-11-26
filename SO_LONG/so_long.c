@@ -24,10 +24,13 @@ static int	check_file(char *argv)
 		return (0);
 	return (1);
 }
+
 t_game *init(t_game *game)
 {
 	game->width = 0;
 	game->heigh = 0;
+	game->playerpos_x = 0;
+	game->playerpos_y = 0;
 	game->move_up = 0;
 	game->move_down = 0;
 	game->move_right = 0;
@@ -45,7 +48,6 @@ t_game *init(t_game *game)
 int main (int argc, char **argv)
 {
 	t_game *game;
-	//char *file;
 
 	if (argc != 2)
 	{
@@ -59,7 +61,5 @@ int main (int argc, char **argv)
 	}
 	game = (t_game *)malloc(sizeof(t_game));
 	game_init(argv[1], game);
-	
-
 	return(0);
 }

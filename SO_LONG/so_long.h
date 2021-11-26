@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rufernan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/26 14:38:22 by rufernan          #+#    #+#             */
+/*   Updated: 2021/11/26 14:38:23 by rufernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include <string.h>
@@ -31,7 +43,8 @@ typedef struct s_game
 	//int **map;
 	int	width;
 	int	heigh;
-	//t_coords	player;
+	int	playerpos_x;
+	int playerpos_y;
 	//t_coords	exit;
 	//t_coords	*col;
 	int	move_up;
@@ -60,10 +73,19 @@ typedef struct s_game
 
 void			map_parser(char *map, t_game *game);
 void			valid_map(char *file, t_game *game);
-void			free_game(t_game *game, char *file);
+void			free_invalid_map(t_game *game, char *file);
 t_game			*init(t_game *game);
 void		game_init(char *file, t_game *game);
-void		draw_map(t_game *game);
+int		draw_map(t_game *game);
+int	keypress(int keycode, t_game *game);
+void	events(int keycode, t_game *game);
+int		exit_game(int keycode, t_game *game);
+int    exit_and_free(t_game *game);
+void	make_movement (t_game *game, int keycode);
+
+
+
+
 
 
 

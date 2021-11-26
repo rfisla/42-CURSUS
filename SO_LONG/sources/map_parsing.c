@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rufernan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/26 14:37:30 by rufernan          #+#    #+#             */
+/*   Updated: 2021/11/26 14:37:32 by rufernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 static void map_read(char *map, char **file, t_game *game)
@@ -13,7 +25,7 @@ static void map_read(char *map, char **file, t_game *game)
 	if (fd < 0 || *file == 0)
 	{
 		close(fd);
-		free_game(game, *file);
+		free_invalid_map(game, *file);
 	}
 	while (ret != 0)
 	{
@@ -21,7 +33,7 @@ static void map_read(char *map, char **file, t_game *game)
 		if (ret == -1)
 		{
 			close(fd);
-			free_game(game, *file);
+			free_invalid_map(game, *file);
 		}
 		else
 		{
@@ -32,7 +44,7 @@ static void map_read(char *map, char **file, t_game *game)
 			if (*file == 0)
 			{
 				close(fd);
-				free_game(game, *file);
+				free_invalid_map(game, *file);
 			}
 		}
 	}
@@ -53,12 +65,12 @@ void    map_parser(char *argv, t_game *game)
     valid_map(file, game);
 	game->map = (char **)malloc(sizeof(char *) * game->heigh);
 	if (!game->map)
-        free_game(game, file);
+        free_invalid_map(game, file);
     while (y < game->heigh)
     {
 		game->map[y] = (char *)malloc(sizeof(char) * game->width);
 		if (!game->map[y])
-        	free_game(game, file);
+        	free_invalid_map(game, file);
 		x = 0;
         while (x < game->width)
         {

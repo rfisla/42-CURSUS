@@ -15,7 +15,9 @@ SRC			=	so_long.c \
 				sources/map_parsing.c \
 				sources/frees.c \
 				sources/init_game.c \
-				sources/draw_map.c
+				sources/draw_map.c \
+				sources/events.c \
+				sources/player_movement.c
 
 LIBFTPATH = ./LIBFT/
 
