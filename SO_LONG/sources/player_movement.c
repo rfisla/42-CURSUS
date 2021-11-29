@@ -134,29 +134,38 @@ static void	down_movement(t_game *game)
 
 void	make_movement (t_game *game, int keycode)
 {
-	if (keycode == 13)
+	if (keycode == 119)
 	{
 		game->move_up++;
 		game->playerpos_y -= 1;
 		up_movement(game);
 	}
-	else if (keycode == 0)
+	else if (keycode == 97)
 	{
 		game->move_left++;
 		game->playerpos_x -= 1;
 		left_movement(game);
 	}
-	else if (keycode == 1)
+	else if (keycode == 115)
 	{
 		game->move_down++;
 		game->playerpos_y += 1;
 		down_movement(game);
 	}
-	else if (keycode == 2)
+	else if (keycode == 100)
 	{
 		game->move_right++;
 		game->playerpos_x += 1;
 		right_movement(game);
 	}
-	//if (!game->exit_char)
 }
+
+/*
+KEYBOARD KEYCODES
+
+Linux:
+W->119, S->115, A->97, D->100
+
+MAC:
+W->13, S->1, A->0, D->2
+*/

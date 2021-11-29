@@ -6,12 +6,14 @@ LIBFTNAME = libft.a
 
 CFLAGS = -Werror -Wall -Wextra -fsanitize=address -fno-omit-frame-pointer
 
-MINILIBX = -I /usr/X11/include -g  -l mlx -framework OpenGL -framework AppKit
+MINILIBX = -L ./minilibx -lmlx -lXext -lX11 -lm -lbsd
+#FOR MAC -> MINILIBX = -I /usr/X11/include -g  -l mlx -framework OpenGL -framework AppKit
 
 OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
 
 SRC			=	so_long.c \
 				sources/map_checks.c \
+				sources/map_checks2.c \
 				sources/map_parsing.c \
 				sources/frees.c \
 				sources/init_game.c \

@@ -31,11 +31,11 @@ static void	loading_image(t_game *game, void **element,  char *path)
 
 static void	display_init(t_game *display)
 {
-	loading_image(display, &display->player, "./images2/worker.xpm");
-	loading_image(display, &display->exit, "./images2/house.xpm");
-	loading_image(display, &display->coll, "./images2/collectible.xpm");
-	loading_image(display, &display->wall, "./images/wall.xpm");
-	loading_image(display, &display->ground, "./images2/ground.xpm");
+	loading_image(display, &display->player, "./images32/worker.xpm");
+	loading_image(display, &display->exit, "./images32/house.xpm");
+	loading_image(display, &display->coll, "./images32/collectible.xpm");
+	loading_image(display, &display->wall, "./images32/wall.xpm");
+	loading_image(display, &display->ground, "./images/ground.xpm");
 }
 
 static void	renderer_init(t_game *game)

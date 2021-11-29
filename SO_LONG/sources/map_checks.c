@@ -35,52 +35,13 @@ static void	map_heigh(t_game *game, char *file)
 	i = 0;
 	while(file[i] != '\0')
 	{
-		if (file[i] == '\n')
+		if (file[i] == '\n' && file[i + 1] != '\0' && file[i + 1] != '\n')
 			game->heigh++;
 		i++;
 	}
 	game->heigh++;
 	if (game->heigh == 0)
 		invalid_map(game, file);
-}
-
-static int	border_checker(char *file, t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (file[i] != '\0')
-	{
-		if (i < game->width && file[i] != '1')
-			return (0);
-		if (file[i + 1] == '\n' && file[i] != '1')
-			return (0);
-		if (file[i] == '\n' && file[i + 1] != '1')
-			return (0);
-		//if (i > (game->width * (game->heigh - 1)) && file[i] != '1')
-			//return(0);
-		i++;
-	}
-	return (1);
-}
-
-static int	rows_same_length(char *file, t_game *game)
-{
-	int	i;
-	int	length;
-
-	i = game->width + 1;
-	length = 0;
-	while (file[i] != '\0')
-	{
-		if (file[i] == '\n' && length != game->width)
-			return (0);
-		if (file[i] == '\n')
-			length = 0;
-		i++;
-		length++;
-	}
-	return(1);
 }
 
 static void	valid_char_checker(t_game *game, char *file, int i)
@@ -105,7 +66,7 @@ void	valid_map(char *file, t_game *game)
 	map_width(game, file);
 	map_heigh(game, file);
 	if (!border_checker(file, game) || game->heigh > game->width || \
-		rows_same_length(file, game))
+		!rows_same_length(file, game))
 		invalid_map(game, file);
 	while (file[i] != '\0')
 	{

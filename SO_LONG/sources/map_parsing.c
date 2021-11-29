@@ -22,7 +22,7 @@ static void map_read(char *map, char **file)
 	fd = open(map, O_RDONLY);
 	*file = ft_calloc(1,1);
 	ret = 1;
-	if (fd < 0 || *file == 0)
+	if (fd < 0 || *file == 0 || read(fd, buf, 1) == 0)
 		invalid_file(file, fd);
 	while (ret != 0)
 	{

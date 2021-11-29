@@ -68,7 +68,8 @@ int	exit_and_free(t_game *game)
 	//mlx_destroy_display(game->mlx);
 	free_map(game->map);
 	//free(game->mlx);
-	ft_putendl_fd("GOOD JOB!", 0);
+	if (game->exit_char ==0)
+		printf("GOOD JOB!\n");
 	exit(0);
 	return (0);
 }

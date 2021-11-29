@@ -17,7 +17,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include "mlx/mlx.h"
+# include "minilibx/mlx.h"
+//# include "mlx/mlx.h"
 # include "LIBFT/libft.h"
 
 typedef struct s_game
@@ -50,7 +51,8 @@ void			valid_map(char *file, t_game *game);
 void			invalid_map(t_game *game, char *file);
 void			invalid_file(char **file, int fd);
 void			free_map(char **map);
-
+int				rows_same_length(char *file, t_game *game);
+int				border_checker(char *file, t_game *game);
 void			free_invalid_map(t_game *game, char *file);
 t_game			*init(t_game *game);
 void			game_init(t_game *game);
