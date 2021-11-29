@@ -4,7 +4,7 @@ NAME = so_long
 
 LIBFTNAME = libft.a
 
-CFLAGS = -Werror -Wall -Wextra -fsanitize=address -fno-omit-frame-pointer
+CFLAGS = -Werror -Wall -Wextra #-fsanitize=address -fno-omit-frame-pointer
 
 MINILIBX = -L ./minilibx -lmlx -lXext -lX11 -lm -lbsd
 #FOR MAC -> MINILIBX = -I /usr/X11/include -g  -l mlx -framework OpenGL -framework AppKit

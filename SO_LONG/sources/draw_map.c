@@ -11,24 +11,10 @@
 /* ************************************************************************** */
 
 #include "../so_long.h"
-/*
-static unsigned int	mlx_get_pixel(t_images *img, int x, int y)
-{
-	return (*(unsigned int *)
-		(img->addr + (x * img->bits_per_pixel / 8 + y * img->size_line)));
-}
 
-static void	mlx_put_pixel(t_images *image, int x, int y, int color)
-{
-	char			*target;
-
-	target = image->addr + (x * image->bits_per_pixel / 8 + y * image->size_line);
-	*(unsigned int *)target = color;
-}
-*/
 static void	draw_square(t_game *game, void *image, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx, game->mlx_win, image, x * 80, y * 80);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, image, x * 32, y * 32);
 }
 
 static void	drawing_player(t_game *game, void *image, int x, int y)
@@ -37,6 +23,7 @@ static void	drawing_player(t_game *game, void *image, int x, int y)
 	game->playerpos_y = y;
 	draw_square(game, image, x, y);
 }
+
 int	draw_map(t_game *game)
 {
 	int				i;
@@ -63,6 +50,4 @@ int	draw_map(t_game *game)
 		j++;
 	}
 	return (0);
-	//mlx_put_image_to_window(game->mlx, game->mlx_win, game->mlx_img, 0, 0);
-
 }

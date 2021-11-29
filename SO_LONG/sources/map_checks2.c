@@ -6,7 +6,7 @@ static int	check_last_line(char *file, t_game *game, int i)
 
 	last_line = -1;
 	i--;
-	while(file[i] != '\n')
+	while (file[i] != '\n')
 	{
 		if (file[i] != '1' && file[i] != '\n')
 			return (0);
@@ -15,9 +15,9 @@ static int	check_last_line(char *file, t_game *game, int i)
 	}
 	if (last_line != game->width)
 		return (0);
-	return(1);
-	
+	return (1);
 }
+
 int	border_checker(char *file, t_game *game)
 {
 	int	i;
@@ -36,7 +36,7 @@ int	border_checker(char *file, t_game *game)
 		i++;
 	}
 	if (!check_last_line(file, game, i))
-		return(0);
+		return (0);
 	return (1);
 }
 
@@ -56,5 +56,5 @@ int	rows_same_length(char *file, t_game *game)
 		i++;
 		length++;
 	}
-	return(1);
+	return (1);
 }

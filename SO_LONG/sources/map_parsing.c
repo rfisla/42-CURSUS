@@ -12,7 +12,7 @@
 
 #include "../so_long.h"
 
-static void map_read(char *map, char **file)
+static void	map_read(char *map, char **file)
 {
 	int		fd;
 	int		ret;
@@ -33,7 +33,7 @@ static void map_read(char *map, char **file)
 		{
 			buf[ret] = 0;
 			tmp = ft_strjoin(*file, buf);
-			free(*file);//Lo hce directamente el strjoin
+			free(*file);
 			*file = tmp;
 			if (*file == 0)
 				invalid_file(file, fd);
@@ -42,35 +42,13 @@ static void map_read(char *map, char **file)
 	close(fd);
 }
 
-void    map_parser(char *argv, t_game *game)
+void	map_parser(char *argv, t_game *game)
 {
-    //int		x;
-    //int		y;
-    //int		i;
+
 	char	*file;
-    //y = 0;
-    //i = 0;
+
 	map_read(argv, &file);
     valid_map(file, game);
 	game->map = ft_split(file, '\n');
-	/*
-	game->map = (char **)malloc(sizeof(char *) * game->heigh);
-	if (!game->map)
-        free_invalid_map(game, file);
-    while (y < game->heigh)
-    {
-		game->map[y] = (char *)malloc(sizeof(char) * game->width);
-		if (!game->map[y])
-        	free_invalid_map(game, file);
-		x = 0;
-        while (x < game->width)
-        {
-            game->map[y][x] = file[i++];
-            x++;
-        }
-		i++;
-        y++;
-    }
-	*/
 	free(file);
 }

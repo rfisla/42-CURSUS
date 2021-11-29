@@ -44,7 +44,7 @@ t_game	*init(t_game *game)
 	return (game);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game	*game;
 
@@ -65,5 +65,6 @@ int main(int argc, char **argv)
 	return (0);
 }
 
-//PDTES: Controlar archivos vacíos, última línea vacía, cerrar ventana pinchando en el botón de cerrar
+//PDTES: Controlar archivos vacíos, última línea vacía, 
+//cerrar ventana pinchando en el botón de cerrar
 //Comprobar ultima línea de muros

@@ -14,22 +14,22 @@
 
 void	invalid_file(char **file, int fd)
 {
-		free(*file);
-		close(fd);
-		ft_putendl_fd("Error:\nInvalid file", 2);
-		exit(0);
+	free(*file);
+	close(fd);
+	ft_putendl_fd("Error:\nInvalid file", 2);
+	exit(0);
 }
 
 void	invalid_map(t_game *game, char *file)
 {
-		free(file);
-		if (game)
-			free(game);
-		ft_putendl_fd("Error:\nInvalid map", 2);
-		exit(0);
+	free(file);
+	if (game)
+		free(game);
+	ft_putendl_fd("Error:\nInvalid map", 2);
+	exit(0);
 }
 
-void    free_map(char **map)
+void	free_map(char **map)
 {
 	int	i;
 
@@ -43,20 +43,6 @@ void    free_map(char **map)
 	map = 0;
 }
 
-void    free_invalid_map(t_game *game, char *file)
-{
-    free(file);
-    if (game->map)
-	{
-        free_map(game->map);
-		game->map = 0;
-	}
-    free(game);
-	ft_putendl_fd("Invalid map", 2);
-	exit(0);
-
-}
-
 int	exit_and_free(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->player);
@@ -65,10 +51,8 @@ int	exit_and_free(t_game *game)
 	mlx_destroy_image(game->mlx, game->exit);
 	mlx_destroy_image(game->mlx, game->ground);
 	mlx_destroy_window(game->mlx, game->mlx_win);
-	//mlx_destroy_display(game->mlx);
 	free_map(game->map);
-	//free(game->mlx);
-	if (game->exit_char ==0)
+	if (game->exit_char == 0)
 		printf("GOOD JOB!\n");
 	exit(0);
 	return (0);
