@@ -60,6 +60,7 @@ void			game_init(t_game *game);
 int				draw_map(t_game *game);
 int				keypress(int keycode, t_game *game);
 void			events(int keycode, t_game *game);
+void			change_player_img(t_game *game, int i);
 int				exit_game(int keycode, t_game *game);
 int				exit_and_free(t_game *game);
 void			make_movement(t_game *game, int keycode);
