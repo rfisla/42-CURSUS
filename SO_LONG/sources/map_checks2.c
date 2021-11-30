@@ -4,7 +4,7 @@ static int	check_last_line(char *file, t_game *game, int i)
 {
 	int	last_line;
 
-	last_line = -1;
+	last_line = 0;
 	i--;
 	while (file[i] != '\n')
 	{
@@ -27,7 +27,7 @@ int	border_checker(char *file, t_game *game)
 	{
 		if (file[i] == '\n' && (file[i + 1] == '\n' || !file[i + 1]))
 			break ;
-		if (i < game->width && file[i] != '1')
+		else if (i < game->width && file[i] != '1')
 			return (0);
 		else if (file[i + 1] == '\n' && file[i] != '1')
 			return (0);
@@ -44,15 +44,22 @@ int	rows_same_length(char *file, t_game *game)
 {
 	int	i;
 	int	length;
+	int	j;
 
 	i = game->width + 1;
-	length = -1;
-	while (file[i] != '\0')
+	length = 0;
+	j = 0;
+	while (file[i] != '\0' && j <= game->heigh)
 	{
 		if (file[i] == '\n' && length != game->width)
 			return (0);
 		if (file[i] == '\n')
-			length = -2;
+		{
+			length = -1;
+			j++;
+		}
+		if (file[i] == '\n' && file[i + 1] != '1')
+			break ;
 		i++;
 		length++;
 	}

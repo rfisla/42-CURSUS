@@ -54,6 +54,8 @@ int	exit_and_free(t_game *game)
 	free_map(game->map);
 	if (game->exit_char == 0)
 		printf("GOOD JOB!\n");
+	else if (game->exit_char == 1)
+		printf("TRY AGAIN :(\n");
 	exit(0);
 	return (0);
 }

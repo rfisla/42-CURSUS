@@ -33,7 +33,7 @@ int	draw_map(t_game *game)
 	while (j < game->heigh)
 	{
 		i = 0;
-		while (i < game->width)
+		while (i <= game->width)
 		{
 			if (game->map[j][i] == '1')
 				draw_square(game, game->wall, i, j);

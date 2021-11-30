@@ -64,7 +64,3 @@ int	main(int argc, char **argv)
 	game_init(game);
 	return (0);
 }
-
-//PDTES: Controlar archivos vacíos, última línea vacía, 
-//cerrar ventana pinchando en el botón de cerrar
-//Comprobar ultima línea de muros

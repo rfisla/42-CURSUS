@@ -24,7 +24,6 @@ static void	map_width(t_game *game, char *file)
 			invalid_map(game, file);
 		i++;
 	}
-	//game->width++;
 	if (game->width == 0)
 		invalid_map(game, file);
 }
@@ -66,9 +65,9 @@ void	valid_map(char *file, t_game *game)
 	i = 0;
 	map_width(game, file);
 	map_heigh(game, file);
-	//if (!border_checker(file, game) || game->heigh > game->width || 
-		//!rows_same_length(file, game))
-		//invalid_map(game, file);
+	if (!border_checker(file, game) || game->heigh > game->width || \
+		!rows_same_length(file, game))
+		invalid_map(game, file);
 	while (file[i] != '\0')
 	{
 		if (file[i] == '\n')

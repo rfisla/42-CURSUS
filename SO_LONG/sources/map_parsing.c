@@ -12,17 +12,15 @@
 
 #include "../so_long.h"
 
-static void	map_read(char *map, char **file)
+static void	map_read(char **file, int fd)
 {
-	int		fd;
 	int		ret;
 	char	buf[1024];
 	char	*tmp;
 
-	fd = open(map, O_RDONLY);
-	*file = ft_calloc(1,1);
+	*file = ft_calloc(1, 1);
 	ret = 1;
-	if (fd < 0 || *file == 0 || read(fd, buf, 1) == 0)
+	if (fd < 0 || *file == 0)
 		invalid_file(file, fd);
 	while (ret != 0)
 	{
@@ -39,16 +37,17 @@ static void	map_read(char *map, char **file)
 				invalid_file(file, fd);
 		}
 	}
-	close(fd);
 }
 
 void	map_parser(char *argv, t_game *game)
 {
-
+	int		fd;
 	char	*file;
 
-	map_read(argv, &file);
-    valid_map(file, game);
+	fd = open(argv, O_RDONLY);
+	map_read(&file, fd);
+	close(fd);
+	valid_map(file, game);
 	game->map = ft_split(file, '\n');
 	free(file);
 }
