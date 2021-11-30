@@ -12,7 +12,7 @@
 
 #include "../so_long.h"
 
-static void	loading_image(t_game *game, void **element, char *path)
+void	loading_image(t_game *game, void **element, char *path)
 {
 	int	width;
 	int	height;
@@ -28,20 +28,20 @@ static void	loading_image(t_game *game, void **element, char *path)
 
 static void	upload_images(t_game *display)
 {
-	loading_image(display, &display->player, "./images32/worker.xpm");
-	loading_image(display, &display->exit, "./images32/house.xpm");
-	loading_image(display, &display->coll, "./images32/collectible.xpm");
-	loading_image(display, &display->wall, "./images32/wall.xpm");
+	loading_image(display, &display->player, "./images/mario_start.xpm");
+	loading_image(display, &display->exit, "./images/exit.xpm");
+	loading_image(display, &display->coll, "./images/star.xpm");
+	loading_image(display, &display->wall, "./images/wall2.xpm");
 	loading_image(display, &display->ground, "./images/ground.xpm");
 }
 
 static void	create_window(t_game *game)
 {
 	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, game->width * 32,
-			game->heigh * 32, "SO_LONG");
-	game->mlx_img = mlx_new_image(game->mlx, game->width * 32,
-			game->heigh * 32);
+	game->mlx_win = mlx_new_window(game->mlx, game->width * 40,
+			game->heigh * 40, "SO_LONG");
+	game->mlx_img = mlx_new_image(game->mlx, game->width * 40,
+			game->heigh * 40);
 	if (game->mlx == 0 || game->mlx_win == 0 || game->mlx_img == 0)
 	{
 		free_map(game->map);

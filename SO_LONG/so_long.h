@@ -51,6 +51,7 @@ void			valid_map(char *file, t_game *game);
 void			invalid_map(t_game *game, char *file);
 void			invalid_file(char **file, int fd);
 void			free_map(char **map);
+void			loading_image(t_game *game, void **element, char *path);
 int				rows_same_length(char *file, t_game *game);
 int				border_checker(char *file, t_game *game);
 void			free_invalid_map(t_game *game, char *file);
