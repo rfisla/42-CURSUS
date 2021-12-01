@@ -1,17 +1,7 @@
-CC = gcc
 
 NAME = so_long
 
-CFLAGS = -Werror -Wall -Wextra -fsanitize=address -fno-omit-frame-pointer
-
-MINILIBXPATH = ./minilibx/
-MINILIBX = $(MINILIBX_PATH)/libmlx.a 
-MINILIBX_FLAGS = -L. -lXext -L. -lX11
-#FOR MAC -> MINILIBX = -I /usr/X11/include -g  -l mlx -framework OpenGL -framework AppKit
-
-OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
-
-SRC			=	so_long.c \
+SRCS			=	so_long.c \
 				sources/map_checks.c \
 				sources/map_checks2.c \
 				sources/map_parsing.c \
@@ -21,31 +11,28 @@ SRC			=	so_long.c \
 				sources/events.c \
 				sources/player_movement.c
 
-LIBFTPATH = ./LIBFT/
-LIBFTNAME = libft.a
 
-all:		$(NAME)
+OBJS = ${SRCS:.c=.o}
+CC = gcc
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer
+MLXFLAGS = -lXext -lX11 -lm -lbsd
+RM = rm -rf
 
-${NAME}: 
-	make -C ${LIBFTPATH}
-	mv $(LIBFTPATH)${LIBFTNAME} ${LIBFTNAME}
-	${CC} ${CFLAGS} ${SRC} ${LIBFTNAME} ${MINILIBX} ${MINILIBX_FLAGS}  -o ${NAME}
+all: ${NAME}
 
-obj:
-			@mkdir -p obj
-
-obj/%.o:	src/%.c
-			$(CC) $(FLAGS) $(INC) -o $@ -c $<
+${NAME}: ${OBJS}
+	@$(MAKE) -C ./LIBFT
+	@$(MAKE) -C ./minilibx
+	@${CC} ${OBJS} ${CFLAGS} ./LIBFT/libft.a ./minilibx/libmlx.a ${MLXFLAGS} -o so_long
 
 clean:
-			
-			$(MAKE) -C $(LIBFTPATH) clean
-			$(MAKE) -C $(MINILIBXPATH) clean
-			@rm -rf $(OBJ) obj
+	@$(MAKE) -C LIBFT fclean
+	@$(MAKE) -C minilibx clean
+	@${RM} ${OBJS}
 
 fclean: clean
-	rm -f $(LIBFTNAME) ${OBJS} $(NAME)
+	@${RM} so_long
 
-re: 	fclean ${NAME}
+re: fclean all
 
-.PHONY:		all clean fclean re
+.PHONY: clean fclean re all
