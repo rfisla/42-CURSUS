@@ -31,10 +31,10 @@ static void	upload_images(t_game *display)
 	loading_image(display, &display->player, "./images/mario_start.xpm");
 	loading_image(display, &display->exit, "./images/exit.xpm");
 	loading_image(display, &display->coll, "./images/star.xpm");
-	loading_image(display, &display->wall, "./images/wall2.xpm");
+	loading_image(display, &display->wall, "./images/wall.xpm");
 	loading_image(display, &display->ground, "./images/ground.xpm");
 	if (display->enemy_char > 0)
-		loading_image(display, &display->enemy, "./images/enemy.xpm");
+		loading_image(display, &display->enemy, "./images/enemy_1.xpm");
 }
 
 static void	create_window(t_game *game)
