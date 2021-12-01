@@ -43,12 +43,7 @@ int	exit_game(int keycode, t_game *game)
 
 int	keypress(int keycode, t_game *game)
 {
-	char	prev_count;
-
-	prev_count = game->count_moves;
 	make_movement(game, keycode);
-	if (prev_count != game->count_moves)
-		printf("%d\n", game->count_moves);
 	exit_game(keycode, game);
 	return (0);
 }

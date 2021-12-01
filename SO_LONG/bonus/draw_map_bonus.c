@@ -14,7 +14,7 @@
 
 static void	draw_square(t_game *game, void *image, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx, game->mlx_win, image, x * 40, y * 40);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, image, x * 40, y * 40 + 40);
 }
 
 static void	drawing_player(t_game *game, void *image, int x, int y)
@@ -40,6 +40,15 @@ static void	detect_draw(t_game *game, int j, int i)
 		draw_square(game, game->ground, i, j);
 }
 
+static void	display_movements(t_game *game)
+{
+	char	*number;
+
+	number = ft_itoa(game->count_moves);
+	mlx_string_put(game->mlx, game->mlx_win, 25, 20, 0xFFFFFF, "MOVES: ");
+	mlx_string_put(game->mlx, game->mlx_win, 70, 20, 0xFFFFFF, number);
+	free(number);
+}
 int	draw_map(t_game *game)
 {
 	int				i;
@@ -56,5 +65,6 @@ int	draw_map(t_game *game)
 		}
 		j++;
 	}
+	display_movements(game);
 	return (0);
 }
