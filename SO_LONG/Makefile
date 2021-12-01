@@ -16,6 +16,7 @@ OBJS = ${SRCS:.c=.o}
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer
 MLXFLAGS = -lXext -lX11 -lm -lbsd
+#FOR MAC -> MINILIBX = -I /usr/X11/include -g  -l mlx -framework OpenGL -framework AppKit
 RM = rm -rf
 
 all: ${NAME}
