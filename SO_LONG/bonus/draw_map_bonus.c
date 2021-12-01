@@ -15,7 +15,7 @@
 static void	draw_square(t_game *game, void *image, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx, game->mlx_win, image, \
-							x * 40, y * 40 + 40);
+							x * 40, y * 40 + 25);
 }
 
 static void	drawing_player(t_game *game, void *image, int x, int y)

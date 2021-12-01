@@ -41,7 +41,7 @@ static void	create_window(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, game->width * 40,
-			game->heigh * 40 + 40, "SO_LONG");
+			game->heigh * 40 + 25, "SO_LONG");
 	game->mlx_img = mlx_new_image(game->mlx, game->width * 40,
 			game->heigh * 40);
 	if (game->mlx == 0 || game->mlx_win == 0 || game->mlx_img == 0)
