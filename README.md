@@ -20,5 +20,5 @@ I'll post every project I'll made during my cursus. For the moment all the proje
 |  03  |Ft_printf	      | [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/ft_printf)](https://github.com/JaeSeoKim/badge42)|
 |  04  |Pipex	      | [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/pipex)](https://github.com/JaeSeoKim/badge42)|
 |  05  |Push_Swap	      | [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/push_swap)](https://github.com/JaeSeoKim/badge42)|
-|  05  |So_Long	      | [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/so_long)](https://github.com/JaeSeoKim/badge42)|
+|  06  |So_Long	      | [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/rufernan/so_long)](https://github.com/JaeSeoKim/badge42)|
 
