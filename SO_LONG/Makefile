@@ -28,7 +28,8 @@ OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer
-MLXFLAGS = -lXext -lX11 -lm -lbsd
+#FOR LINUX MLXFLAGS = -lXext -lX11 -lm -lbsd
+MLXFLAGS = -framework OpenGL -framework AppKit
 #FOR MAC -> MINILIBX = -I /usr/X11/include -g  -l mlx -framework OpenGL -framework AppKit
 RM = rm -rf
 

@@ -35,6 +35,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[size2] != '\0')
 		newchain[size1++] = s2[size2++];
 	newchain[size1] = '\0';
-	//free((void *)s1);
 	return (newchain);
 }

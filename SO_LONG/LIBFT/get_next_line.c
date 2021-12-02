@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <fcntl.h>
 
-static	int	bytes_under_zero (char **s, ssize_t read_bytes)
+static	int	bytes_under_zero(char **s, ssize_t read_bytes)
 {
 	if (read_bytes < 0)
 	{
@@ -34,7 +34,7 @@ static	void	end_of_file(char **s, char **line)
 	*s = NULL;
 }
 
-static	int	get_line (char **line, char **s, ssize_t read_bytes)
+static	int	get_line(char **line, char **s, ssize_t read_bytes)
 {
 	char	*temp;
 	char	*temp2;
@@ -63,7 +63,7 @@ static	int	get_line (char **line, char **s, ssize_t read_bytes)
 	return (0);
 }
 
-int	get_next_line (int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*s[4096];
 	char		*buf;

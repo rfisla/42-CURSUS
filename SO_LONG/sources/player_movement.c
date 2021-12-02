@@ -120,27 +120,27 @@ static void	down_movement(t_game *game)
 	draw_map(game);
 }
 
-void	make_movement (t_game *game, int keycode)
+void	make_movement(t_game *game, int keycode)
 {
-	if (keycode == 119)
+	if (keycode == 13)
 	{
 		game->move_up++;
 		game->playerpos_y -= 1;
 		up_movement(game);
 	}
-	else if (keycode == 97)
+	else if (keycode == 0)
 	{
 		game->move_left++;
 		game->playerpos_x -= 1;
 		left_movement(game);
 	}
-	else if (keycode == 115)
+	else if (keycode == 1)
 	{
 		game->move_down++;
 		game->playerpos_y += 1;
 		down_movement(game);
 	}
-	else if (keycode == 100)
+	else if (keycode == 2)
 	{
 		game->move_right++;
 		game->playerpos_x += 1;

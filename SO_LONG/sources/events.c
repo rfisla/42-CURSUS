@@ -12,7 +12,7 @@
 
 #include "../so_long.h"
 
-//Scape keycode: Linux = 65307, MAC 53
+//Scape keycode: Linux = 65307, MAC = 53
 
 void	change_player_img(t_game *game, int i)
 {
@@ -30,7 +30,7 @@ void	change_player_img(t_game *game, int i)
 
 int	exit_game(int keycode, t_game *game)
 {
-	if (keycode == 65307 || !game->exit_char)
+	if (keycode == 53 || !game->exit_char)
 		exit_and_free(game);
 	return (0);
 }
